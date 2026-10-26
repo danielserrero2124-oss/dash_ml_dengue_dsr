@@ -22,8 +22,12 @@
 * **DeLong:** todas las diferencias con $p < 10^{-24}$, en 2023 y en 2024 por separado.
 * **Friedman–Nemenyi (100 semanas como bloques):** $\chi^2_F = 274{,}8$, $p \approx 3\times10^{-58}$; HetDS tiene el mejor rango
   medio (1,49) y su distancia a GradientBoosting (2,24) supera la diferencia crítica (0,61). Es el mejor en el 66 % de las semanas.
-* **McNemar** (errores con el umbral de 2022): HetDS comete significativamente menos errores que GradientBoosting y KNN;
-  frente a RandomForest la diferencia no es significativa ($p = 0{,}057$).
+* **McNemar** (errores totales con el umbral de 2022 de cada modelo): es la única prueba que no favorece a HetDS. Frente a
+  KNN, HetDS comete significativamente menos errores; frente a LogisticRegression y RandomForest no hay diferencia; y frente a
+  GradientBoosting comete **más** errores totales ($b = 719$ frente a $c = 893$, $p < 0{,}001$). La razón es el umbral: el de HetDS
+  (máximo F1) emite más alertas, así que anticipa más brotes (recall 0,808 frente a 0,771) a cambio de más falsas alarmas
+  (precisión 0,675 frente a 0,696). McNemar mide exactitud con un umbral fijo; el AUC mide la calidad del ordenamiento del riesgo,
+  que es donde HetDS es superior.
 
 ## Ablación: ¿de dónde viene la ventaja?
 

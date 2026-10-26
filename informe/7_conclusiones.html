@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/autor.css?v=483c0dd5" />
@@ -464,8 +464,12 @@ document.write(`
 <li><p><strong>DeLong:</strong> todas las diferencias con <span class="math notranslate nohighlight">\(p &lt; 10^{-24}\)</span>, en 2023 y en 2024 por separado.</p></li>
 <li><p><strong>Friedman–Nemenyi (100 semanas como bloques):</strong> <span class="math notranslate nohighlight">\(\chi^2_F = 274{,}8\)</span>, <span class="math notranslate nohighlight">\(p \approx 3\times10^{-58}\)</span>; HetDS tiene el mejor rango
 medio (1,49) y su distancia a GradientBoosting (2,24) supera la diferencia crítica (0,61). Es el mejor en el 66 % de las semanas.</p></li>
-<li><p><strong>McNemar</strong> (errores con el umbral de 2022): HetDS comete significativamente menos errores que GradientBoosting y KNN;
-frente a RandomForest la diferencia no es significativa (<span class="math notranslate nohighlight">\(p = 0{,}057\)</span>).</p></li>
+<li><p><strong>McNemar</strong> (errores totales con el umbral de 2022 de cada modelo): es la única prueba que no favorece a HetDS. Frente a
+KNN, HetDS comete significativamente menos errores; frente a LogisticRegression y RandomForest no hay diferencia; y frente a
+GradientBoosting comete <strong>más</strong> errores totales (<span class="math notranslate nohighlight">\(b = 719\)</span> frente a <span class="math notranslate nohighlight">\(c = 893\)</span>, <span class="math notranslate nohighlight">\(p &lt; 0{,}001\)</span>). La razón es el umbral: el de HetDS
+(máximo F1) emite más alertas, así que anticipa más brotes (recall 0,808 frente a 0,771) a cambio de más falsas alarmas
+(precisión 0,675 frente a 0,696). McNemar mide exactitud con un umbral fijo; el AUC mide la calidad del ordenamiento del riesgo,
+que es donde HetDS es superior.</p></li>
 </ul>
 </section>
 <section id="ablacion-de-donde-viene-la-ventaja">
