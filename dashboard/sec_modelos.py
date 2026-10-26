@@ -450,7 +450,7 @@ def sub_conclusiones():  # Construye la sub-pestaña
                 "Evaluación prospectiva con secretarías de salud y monitoreo de deriva de los datos.",
             ])),
         ], className="rejilla cols-2"),
-        tarjeta(html.H3("Preguntas esperadas en la sustentación"), html.P("Haz clic en cada pregunta para ver la respuesta.", className="nota"),
+        tarjeta(html.H3("Preguntas clave"), html.P("Haz clic en cada pregunta para ver la respuesta.", className="nota"),
                 pregunta("¿Cómo se define un brote?", html.P("Con el canal endémico: una semana es de brote si sus casos superan el tercer cuartil de las mismas semanas (± 2) de los cinco años anteriores y hay al menos 3 casos. Es el método de cuartiles (Bortman) que usa la vigilancia en salud pública.")),
                 pregunta("¿Por qué predecir a 4 semanas y no la semana actual?", html.P("Porque la utilidad está en anticipar: 4 semanas permiten intervenir criaderos y preparar servicios. Además coincide con el ciclo mosquito–virus–síntomas.")),
                 pregunta("¿Qué es HetDS y por qué es original?", html.P("Una selección dinámica de un ensamble heterogéneo: cinco expertos distintos cuyo peso se actualiza cada semana con el algoritmo Hedge, usando solo etiquetas confirmadas. La selección dinámica, la ventana con retraso y la combinación en logit están programadas desde cero; además incorpora autocorrelación espacial.")),
