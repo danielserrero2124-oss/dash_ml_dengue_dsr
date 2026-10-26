@@ -1,0 +1,9 @@
+# Dependencias del contenedor del dashboard (mismas versiones con las que se entrenaron los artefactos)
+pandas==2.1.0              # Manejo de tablas
+numpy==1.25.2              # Cálculo numérico
+scipy==1.11.2              # Pruebas estadísticas
+scikit-learn==1.3.0        # Debe coincidir con la versión de entrenamiento para cargar hetds.joblib
+joblib==1.3.2              # Carga de artefactos
+dash==2.18.2               # Dashboard
+plotly==5.24.1             # Gráficos
+gunicorn==23.0.0           # Servidor WSGI de producción (Linux)

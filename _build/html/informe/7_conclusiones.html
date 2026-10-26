@@ -1,0 +1,665 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>7. Conclusiones, limitaciones y preguntas &#8212; Predicción de brotes de dengue en Colombia – Informe del desarrollo</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/autor.css?v=483c0dd5" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'informe/7_conclusiones';</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="prev" title="6. El dashboard" href="6_dashboard.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logoUN.png" class="logo__image only-light" alt="Predicción de brotes de dengue en Colombia – Informe del desarrollo - Home"/>
+    <script>document.write(`<img src="../_static/logoUN.png" class="logo__image only-dark" alt="Predicción de brotes de dengue en Colombia – Informe del desarrollo - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><!-- Tarjeta del autor en la barra lateral izquierda (visible en todas las páginas del libro) -->
+<div class="tarjeta-autor">
+  <img src="../_static/foto_author_DSR_sidebar.png" alt="Daniel Serrano Romero" class="tarjeta-autor__foto">
+  <div class="tarjeta-autor__nombre">Daniel Serrano Romero</div>
+  <div class="tarjeta-autor__detalle">Maestría en Matemáticas</div>
+  <div class="tarjeta-autor__detalle">Machine Learning</div>
+</div></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Búsqueda</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Predicción de brotes de dengue en Colombia: informe del desarrollo
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1_problema.html">1. Problema y formulación matemática</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/1_eda.html">2. EDA, datos y preprocesamiento</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_modelo_original.html">3. Fundamentos teóricos del modelo original: HetDS en línea</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/2_modelos.html">4. Entrenamiento y resultados de los cinco modelos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/3_pruebas.html">5. Pruebas de significancia, ablación y tiempos de cómputo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6_dashboard.html">6. El dashboard</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">7. Conclusiones, limitaciones y preguntas</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/informe/7_conclusiones.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="claro/oscuro" aria-label="claro/oscuro" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Conclusiones, limitaciones y preguntas</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resultados-en-la-prueba-20232024">7.1. Resultados en la prueba 2023–2024</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#significancia-de-la-superioridad-de-hetds">7.2. Significancia de la superioridad de HetDS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ablacion-de-donde-viene-la-ventaja">7.3. Ablación: ¿de dónde viene la ventaja?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusiones">7.4. Conclusiones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitaciones">7.5. Limitaciones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trabajo-futuro">7.6. Trabajo futuro</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="conclusiones-limitaciones-y-preguntas">
+<h1><span class="section-number">7. </span>Conclusiones, limitaciones y preguntas<a class="headerlink" href="#conclusiones-limitaciones-y-preguntas" title="Link to this heading">#</a></h1>
+<section id="resultados-en-la-prueba-20232024">
+<h2><span class="section-number">7.1. </span>Resultados en la prueba 2023–2024<a class="headerlink" href="#resultados-en-la-prueba-20232024" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Modelo</p></th>
+<th class="head"><p>AUC-ROC</p></th>
+<th class="head"><p>AUC-PR</p></th>
+<th class="head"><p>MCC</p></th>
+<th class="head"><p>Brier ↓</p></th>
+<th class="head"><p>Ajuste</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>HetDS en línea (original)</strong></p></td>
+<td><p><strong>0,9017</strong></p></td>
+<td><p><strong>0,8288</strong></p></td>
+<td><p><strong>0,610</strong></p></td>
+<td><p><strong>0,1117</strong></p></td>
+<td><p>78 s</p></td>
+</tr>
+<tr class="row-odd"><td><p>GradientBoostingClassifier</p></td>
+<td><p>0,8977</p></td>
+<td><p>0,8226</p></td>
+<td><p>0,607</p></td>
+<td><p>0,1142</p></td>
+<td><p>284 s</p></td>
+</tr>
+<tr class="row-even"><td><p>RandomForestClassifier</p></td>
+<td><p>0,8976</p></td>
+<td><p>0,8226</p></td>
+<td><p>0,607</p></td>
+<td><p>0,1144</p></td>
+<td><p>173 s</p></td>
+</tr>
+<tr class="row-odd"><td><p>LogisticRegression</p></td>
+<td><p>0,8854</p></td>
+<td><p>0,8090</p></td>
+<td><p>0,593</p></td>
+<td><p>0,1218</p></td>
+<td><p>1 s</p></td>
+</tr>
+<tr class="row-even"><td><p>KNeighborsClassifier</p></td>
+<td><p>0,8854</p></td>
+<td><p>0,8030</p></td>
+<td><p>0,583</p></td>
+<td><p>0,1235</p></td>
+<td><p>0,1 s</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="significancia-de-la-superioridad-de-hetds">
+<h2><span class="section-number">7.2. </span>Significancia de la superioridad de HetDS<a class="headerlink" href="#significancia-de-la-superioridad-de-hetds" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>HetDS vs.</p></th>
+<th class="head"><p>ΔAUC-ROC</p></th>
+<th class="head"><p>IC 95 % (bootstrap por municipio)</p></th>
+<th class="head"><p>p (Holm)</p></th>
+<th class="head"><p>ΔAUC-PR</p></th>
+<th class="head"><p>p (Holm)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>GradientBoosting</p></td>
+<td><p>+0,0040</p></td>
+<td><p>[+0,0029; +0,0050]</p></td>
+<td><p>0,004</p></td>
+<td><p>+0,0062</p></td>
+<td><p>0,004</p></td>
+</tr>
+<tr class="row-odd"><td><p>RandomForest</p></td>
+<td><p>+0,0041</p></td>
+<td><p>[+0,0031; +0,0051]</p></td>
+<td><p>0,004</p></td>
+<td><p>+0,0062</p></td>
+<td><p>0,004</p></td>
+</tr>
+<tr class="row-even"><td><p>LogisticRegression</p></td>
+<td><p>+0,0162</p></td>
+<td><p>[+0,0138; +0,0189]</p></td>
+<td><p>0,004</p></td>
+<td><p>+0,0198</p></td>
+<td><p>0,004</p></td>
+</tr>
+<tr class="row-odd"><td><p>KNN</p></td>
+<td><p>+0,0162</p></td>
+<td><p>[+0,0143; +0,0184]</p></td>
+<td><p>0,004</p></td>
+<td><p>+0,0258</p></td>
+<td><p>0,004</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul class="simple">
+<li><p><strong>DeLong:</strong> todas las diferencias con <span class="math notranslate nohighlight">\(p &lt; 10^{-24}\)</span>, en 2023 y en 2024 por separado.</p></li>
+<li><p><strong>Friedman–Nemenyi (100 semanas como bloques):</strong> <span class="math notranslate nohighlight">\(\chi^2_F = 274{,}8\)</span>, <span class="math notranslate nohighlight">\(p \approx 3\times10^{-58}\)</span>; HetDS tiene el mejor rango
+medio (1,49) y su distancia a GradientBoosting (2,24) supera la diferencia crítica (0,61). Es el mejor en el 66 % de las semanas.</p></li>
+<li><p><strong>McNemar</strong> (errores con el umbral de 2022): HetDS comete significativamente menos errores que GradientBoosting y KNN;
+frente a RandomForest la diferencia no es significativa (<span class="math notranslate nohighlight">\(p = 0{,}057\)</span>).</p></li>
+</ul>
+</section>
+<section id="ablacion-de-donde-viene-la-ventaja">
+<h2><span class="section-number">7.3. </span>Ablación: ¿de dónde viene la ventaja?<a class="headerlink" href="#ablacion-de-donde-viene-la-ventaja" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variante</p></th>
+<th class="head"><p>AUC-ROC</p></th>
+<th class="head"><p>Δ vs. GradientBoosting</p></th>
+<th class="head"><p>p (bootstrap por municipio)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>GradientBoosting (variables base)</p></td>
+<td><p>0,8977</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-odd"><td><p>HetDS sin variables espaciales</p></td>
+<td><p>0,8994</p></td>
+<td><p>+0,0016</p></td>
+<td><p>0,002</p></td>
+</tr>
+<tr class="row-even"><td><p>GradientBoosting + variables espaciales</p></td>
+<td><p>0,9005</p></td>
+<td><p>+0,0028</p></td>
+<td><p>0,002</p></td>
+</tr>
+<tr class="row-odd"><td><p>HetDS estático (pesos iguales)</p></td>
+<td><p>0,9011</p></td>
+<td><p>+0,0034</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>HetDS completo en línea</strong></p></td>
+<td><p><strong>0,9017</strong></p></td>
+<td><p><strong>+0,0040</strong></p></td>
+<td><p>0,002</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Los dos componentes aportan y se suman: el ensamble heterogéneo en línea supera a GradientBoosting aun sin
+variables espaciales, y la autocorrelación espacial añade información que ningún modelo recomendado tenía.</p>
+</section>
+<section id="conclusiones">
+<h2><span class="section-number">7.4. </span>Conclusiones<a class="headerlink" href="#conclusiones" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>HetDS en línea es el mejor modelo</strong> y su superioridad es estadísticamente significativa frente a los cuatro
+modelos recomendados con la prueba más estricta (bootstrap por municipio con ajuste de Holm).</p></li>
+<li><p><strong>El tamaño del efecto es moderado:</strong> +0,004 de AUC-ROC y +0,006 de AUC-PR frente a los mejores recomendados,
++0,016 frente a LR y KNN. Todos los modelos se acercan a un techo de ≈ 0,90 que fija la información disponible;
+la ventaja de HetDS es consistente (gana 2 de cada 3 semanas) más que grande.</p></li>
+<li><p><strong>La historia de casos domina:</strong> los casos recientes frente al umbral del canal endémico son el mejor predictor.</p></li>
+<li><p><strong>El clima anticipa, pero ya está en los casos:</strong> solo con clima el AUC es 0,71 (temperaturas de 25–28 °C, El Niño
+y lluvias previas aumentan el riesgo con 8–12 semanas de rezago), pero cuando ya se conocen los casos recientes el
+clima casi no añade (0,8968 → 0,8969).</p></li>
+<li><p><strong>Robustez temporal:</strong> el desempeño se mantiene en la epidemia récord de 2024, aunque la proporción de brotes
+triplica la del entrenamiento.</p></li>
+</ol>
+</section>
+<section id="limitaciones">
+<h2><span class="section-number">7.5. </span>Limitaciones<a class="headerlink" href="#limitaciones" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Teóricas:</strong> Hedge garantiza seguir al mejor experto, no superar el techo de información; la vecindad espacial se
+aproxima por el departamento; ante cambios bruscos la ponderación reacciona con el retraso de 4 semanas.</p></li>
+<li><p><strong>Empíricas:</strong> el 64 % de las semanas tiene temperatura imputada; el canal endémico depende del subregistro; solo
+hay dos años de prueba y 2024 fue excepcional; las filas no son independientes (por eso se usan pruebas por conglomerados).</p></li>
+</ul>
+</section>
+<section id="trabajo-futuro">
+<h2><span class="section-number">7.6. </span>Trabajo futuro<a class="headerlink" href="#trabajo-futuro" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Vecindad espacial real (coordenadas, red de movilidad) en lugar del departamento.</p></li>
+<li><p>Datos climáticos sin imputar (estaciones IDEAM, reanálisis ERA5) y rezagos distribuidos no lineales.</p></li>
+<li><p>Serotipos circulantes e índices entomológicos como variables.</p></li>
+<li><p>Expertos reentrenados en línea y umbrales de alerta sensibles al costo de la respuesta.</p></li>
+<li><p>Evaluación prospectiva con secretarías de salud y monitoreo de deriva de los datos.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./informe"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="6_dashboard.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title"><span class="section-number">6. </span>El dashboard</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resultados-en-la-prueba-20232024">7.1. Resultados en la prueba 2023–2024</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#significancia-de-la-superioridad-de-hetds">7.2. Significancia de la superioridad de HetDS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ablacion-de-donde-viene-la-ventaja">7.3. Ablación: ¿de dónde viene la ventaja?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusiones">7.4. Conclusiones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitaciones">7.5. Limitaciones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trabajo-futuro">7.6. Trabajo futuro</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Daniel Serrano Romero
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

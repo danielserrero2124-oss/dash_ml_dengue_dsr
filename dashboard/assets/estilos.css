@@ -1,0 +1,175 @@
+/* ==========================================================================
+   Tema visual del dashboard de brotes de dengue (Dash carga automáticamente assets/)
+   ========================================================================== */
+
+/* Variables de color y medida */
+:root {
+  --fondo: #0d0f10;            /* Fondo general (casi negro, cálido) */
+  --superficie: #17191b;       /* Tarjetas y gráficos */
+  --superficie-2: #202326;     /* Controles (desplegables, entradas) */
+  --borde: #2f3337;            /* Bordes y divisores */
+  --texto: #f4f2ef;            /* Texto principal */
+  --texto-2: #c4bfb8;          /* Texto secundario */
+  --texto-3: #8f8a83;          /* Texto atenuado */
+  --acento: #ff6b5a;           /* Color de marca: rojo dengue (no se usa para datos) */
+  --ambar: #f2b134;            /* Acento secundario (alerta epidemiológica) */
+  --azul: #3987e5;             /* Serie «sin brote» y controles */
+  --rojo: #e66767;             /* Serie «brote» */
+  --radio: 16px;               /* Redondeo de tarjetas */
+}
+
+/* Página: fondo oscuro con un resplandor rojo y uno ámbar */
+body {
+  margin: 0;                                                                   /* Sin margen exterior */
+  background:
+    radial-gradient(900px 520px at 8% -10%, rgba(255, 107, 90, 0.16), transparent 60%),   /* Resplandor rojo */
+    radial-gradient(900px 520px at 96% 0%, rgba(242, 177, 52, 0.10), transparent 60%),   /* Resplandor ámbar */
+    var(--fondo);                                                              /* Color base */
+  background-attachment: fixed;                                                /* Fondo fijo */
+  color: var(--texto);                                                         /* Texto por defecto */
+  font-family: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;       /* Tipografía del sistema */
+}
+.contenedor { max-width: 1400px; margin: 0 auto; padding: 22px 26px 60px; }   /* Contenido centrado */
+
+/* Encabezado con la foto del mosquito sobre la piel como fondo */
+.encabezado {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;   /* Marca y etiquetas en fila */
+  margin-bottom: 18px; padding: 18px 22px; border-radius: var(--radio); border: 1px solid var(--borde);
+  background: linear-gradient(90deg, rgba(13, 15, 16, 0.96) 35%, rgba(13, 15, 16, 0.55)), url("mosquito_piel.png") right center / cover;   /* Imagen a la derecha */
+}
+.marca { display: flex; align-items: center; gap: 14px; }                                  /* Icono y títulos */
+.marca-icono { width: 46px; height: 46px; border-radius: 14px; background: linear-gradient(135deg, #ff6b5a, #b3261e);   /* Degradado rojo */
+               display: grid; place-items: center; font-size: 24px; box-shadow: 0 8px 24px rgba(255, 107, 90, 0.35); }
+.marca h1 { font-size: 21px; margin: 0; font-weight: 700; }                                 /* Título */
+.marca p { margin: 2px 0 0; font-size: 13px; color: var(--texto-2); }                       /* Subtítulo */
+
+/* Pestañas principales */
+.pestanas { border: none !important; margin-bottom: 20px; }
+.pestanas .tab { background: transparent !important; border: none !important; border-bottom: 2px solid var(--borde) !important;
+                 color: var(--texto-2) !important; padding: 12px 22px !important; font-weight: 600; font-size: 15px; }
+.pestanas .tab:hover { color: var(--texto) !important; }
+.pestanas .tab--selected { color: var(--texto) !important; border-bottom: 2px solid var(--acento) !important;
+                           background: linear-gradient(180deg, transparent, rgba(255, 107, 90, 0.10)) !important; }
+
+/* Sub-pestañas de ML Models (píldoras) */
+.subpestanas { border: none !important; margin-bottom: 18px; }
+.subpestanas .subtab { background: var(--superficie) !important; border: 1px solid var(--borde) !important; border-radius: 999px !important;
+                       margin-right: 8px; padding: 8px 16px !important; color: var(--texto-2) !important; font-weight: 600; font-size: 13.5px; }
+.subpestanas .subtab--selected { background: rgba(255, 107, 90, 0.16) !important; border-color: var(--acento) !important; color: var(--texto) !important; }
+
+/* Banners de sección con imagen de fondo */
+.banner { border-radius: var(--radio); border: 1px solid var(--borde); padding: 34px 30px; margin-bottom: 18px; min-height: 150px;
+          display: flex; flex-direction: column; justify-content: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35); }
+.banner h2 { margin: 0 0 8px; font-size: 27px; line-height: 1.2; }                           /* Título del banner */
+.banner p { margin: 0; max-width: 720px; color: var(--texto-2); font-size: 15px; line-height: 1.6; }   /* Texto del banner */
+.banner-mapa { background: linear-gradient(90deg, rgba(13, 15, 16, 0.95) 40%, rgba(13, 15, 16, 0.35)), url("mapa_colombia.webp") center / cover; }
+.banner-vector { background: linear-gradient(90deg, rgba(13, 15, 16, 0.95) 38%, rgba(13, 15, 16, 0.30)), url("aedes_macro.webp") 70% 40% / cover; }
+.banner-virus { background: linear-gradient(90deg, rgba(13, 15, 16, 0.95) 40%, rgba(13, 15, 16, 0.35)), url("virus_dengue.webp") center / cover; }
+.banner-brazo { background: linear-gradient(90deg, rgba(13, 15, 16, 0.95) 40%, rgba(13, 15, 16, 0.35)), url("mosquitos_brazo.webp") center / cover; }
+.resaltado { color: var(--acento); }                                                        /* Palabras destacadas */
+.resaltado-ambar { color: var(--ambar); }
+
+/* Tarjetas */
+.tarjeta { background: var(--superficie); border: 1px solid var(--borde); border-radius: var(--radio); padding: 18px 20px;
+           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.30); height: 100%; box-sizing: border-box; min-width: 0; }
+.tarjeta h3 { margin: 0 0 4px; font-size: 16px; font-weight: 650; }
+.tarjeta .nota { margin: 0 0 12px; font-size: 13px; color: var(--texto-2); line-height: 1.5; }
+.tarjeta p { color: var(--texto-2); line-height: 1.65; font-size: 14.5px; }
+.tarjeta li { color: var(--texto-2); line-height: 1.7; font-size: 14.5px; }
+.tarjeta b, .tarjeta strong { color: var(--texto); }
+.destacada { border-color: rgba(255, 107, 90, 0.45); box-shadow: 0 0 0 1px rgba(255, 107, 90, 0.15), 0 10px 30px rgba(0, 0, 0, 0.3); }
+.imagen-tarjeta { width: 100%; height: 100%; min-height: 260px; object-fit: cover; border-radius: var(--radio); display: block; }   /* Imagen que llena su tarjeta */
+.sin-relleno { padding: 0; overflow: hidden; }
+
+/* Rejillas */
+.rejilla { display: grid; gap: 18px; margin-bottom: 18px; }
+.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.cols-heroe { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); }
+.cols-control { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); }
+.columna { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.columna > .tarjeta { height: auto; }
+@media (max-width: 1000px) {
+  .cols-2, .cols-3, .cols-heroe, .cols-control { grid-template-columns: 1fr; }
+  .cols-4, .cols-5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 520px) { .contenedor { padding: 16px 16px 40px; } .cols-4, .cols-5 { grid-template-columns: 1fr; } }
+
+/* Indicadores (KPI) */
+.kpi .etiqueta { font-size: 12.5px; color: var(--texto-3); text-transform: uppercase; letter-spacing: 0.7px; }
+.kpi .valor { font-size: 29px; font-weight: 700; margin-top: 6px; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.kpi .detalle { font-size: 12.5px; color: var(--texto-2); margin-top: 6px; }
+
+/* Título de la parte de la rúbrica */
+.rubrica { display: flex; align-items: center; margin-bottom: 18px; padding: 10px 14px; border: 1px dashed rgba(255, 107, 90, 0.45);
+           border-radius: 12px; background: rgba(255, 107, 90, 0.05); }
+.rubrica-nombre { color: var(--texto); font-weight: 600; font-size: 14px; }
+
+/* Controles */
+.control-etiqueta { display: block; font-size: 12.5px; color: var(--texto-3); text-transform: uppercase; letter-spacing: 0.6px; margin: 12px 0 6px; }
+.Select-control { background-color: var(--superficie-2) !important; border: 1px solid var(--borde) !important; border-radius: 10px !important; color: var(--texto) !important; min-height: 40px; }
+.is-focused:not(.is-open) > .Select-control { border-color: var(--azul) !important; box-shadow: 0 0 0 2px rgba(57, 135, 229, 0.25) !important; }
+.Select-value-label, .Select-placeholder, .Select--single > .Select-control .Select-value { color: var(--texto) !important; line-height: 38px !important; }
+.Select-input > input { color: var(--texto) !important; }
+.Select-arrow { border-top-color: var(--texto-2) !important; }
+.Select-menu-outer { background-color: var(--superficie-2) !important; border: 1px solid var(--borde) !important; border-radius: 10px !important;
+                     margin-top: 4px; box-shadow: 0 14px 34px rgba(0, 0, 0, 0.5); z-index: 50 !important; overflow: hidden; }
+.Select-option, .VirtualizedSelectOption { background-color: var(--superficie-2) !important; color: var(--texto-2) !important; }
+.Select-option.is-focused, .VirtualizedSelectFocusedOption { background-color: rgba(57, 135, 229, 0.18) !important; color: var(--texto) !important; }
+.Select-option.is-selected, .VirtualizedSelectSelectedOption { color: var(--texto) !important; font-weight: 600; }
+.opciones label { display: inline-flex; align-items: center; gap: 6px; margin: 0 8px 8px 0; padding: 7px 13px; border: 1px solid var(--borde);
+                  border-radius: 999px; background: var(--superficie-2); color: var(--texto-2); font-size: 13.5px; cursor: pointer; }
+.opciones input { accent-color: var(--azul); }
+.entrada { width: 100%; box-sizing: border-box; background: var(--superficie-2); border: 1px solid var(--borde); border-radius: 10px; color: var(--texto); padding: 9px 12px; font-size: 14px; }
+.rc-slider-rail { background-color: var(--borde) !important; }
+.rc-slider-track { background-color: var(--azul) !important; }
+.rc-slider-handle { border-color: var(--azul) !important; background-color: #fff !important; opacity: 1 !important; }
+.rc-slider-mark-text { color: var(--texto-3) !important; }
+.rc-slider-tooltip-inner { background-color: var(--superficie-2) !important; color: var(--texto) !important; }
+
+/* Tablas */
+.tabla-envoltura { overflow-x: auto; }
+.tabla { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+.tabla th { text-align: left; color: var(--texto-3); font-weight: 600; padding: 8px 10px; border-bottom: 1px solid var(--borde); text-transform: uppercase; font-size: 11.5px; letter-spacing: 0.6px; }
+.tabla td { padding: 9px 10px; border-bottom: 1px solid var(--borde); color: var(--texto-2); }
+.tabla tr.activa td { color: var(--texto); background: rgba(255, 107, 90, 0.08); }
+.tabla td.num, .tabla th.num { text-align: right; font-variant-numeric: tabular-nums; }
+.tabla code { color: #9ec5f4; background: rgba(57, 135, 229, 0.10); padding: 1px 6px; border-radius: 6px; }
+.caja-scroll { max-height: 420px; overflow: auto; }
+
+/* Etiquetas, pasos, insignias y citas */
+.chip { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; border: 1px solid var(--borde); color: var(--texto-2); margin: 0 6px 6px 0; background: rgba(13, 15, 16, 0.6); }
+.paso { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 12px; }
+.paso-numero { flex: 0 0 28px; height: 28px; border-radius: 50%; background: rgba(255, 107, 90, 0.14); color: var(--acento); display: grid; place-items: center; font-weight: 700; font-size: 13px; }
+.paso-texto { color: var(--texto-2); font-size: 14px; line-height: 1.55; }
+.insignia { display: inline-block; padding: 2px 9px; border-radius: 999px; font-size: 11.5px; font-weight: 700; }
+.insignia.si { background: rgba(46, 230, 176, 0.15); color: #6ff0c8; }
+.insignia.no { background: rgba(255, 255, 255, 0.07); color: var(--texto-2); }
+.cita { font-size: 13px; color: var(--texto-2); border-left: 3px solid var(--acento); padding: 4px 0 4px 12px; margin: 10px 0; line-height: 1.55; }
+.cita a { color: #9ec5f4; }
+
+/* Fórmulas, preguntas y código */
+.formula { color: var(--texto-2); font-size: 14.5px; line-height: 1.7; overflow-x: auto; }
+.formula p { margin: 8px 0; }
+.formula strong { color: var(--texto); }
+mjx-container { color: var(--texto); }
+.pregunta { border: 1px solid var(--borde); border-radius: 12px; margin-bottom: 10px; background: var(--superficie-2); }
+.pregunta summary { cursor: pointer; padding: 12px 16px; font-weight: 600; color: var(--texto); font-size: 14.5px; }
+.pregunta[open] summary { border-bottom: 1px solid var(--borde); }
+.pregunta .respuesta { padding: 4px 16px 6px; }
+.caja-codigo { max-height: 520px; overflow: auto; border: 1px solid var(--borde); border-radius: 12px; background: #0d1117; padding: 4px 14px; }
+.caja-codigo pre { margin: 0; background: transparent !important; }
+.caja-codigo code { font-family: "Cascadia Code", Consolas, monospace; font-size: 12.5px; line-height: 1.55; background: transparent !important; color: #e6edf3 !important; }
+.caja-codigo .hljs-keyword { color: #ff7b72 !important; } .caja-codigo .hljs-string { color: #a5d6ff !important; }
+.caja-codigo .hljs-comment { color: #8b949e !important; font-style: italic; } .caja-codigo .hljs-number, .caja-codigo .hljs-literal { color: #79c0ff !important; }
+.caja-codigo .hljs-title { color: #d2a8ff !important; } .caja-codigo .hljs-built_in { color: #ffa657 !important; }
+.caja-codigo .hljs-meta, .caja-codigo .hljs-doctag { color: #7ee787 !important; }
+.caja-codigo .nota { margin: 8px 0 0; }
+.codigo { background: var(--superficie-2); border: 1px solid var(--borde); border-radius: 10px; padding: 12px 14px; color: #9ec5f4; font-size: 13px; overflow-x: auto; white-space: pre; }
+
+/* Simulador y pie */
+.resultado { text-align: center; padding-top: 4px; }
+.resultado .veredicto { font-size: 18px; font-weight: 700; margin-top: -6px; }
+.pie { text-align: center; color: var(--texto-3); font-size: 12.5px; margin-top: 26px; }

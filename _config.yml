@@ -1,0 +1,31 @@
+# Configuración del Jupyter Book (informe del desarrollo y ejecución de los modelos)
+title: "Predicción de brotes de dengue en Colombia – Informe del desarrollo"  # Título del libro
+author: "Daniel Serrano Romero"  # Autor
+copyright: "2026"  # Año
+logo: "images/logoUN.png"  # Logo de la universidad (arriba en la barra lateral)
+favicon: "images/logoUN.png"  # Icono de la pestaña del navegador
+
+only_build_toc_files: true  # Solo se procesan los archivos listados en _toc.yml
+exclude_patterns: [".venv", "_build", "README.md", "data", "src", "dashboard", "*.log"]  # Carpetas que no forman parte del libro
+
+execute:
+  execute_notebooks: "off"  # Los cuadernos se ejecutan antes con nbconvert y se publican con sus salidas
+
+parse:
+  myst_enable_extensions:  # Extensiones de MyST
+    - dollarmath  # Fórmulas con $...$ y $$...$$
+    - colon_fence  # Bloques ::: de admoniciones
+
+html:
+  home_page_in_navbar: true  # La portada aparece en la barra lateral
+
+sphinx:
+  config:
+    language: es  # Idioma del libro
+    html_show_copyright: true  # Muestra el copyright
+    suppress_warnings: ["mystnb.unknown_mime_type"]  # Oculta avisos por tipos de salida no reconocidos
+    templates_path: ["_templates"]  # Plantillas propias (tarjeta del autor)
+    html_static_path: ["_static"]  # Archivos estáticos (foto y estilos)
+    html_css_files: ["autor.css"]  # Estilos de la tarjeta del autor
+    html_sidebars:  # Barra lateral en todas las páginas
+      "**": ["navbar-logo.html", "autor.html", "search-button-field.html", "sbt-sidebar-nav.html"]  # Logo, foto, buscador e índice

@@ -1,0 +1,11 @@
+# Configuración de despliegue en Render (Blueprint): publica el dashboard como servicio web.
+# En Render: New → Blueprint → elegir el repositorio dash_ml_dengue_dsr → Apply.
+services:
+  - type: web                         # Servicio web con URL pública
+    name: dengue-dashboard            # Nombre del servicio (define la URL: <nombre>.onrender.com)
+    runtime: docker                   # Se construye con docker/Dockerfile (Python 3.9 y versiones fijadas)
+    dockerfilePath: ./docker/Dockerfile   # Ruta del Dockerfile
+    dockerContext: .                  # Contexto: raíz del repositorio
+    plan: free                        # Plan gratuito (512 MB de RAM)
+    healthCheckPath: /                # Ruta que Render consulta para saber si el servicio está listo
+    autoDeploy: true                  # Redespliega con cada push a main

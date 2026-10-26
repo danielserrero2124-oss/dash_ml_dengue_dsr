@@ -1,0 +1,12 @@
+# Entorno virtual y cachés de Python
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+# Caché del panel procesado (se reconstruye en segundos)
+data/panel_procesado.pkl
+# Registros
+*.log
+# Configuración local del asistente y del editor
+.claude/
+.vscode/

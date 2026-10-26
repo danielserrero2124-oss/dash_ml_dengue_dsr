@@ -1,0 +1,10 @@
+# Archivos que no entran al contexto de construcción de Docker
+.venv/
+.git/
+.claude/
+_build/
+notebooks/
+informe/
+**/__pycache__/
+*.log
+data/panel_procesado.pkl

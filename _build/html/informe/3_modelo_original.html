@@ -1,0 +1,631 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>3. Fundamentos teóricos del modelo original: HetDS en línea &#8212; Predicción de brotes de dengue en Colombia – Informe del desarrollo</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/autor.css?v=483c0dd5" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'informe/3_modelo_original';</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="4. Entrenamiento y resultados de los cinco modelos" href="../notebooks/2_modelos.html" />
+    <link rel="prev" title="2. EDA, datos y preprocesamiento" href="../notebooks/1_eda.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logoUN.png" class="logo__image only-light" alt="Predicción de brotes de dengue en Colombia – Informe del desarrollo - Home"/>
+    <script>document.write(`<img src="../_static/logoUN.png" class="logo__image only-dark" alt="Predicción de brotes de dengue en Colombia – Informe del desarrollo - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><!-- Tarjeta del autor en la barra lateral izquierda (visible en todas las páginas del libro) -->
+<div class="tarjeta-autor">
+  <img src="../_static/foto_author_DSR_sidebar.png" alt="Daniel Serrano Romero" class="tarjeta-autor__foto">
+  <div class="tarjeta-autor__nombre">Daniel Serrano Romero</div>
+  <div class="tarjeta-autor__detalle">Maestría en Matemáticas</div>
+  <div class="tarjeta-autor__detalle">Machine Learning</div>
+</div></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Búsqueda</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Predicción de brotes de dengue en Colombia: informe del desarrollo
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1_problema.html">1. Problema y formulación matemática</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/1_eda.html">2. EDA, datos y preprocesamiento</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Fundamentos teóricos del modelo original: HetDS en línea</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/2_modelos.html">4. Entrenamiento y resultados de los cinco modelos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/3_pruebas.html">5. Pruebas de significancia, ablación y tiempos de cómputo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6_dashboard.html">6. El dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="7_conclusiones.html">7. Conclusiones, limitaciones y preguntas</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/informe/3_modelo_original.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="claro/oscuro" aria-label="claro/oscuro" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Fundamentos teóricos del modelo original: HetDS en línea</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#origen-y-motivacion">3.1. Origen y motivación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formulacion">3.2. Formulación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-objetivo-y-principio-de-aprendizaje">3.3. Función objetivo y principio de aprendizaje</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supuestos">3.4. Supuestos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regularizacion-complejidad-y-generalizacion">3.5. Regularización, complejidad y generalización</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referencias">3.6. Referencias</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="fundamentos-teoricos-del-modelo-original-hetds-en-linea">
+<h1><span class="section-number">3. </span>Fundamentos teóricos del modelo original: HetDS en línea<a class="headerlink" href="#fundamentos-teoricos-del-modelo-original-hetds-en-linea" title="Link to this heading">#</a></h1>
+<section id="origen-y-motivacion">
+<h2><span class="section-number">3.1. </span>Origen y motivación<a class="headerlink" href="#origen-y-motivacion" title="Link to this heading">#</a></h2>
+<p>Del listado de modelos del curso se eligió <strong>HetDS — selección dinámica de ensambles heterogéneos</strong> (grupo
+«Árboles, boosting y ensambles propuestos»). La selección dinámica parte de una idea sencilla: ningún
+clasificador es el mejor en todas las regiones del espacio ni en todos los momentos, así que conviene
+combinar varios <strong>expertos</strong> y decidir, caso a caso, cuánto confiar en cada uno (Ko, Sabourin y Britto, 2008;
+Cruz, Sabourin y Cavalcanti, 2018).</p>
+<p>En la vigilancia del dengue el «momento» importa: el régimen epidémico cambia entre años (2024 triplicó la
+proporción de brotes del entrenamiento). Por eso la competencia de cada experto se mide <strong>en línea</strong>, con las
+etiquetas que se van confirmando, y se combina con el algoritmo <strong>Hedge</strong> de pesos exponenciales
+(Freund y Schapire, 1997), que tiene garantías teóricas de desempeño.</p>
+<p>El modelo agrega un componente de <strong>autocorrelación espacial</strong>: el dengue se propaga entre municipios vecinos
+porque comparten clima, vectores y movilidad de personas.</p>
+</section>
+<section id="formulacion">
+<h2><span class="section-number">3.2. </span>Formulación<a class="headerlink" href="#formulacion" title="Link to this heading">#</a></h2>
+<p><strong>Expertos.</strong> <span class="math notranslate nohighlight">\(K = 5\)</span> clasificadores heterogéneos entrenados con 2015–2021:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Experto</p></th>
+<th class="head"><p>Sesgo inductivo</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Boosting de árboles (31 hojas)</p></td>
+<td><p>Interacciones complejas, corrección secuencial de errores</p></td>
+</tr>
+<tr class="row-odd"><td><p>Boosting de árboles (7 hojas, <span class="math notranslate nohighlight">\(L_2\)</span>)</p></td>
+<td><p>Efectos más suaves y regularizados</p></td>
+</tr>
+<tr class="row-even"><td><p>Bosque aleatorio</p></td>
+<td><p>Promedio de árboles profundos: baja varianza</p></td>
+</tr>
+<tr class="row-odd"><td><p>Árboles extremos</p></td>
+<td><p>Cortes aleatorios: máxima diversidad</p></td>
+</tr>
+<tr class="row-even"><td><p>Regresión logística</p></td>
+<td><p>Frontera lineal: extrapola fuera del rango de entrenamiento</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Cada experto recibe las variables del problema <span class="math notranslate nohighlight">\(\mathbf{x}_{m,t}\)</span> y las espaciales</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{s}_{m,t} = \Big(\ln\big(1 + \textstyle\sum_{j \in D(m),\, j\ne m} c_{j,t}\big),\;
+\Delta_4 \ln\big(1 + \textstyle\sum_{j \in D(m),\, j\ne m} c_{j,t}\big),\;
+\bar b_{D(m)\setminus m,\,t}\Big),
+\]</div>
+<p>donde <span class="math notranslate nohighlight">\(D(m)\)</span> es el departamento del municipio <span class="math notranslate nohighlight">\(m\)</span>: casos del resto del departamento, su cambio en cuatro
+semanas y la proporción de municipios vecinos en brote. Cada experto produce <span class="math notranslate nohighlight">\(p_k(m,t) = f_k(\mathbf{x}_{m,t}, \mathbf{s}_{m,t})\)</span>.</p>
+<p><strong>Pérdida con retraso de la etiqueta.</strong> El brote de la semana <span class="math notranslate nohighlight">\(s\)</span> se confirma en <span class="math notranslate nohighlight">\(s + r\)</span> (<span class="math notranslate nohighlight">\(r = 4\)</span>). Para predecir
+la semana <span class="math notranslate nohighlight">\(t\)</span> solo se usan las filas con <span class="math notranslate nohighlight">\(s \le t - r\)</span>. La pérdida de cada experto en la ventana
+<span class="math notranslate nohighlight">\(W(t) = \{s : t - r - V &lt; s \le t - r\}\)</span> es</p>
+<div class="math notranslate nohighlight">
+\[
+L_k(t) = \sum_{s\in W(t)}\sum_m \ell\big(y_{m,s}, p_k(m,s)\big), \qquad
+\ell(y,p) = -\big[y\ln p + (1-y)\ln(1-p)\big].
+\]</div>
+<p><strong>Pesos Hedge.</strong></p>
+<div class="math notranslate nohighlight">
+\[
+w_k(t) = \frac{\exp\big(-\eta L_k(t)\big)}{\sum_{j=1}^K \exp\big(-\eta L_j(t)\big)} .
+\]</div>
+<p><strong>Combinación en el espacio logit.</strong></p>
+<div class="math notranslate nohighlight">
+\[
+P\big(y_{m,t}=1\big) = \sigma\Big(\sum_{k=1}^K w_k(t)\,\operatorname{logit}p_k(m,t)\Big), \qquad \sigma(z) = \frac{1}{1+e^{-z}} .
+\]</div>
+</section>
+<section id="funcion-objetivo-y-principio-de-aprendizaje">
+<h2><span class="section-number">3.3. </span>Función objetivo y principio de aprendizaje<a class="headerlink" href="#funcion-objetivo-y-principio-de-aprendizaje" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Expertos:</strong> cada uno minimiza el riesgo empírico con log-loss y su propia regularización (profundidad,
+hojas mínimas, <span class="math notranslate nohighlight">\(L_2\)</span>).</p></li>
+<li><p><strong>Selector:</strong> los pesos Hedge son la solución exacta del problema <em>Follow the Regularized Leader</em> con
+regularización entrópica sobre el símplex <span class="math notranslate nohighlight">\(\Delta_K\)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{w}(t) = \arg\min_{\mathbf{w}\in\Delta_K}\; \eta\,\langle\mathbf{w}, \mathbf{L}(t)\rangle + \sum_k w_k\ln w_k .
+\]</div>
+<ul class="simple">
+<li><p><strong>Garantía (arrepentimiento):</strong> con pérdidas acotadas en <span class="math notranslate nohighlight">\([0, B]\)</span> (las probabilidades se recortan a
+<span class="math notranslate nohighlight">\([10^{-5}, 1-10^{-5}]\)</span>), la pérdida acumulada de Hedge excede la del mejor experto en, a lo sumo,
+<span class="math notranslate nohighlight">\(B\sqrt{(T/2)\ln K}\)</span> para <span class="math notranslate nohighlight">\(\eta\)</span> adecuado (Cesa-Bianchi y Lugosi, 2006).</p></li>
+</ul>
+</section>
+<section id="supuestos">
+<h2><span class="section-number">3.4. </span>Supuestos<a class="headerlink" href="#supuestos" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Retraso conocido de las etiquetas:</strong> nunca se usa un brote antes de que esté confirmado.</p></li>
+<li><p><strong>Cambios de régimen graduales:</strong> el experto que funcionó en las últimas semanas sigue siendo útil.</p></li>
+<li><p><strong>Diversidad:</strong> los expertos cometen errores distintos (si fallaran igual, ponderarlos no ayudaría).</p></li>
+<li><p><strong>Dependencia espacial dentro del departamento.</strong></p></li>
+</ol>
+</section>
+<section id="regularizacion-complejidad-y-generalizacion">
+<h2><span class="section-number">3.5. </span>Regularización, complejidad y generalización<a class="headerlink" href="#regularizacion-complejidad-y-generalizacion" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Elemento</p></th>
+<th class="head"><p>Papel</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\eta\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\eta\to0\)</span>: promedio fijo (estable); <span class="math notranslate nohighlight">\(\eta\)</span> grande: sigue al último líder (adaptativo)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ventana <span class="math notranslate nohighlight">\(V\)</span></p></td>
+<td><p>Pocas semanas: reacción rápida y ruidosa; muchas: más suave</p></td>
+</tr>
+<tr class="row-even"><td><p>Regularizador entrópico</p></td>
+<td><p>Evita pesos extremos (equivale a un prior uniforme sobre los expertos)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Expertos</p></td>
+<td><p>Cada uno con su regularización interna</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul class="simple">
+<li><p><strong>Costo:</strong> entrenar = suma de los cinco expertos; predecir en línea = <span class="math notranslate nohighlight">\(O(K)\)</span> por fila más una suma acumulada por semana.</p></li>
+<li><p><strong>Hiperparámetros:</strong> <span class="math notranslate nohighlight">\(\eta \in \{0{,}01; 0{,}05; 0{,}2\}\)</span> y <span class="math notranslate nohighlight">\(V \in \{4, 8, 26\}\)</span> semanas se eligen por AUC-PR en 2022.</p></li>
+<li><p><strong>Generalización:</strong> se evalúa en 2023–2024, años nunca usados para entrenar ni para elegir hiperparámetros.</p></li>
+</ul>
+</section>
+<section id="referencias">
+<h2><span class="section-number">3.6. </span>Referencias<a class="headerlink" href="#referencias" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Cruz, R. M. O., Sabourin, R. y Cavalcanti, G. D. C. (2018). Dynamic classifier selection: Recent advances and perspectives. <em>Information Fusion</em>, 41, 195–216. <a class="reference external" href="https://doi.org/10.1016/j.inffus.2017.09.010">https://doi.org/10.1016/j.inffus.2017.09.010</a></p></li>
+<li><p>Ko, A. H. R., Sabourin, R. y Britto, A. S. (2008). From dynamic classifier selection to dynamic ensemble selection. <em>Pattern Recognition</em>, 41(5), 1718–1731. <a class="reference external" href="https://doi.org/10.1016/j.patcog.2007.10.015">https://doi.org/10.1016/j.patcog.2007.10.015</a></p></li>
+<li><p>Freund, Y. y Schapire, R. E. (1997). A decision-theoretic generalization of on-line learning and an application to boosting. <em>Journal of Computer and System Sciences</em>, 55(1), 119–139. <a class="reference external" href="https://doi.org/10.1006/jcss.1997.1504">https://doi.org/10.1006/jcss.1997.1504</a></p></li>
+<li><p>Cesa-Bianchi, N. y Lugosi, G. (2006). <em>Prediction, Learning, and Games</em>. Cambridge University Press.</p></li>
+<li><p>Huber, J. H. et al. (2018). Seasonal temperature variation influences climate suitability for dengue, chikungunya, and Zika transmission. <em>PLOS Neglected Tropical Diseases</em>, 12(5), e0006451. <a class="reference external" href="https://doi.org/10.1371/journal.pntd.0006451">https://doi.org/10.1371/journal.pntd.0006451</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./informe"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../notebooks/1_eda.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>EDA, datos y preprocesamiento</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../notebooks/2_modelos.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Entrenamiento y resultados de los cinco modelos</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#origen-y-motivacion">3.1. Origen y motivación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formulacion">3.2. Formulación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-objetivo-y-principio-de-aprendizaje">3.3. Función objetivo y principio de aprendizaje</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supuestos">3.4. Supuestos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regularizacion-complejidad-y-generalizacion">3.5. Regularización, complejidad y generalización</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referencias">3.6. Referencias</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Daniel Serrano Romero
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

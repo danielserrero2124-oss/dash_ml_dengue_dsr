@@ -1,0 +1,17 @@
+# Entorno del proyecto (Python 3.9.25, mismas versiones que el proyecto Heart Disease)
+pandas==2.1.0                  # Manejo de tablas
+numpy==1.25.2                  # Cálculo numérico (compatible con scikit-learn 1.3.0)
+scipy==1.11.2                  # Pruebas estadísticas (DeLong, McNemar, Friedman)
+scikit-learn==1.3.0            # Pipeline, GridSearchCV, modelos y expertos de HetDS
+joblib==1.3.2                  # Guardado de artefactos
+dash==2.18.2                   # Dashboard interactivo
+dash-bootstrap-components==1.6.0   # Componentes adicionales de Dash (mismo entorno que Heart Disease)
+plotly==5.24.1                 # Gráficos interactivos
+matplotlib==3.7.2              # Gráficos auxiliares de los cuadernos
+seaborn==0.12.2                # Gráficos estadísticos de los cuadernos
+statsmodels==0.14.0            # Estadística (mismo entorno que Heart Disease)
+greenlet==2.0.2                # Fijado: versiones nuevas no tienen rueda para Python 3.9 en Windows
+jupyter-book==1.0.4.post1      # Compilación del informe
+ipykernel                      # Kernel para ejecutar los cuadernos
+nbconvert                      # Ejecución de cuadernos por línea de comandos
+nbformat                       # Construcción de cuadernos

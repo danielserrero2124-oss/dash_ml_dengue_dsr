@@ -1,0 +1,13 @@
+# Tabla de contenido del Jupyter Book
+format: jb-book  # Formato de libro
+root: intro  # Portada (intro.md)
+options:
+  numbered: true  # Numera los capítulos
+chapters:
+  - file: informe/1_problema  # 1. Problema y formulación matemática
+  - file: notebooks/1_eda  # 2. EDA, datos y preprocesamiento (cuaderno ejecutado)
+  - file: informe/3_modelo_original  # 3. Fundamentos teóricos de HetDS en línea
+  - file: notebooks/2_modelos  # 4. Entrenamiento y resultados de los cinco modelos (cuaderno ejecutado)
+  - file: notebooks/3_pruebas  # 5. Pruebas de significancia, ablación y tiempos (cuaderno ejecutado)
+  - file: informe/6_dashboard  # 6. El dashboard
+  - file: informe/7_conclusiones  # 7. Conclusiones, limitaciones y preguntas
