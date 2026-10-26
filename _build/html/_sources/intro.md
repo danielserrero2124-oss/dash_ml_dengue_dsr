@@ -16,7 +16,7 @@ capítulos 2, 4 y 5 se ejecutaron completos y sus resultados son los mismos que 
 | Validación | Entrenamiento 2015–2021 (validación cruzada hacia adelante), validación 2022, prueba 2023–2024 |
 | Modelos recomendados | LogisticRegression (AUC 0,885), RandomForest (0,898), KNN (0,885), GradientBoosting (0,898) |
 | Modelo original | **HetDS en línea**: AUC-ROC **0,902**, AUC-PR **0,829** en 2023–2024 |
-| Significancia | Supera a los cuatro con bootstrap por municipio (p = 0,004, Holm), DeLong, McNemar (salvo RF) y Friedman–Nemenyi |
+| Significancia | Supera a los cuatro en AUC con bootstrap por municipio (p = 0,004, Holm), DeLong y Friedman–Nemenyi; McNemar (errores con el umbral) no lo favorece frente a GB |
 | Aporte del clima | Solo con clima AUC ≈ 0,71; con la historia de casos ya incluida, el clima casi no añade |
 
 ## Cómo leer este informe
