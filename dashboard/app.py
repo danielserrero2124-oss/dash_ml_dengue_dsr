@@ -31,7 +31,7 @@ app.layout = html.Div([
         dcc.Tab(label="ML Models", value="ml", className="tab", selected_className="tab--selected"),
     ]),
     html.Div(id="contenido"),  # Contenido de la pestaña activa
-    html.Div("Maestría en Machine Learning · Proyecto de aprendizaje automático · Daniel Serrano Romero", className="pie"),  # Pie
+    html.Div("Maestría en Matemáticas · Proyecto de Aprendizaje Automático · Daniel Serrano Romero", className="pie"),  # Pie de página
 ], className="contenedor")
 
 
