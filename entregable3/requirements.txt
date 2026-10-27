@@ -1,0 +1,23 @@
+# Dependencias exactas del Tercer Entregable (Python 3.9.25). Semilla global: e3/config.py (SEMILLA = 42)
+numpy==1.25.2              # Cálculo numérico
+pandas==2.1.0              # Tablas
+scipy==1.11.2              # Pruebas estadísticas y rango estudentizado (Nemenyi)
+scikit-learn==1.3.0        # Pipelines, modelos, Successive Halving
+statsmodels==0.14.0        # White, BDS, Ljung-Box
+xgboost==2.0.3             # XGBoost (hist, parada temprana)
+imbalanced-learn==0.11.0   # SMOTE, ADASYN y Pipeline con remuestreo
+optuna==3.6.1              # Optimización bayesiana (TPE)
+deap==1.4.1                # Algoritmos genéticos
+shap==0.44.1               # Valores de Shapley
+lime==0.2.0.1              # Explicaciones locales LIME
+arch==6.3.0                # Model Confidence Set, SPA y bootstrap estacionario
+faiss-cpu==1.7.4           # Vecinos aproximados (HNSW)
+memory_profiler==0.61.0    # Memoria por ajuste
+joblib==1.3.2              # Paralelización (loky)
+plotly==5.24.1             # Figuras interactivas
+matplotlib==3.7.2          # Gráficos de SHAP
+jupyter-book==1.0.4.post1  # Compilación del informe
+greenlet==2.0.2            # Fijado: versiones nuevas no tienen rueda para Python 3.9 en Windows
+nbformat                   # Construcción de cuadernos
+nbconvert                  # Ejecución de cuadernos
+ipykernel                  # Kernel

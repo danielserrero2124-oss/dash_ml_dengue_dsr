@@ -1,0 +1,25 @@
+# Tabla de contenido del Tercer Entregable
+format: jb-book  # Formato de libro
+root: intro  # Portada
+options:
+  numbered: true  # Numera los capítulos
+parts:
+  - caption: "Datos y diseño"  # Secciones 2, 3.2, 7.1 y 7.3 de la guía
+    chapters:
+      - file: cuadernos/1_datos  # ETL y EDA mejorado
+      - file: cuadernos/2_diseno  # Pipeline combinatorio y validación anidada
+  - caption: "Optimización"  # Secciones 3 y 4
+    chapters:
+      - file: cuadernos/3_optimizacion  # Comparación de optimizadores
+      - file: cuadernos/4_computacional  # Complejidad, paralelización y perfilamiento
+  - caption: "Resultados"  # Sección 5
+    chapters:
+      - file: cuadernos/5_clasificacion  # Clasificación y calibración
+      - file: cuadernos/6_regresion  # Regresión y residuos
+      - file: cuadernos/7_interpretabilidad  # SHAP y LIME
+  - caption: "Comparación estadística"  # Secciones 5.4 y 6
+    chapters:
+      - file: cuadernos/8_estadistica  # Robustez y pruebas jerárquicas
+  - caption: "Cierre"  # Conclusiones
+    chapters:
+      - file: conclusiones  # Conclusiones y reproducibilidad

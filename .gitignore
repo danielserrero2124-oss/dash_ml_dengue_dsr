@@ -23,3 +23,8 @@ _publicar/
 # Registro del dashboard del Segundo Entregable
 entregable2/_build/
 entregable2/*.log
+
+# Tercer Entregable: compilación, registros y resultados intermedios pesados
+entregable3/_build/
+entregable3/*.log
+entregable3/resultados/finales/
