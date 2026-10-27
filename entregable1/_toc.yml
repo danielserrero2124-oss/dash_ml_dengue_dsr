@@ -1,0 +1,26 @@
+# Tabla de contenido del Primer Entregable
+format: jb-book  # Formato de libro
+root: intro  # Portada
+options:
+  numbered: true  # Numera los capítulos
+parts:
+  - caption: "1. Base de datos"  # Sección 1 de la guía
+    chapters:
+      - file: cuadernos/01_base_datos  # Problema, fuente, diccionario, estructura, calidad y ética
+  - caption: "2. Análisis exploratorio de datos"  # Sección 2 de la guía
+    chapters:
+      - file: cuadernos/02_objetivo  # Reserva de la prueba y 2.1
+      - file: cuadernos/03_univariado  # 2.2
+      - file: cuadernos/04_bivariado  # 2.3
+      - file: cuadernos/05_multivariado  # 2.4
+      - file: cuadernos/06_fuga  # 2.5
+      - file: cuadernos/07_temporal  # 2.6
+      - file: cuadernos/08_espacial  # 2.7
+      - file: cuadernos/09_espacio_temporal  # 2.8
+      - file: cuadernos/10_preprocesamiento  # 2.9
+  - caption: "3. Modelo base"  # Sección 3 de la guía
+    chapters:
+      - file: cuadernos/11_modelo_base  # Regresión logística frente a líneas base triviales
+  - caption: "Cierre"  # Conclusiones y reproducibilidad
+    chapters:
+      - file: conclusiones  # Hallazgos, limitaciones y reproducibilidad

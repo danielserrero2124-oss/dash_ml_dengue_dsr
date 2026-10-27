@@ -10,3 +10,12 @@ data/panel_procesado.pkl
 # Configuración local del asistente y del editor
 .claude/
 .vscode/
+
+# Material personal de la sustentación (no se publica)
+sustentacion/
+
+# Compilación del libro del Primer Entregable (se regenera)
+entregable1/_build/
+
+# Carpeta temporal para publicar los dos libros en GitHub Pages
+_publicar/

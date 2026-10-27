@@ -1,0 +1,13 @@
+# Dependencias del Primer Entregable (Python 3.9.25). Semilla aleatoria fijada en src/config.py: SEMILLA = 42
+pandas==2.1.0                  # Tablas
+numpy==1.25.2                  # Cálculo numérico
+scipy==1.11.2                  # Pruebas estadísticas, envolvente convexa y vecinos
+scikit-learn==1.3.0            # Pipeline, GridSearchCV, regresión logística, PCA, t-SNE, Isolation Forest, DBSCAN
+statsmodels==0.14.0            # STL, ADF, KPSS, ACF y PACF
+plotly==5.24.1                 # Figuras interactivas
+matplotlib==3.7.2              # Prueba de punto en polígono (Ripley)
+jupyter-book==1.0.4.post1      # Compilación del informe
+greenlet==2.0.2                # Fijado: versiones nuevas no tienen rueda para Python 3.9 en Windows
+ipykernel                      # Kernel para ejecutar los cuadernos
+nbconvert                      # Ejecución de los cuadernos por línea de comandos
+nbformat                       # Construcción de los cuadernos
