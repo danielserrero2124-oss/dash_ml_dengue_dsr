@@ -19,3 +19,7 @@ entregable1/_build/
 
 # Carpeta temporal para publicar los dos libros en GitHub Pages
 _publicar/
+
+# Registro del dashboard del Segundo Entregable
+entregable2/_build/
+entregable2/*.log

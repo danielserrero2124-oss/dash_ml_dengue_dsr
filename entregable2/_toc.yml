@@ -1,0 +1,16 @@
+# Tabla de contenido del Segundo Entregable
+format: jb-book  # Formato de libro
+root: intro  # Portada
+options:
+  numbered: true  # Numera los capítulos
+parts:
+  - caption: "Informe del desarrollo"  # Un capítulo por pestaña del dashboard
+    chapters:
+      - file: cuadernos/1_contexto  # Pestaña 1: Contexto del problema
+      - file: cuadernos/2_eda_datos  # Pestaña 2: EDA (datos, objetivo, uni-, bi- y multivariado, fuga)
+      - file: cuadernos/3_eda_tiempo_espacio  # Pestaña 2: EDA (temporal, espacial, espacio-temporal, preprocesamiento)
+      - file: cuadernos/4_modelos_base  # Pestaña 3: Modelos base
+  - caption: "El dashboard"  # Arquitectura y ejecución
+    chapters:
+      - file: dashboard  # Estructura, componentes y ejecución
+      - file: conclusiones  # Conclusiones y reproducibilidad

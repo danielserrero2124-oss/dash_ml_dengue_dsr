@@ -1,0 +1,9 @@
+# Archivos que no entran al contexto de construcción de Docker (contexto = entregable2)
+_build/
+cuadernos/
+construir/
+_static/
+_templates/
+images/
+**/__pycache__/
+*.log

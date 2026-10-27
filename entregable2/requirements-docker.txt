@@ -1,0 +1,8 @@
+# Dependencias del contenedor del dashboard del Segundo Entregable (mismas versiones con las que se generaron los artefactos)
+pandas==2.1.0              # Tablas de los artefactos
+numpy==1.25.2              # Cálculo numérico
+scikit-learn==1.3.0        # Matriz de confusión y curvas ROC/PR en vivo
+joblib==1.3.2              # Carga de artefactos
+dash==2.18.2               # Dashboard
+plotly==5.24.1             # Gráficos
+gunicorn==23.0.0           # Servidor WSGI de producción (Linux)
