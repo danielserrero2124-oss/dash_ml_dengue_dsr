@@ -1,0 +1,1592 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Robustez y comparación estadística &#8212; Tercer Entregable – Modelos, optimización y comparación estadística</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/autor.css?v=483c0dd5" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'cuadernos/8_estadistica';</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Conclusiones" href="../conclusiones.html" />
+    <link rel="prev" title="Interpretabilidad: valores de Shapley (SHAP) y LIME" href="7_interpretabilidad.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logoUN.png" class="logo__image only-light" alt="Tercer Entregable – Modelos, optimización y comparación estadística - Home"/>
+    <script>document.write(`<img src="../_static/logoUN.png" class="logo__image only-dark" alt="Tercer Entregable – Modelos, optimización y comparación estadística - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><!-- Tarjeta del autor en la barra lateral izquierda (visible en todas las páginas del libro) -->
+<div class="tarjeta-autor">
+  <img src="../_static/foto_author_DSR_sidebar.png" alt="Daniel Serrano Romero" class="tarjeta-autor__foto">
+  <div class="tarjeta-autor__nombre">Daniel Serrano Romero</div>
+  <div class="tarjeta-autor__detalle">Maestría en Matemáticas</div>
+  <div class="tarjeta-autor__detalle">Machine Learning</div>
+</div></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Búsqueda</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Tercer Entregable: modelos de Machine Learning, optimización y comparación estadística
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Datos y diseño</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1_datos.html">Datos: ETL y EDA mejorado</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_diseno.html">Diseño experimental: 140 modelos con validación anidada</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Optimización</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="3_optimizacion.html">Optimización de hiperparámetros: comparación de métodos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_computacional.html">Optimización computacional</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resultados</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="5_clasificacion.html">Resultados de clasificación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6_regresion.html">Resultados de regresión: log(1 + casos) en <span class="math notranslate nohighlight">\(t + 4\)</span></a></li>
+<li class="toctree-l1"><a class="reference internal" href="7_interpretabilidad.html">Interpretabilidad: valores de Shapley (SHAP) y LIME</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Comparación estadística</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Robustez y comparación estadística</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Cierre</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../conclusiones.html">Conclusiones</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/cuadernos/8_estadistica.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="claro/oscuro" aria-label="claro/oscuro" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Robustez y comparación estadística</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#robustez-media-desviacion-en-el-bucle-externo-y-sensibilidad-a-la-semilla">1. Robustez: media ± desviación en el bucle externo y sensibilidad a la semilla</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-etapa-1-prueba-global-de-friedman">2. Clasificación — Etapa 1: prueba global de Friedman</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-etapa-2-nemenyi-y-diagrama-de-diferencia-critica">3. Clasificación — Etapa 2: Nemenyi y diagrama de Diferencia Crítica</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparaciones-dirigidas-delong-con-correccion-de-holm-bootstrap-bca-y-delta-de-cliff">4. Comparaciones dirigidas: DeLong con corrección de Holm, bootstrap BCa y delta de Cliff</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regresion-secuencia-jerarquica">5. Regresión: secuencia jerárquica</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="robustez-y-comparacion-estadistica">
+<h1>Robustez y comparación estadística<a class="headerlink" href="#robustez-y-comparacion-estadistica" title="Link to this heading">#</a></h1>
+<p>Con 140 modelos hay <span class="math notranslate nohighlight">\(\binom{140}{2} = 9\,730\)</span> pares posibles: probarlos todos con <span class="math notranslate nohighlight">\(\alpha = 0{,}05\)</span> daría ≈ 487 falsos positivos por azar. La comparación es <strong>jerárquica</strong>: primero una prueba global y solo después comparaciones dirigidas con corrección por comparaciones múltiples y tamaño del efecto.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>  <span class="c1"># Rutas</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>  <span class="c1"># Configuración del intérprete</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">"LOKY_MAX_CPU_COUNT"</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">()))</span>  <span class="c1"># Evita un aviso de joblib en Windows</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">[:</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s2">".."</span><span class="p">),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s2">"../.."</span><span class="p">),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s2">"../../entregable1"</span><span class="p">)]</span>  <span class="c1"># e3, src y e1</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>  <span class="c1"># Control de avisos</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">"ignore"</span><span class="p">)</span>  <span class="c1"># Oculta avisos de versiones</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">contextlib</span><span class="o">,</span><span class="w"> </span><span class="nn">io</span>  <span class="c1"># Silenciar un diagnóstico de joblib en Windows</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">joblib.externals.loky</span><span class="w"> </span><span class="kn">import</span> <span class="n">cpu_count</span>  <span class="c1"># Conteo de núcleos</span>
+<span class="k">with</span> <span class="n">contextlib</span><span class="o">.</span><span class="n">redirect_stderr</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">()):</span>  <span class="c1"># joblib imprime un diagnóstico al no encontrar «wmic»</span>
+    <span class="n">cpu_count</span><span class="p">(</span><span class="n">only_physical_cores</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Se calcula una vez (queda en caché)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>  <span class="c1"># Lectura de resultados</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>  <span class="c1"># Cálculo numérico</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>  <span class="c1"># Tablas</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">plotly.express</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">px</span>  <span class="c1"># Figuras rápidas</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">plotly.graph_objects</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span>  <span class="c1"># Figuras detalladas</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">plotly.subplots</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_subplots</span>  <span class="c1"># Paneles</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Markdown</span><span class="p">,</span> <span class="n">display</span>  <span class="c1"># Texto enriquecido</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">e1.figuras</span><span class="w"> </span><span class="kn">import</span> <span class="n">mostrar</span><span class="p">,</span> <span class="n">AZUL</span><span class="p">,</span> <span class="n">ROJO</span><span class="p">,</span> <span class="n">VERDE</span><span class="p">,</span> <span class="n">AMBAR</span><span class="p">,</span> <span class="n">GRIS</span><span class="p">,</span> <span class="n">MORADO</span>  <span class="c1"># Estilo de figuras (tema claro del informe)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">e3</span><span class="w"> </span><span class="kn">import</span> <span class="n">config</span> <span class="k">as</span> <span class="n">c3</span><span class="p">,</span> <span class="n">datos</span> <span class="k">as</span> <span class="n">dd</span><span class="p">,</span> <span class="n">modelos</span> <span class="k">as</span> <span class="n">mo</span><span class="p">,</span> <span class="n">optimizadores</span> <span class="k">as</span> <span class="n">op</span><span class="p">,</span> <span class="n">experimento</span> <span class="k">as</span> <span class="n">ex</span>  <span class="c1"># Código del entregable</span>
+<span class="n">c3</span><span class="o">.</span><span class="n">fijar_semilla</span><span class="p">()</span>  <span class="c1"># Semilla global (42)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.width"</span><span class="p">,</span> <span class="mi">170</span><span class="p">)</span>  <span class="c1"># Ancho de las tablas</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.max_columns"</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>  <span class="c1"># Columnas visibles</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.float_format"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s2">,.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>  <span class="c1"># Cuatro decimales</span>
+<span class="n">COLORES</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"Grid Search"</span><span class="p">:</span> <span class="n">GRIS</span><span class="p">,</span> <span class="s2">"Random Search"</span><span class="p">:</span> <span class="n">AMBAR</span><span class="p">,</span> <span class="s2">"Bayesiana (Optuna TPE)"</span><span class="p">:</span> <span class="n">AZUL</span><span class="p">,</span> <span class="s2">"Genética (DEAP)"</span><span class="p">:</span> <span class="n">VERDE</span><span class="p">,</span> <span class="s2">"Successive Halving"</span><span class="p">:</span> <span class="n">MORADO</span><span class="p">}</span>  <span class="c1"># Color por optimizador</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">joblib</span>  <span class="c1"># Lectura</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">average_precision_score</span><span class="p">,</span> <span class="n">roc_auc_score</span>  <span class="c1"># Métricas</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">e3</span><span class="w"> </span><span class="kn">import</span> <span class="n">estadistica</span> <span class="k">as</span> <span class="n">st</span><span class="p">,</span> <span class="n">evaluacion</span> <span class="k">as</span> <span class="n">ev</span>  <span class="c1"># Pruebas y métricas</span>
+<span class="n">tabla</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">c3</span><span class="o">.</span><span class="n">RESULTADOS</span> <span class="o">/</span> <span class="s2">"tabla_maestra.csv"</span><span class="p">)</span>  <span class="c1"># Tabla maestra</span>
+<span class="n">tr</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">te</span> <span class="o">=</span> <span class="n">dd</span><span class="o">.</span><span class="n">cargar</span><span class="p">()</span>  <span class="c1"># Periodos</span>
+<span class="n">y_te</span> <span class="o">=</span> <span class="n">te</span><span class="p">[</span><span class="s2">"y"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>  <span class="c1"># Objetivo de la prueba</span>
+<span class="n">semanas</span> <span class="o">=</span> <span class="n">te</span><span class="p">[</span><span class="s2">"time_idx"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>  <span class="c1"># Semana de cada fila (bloques)</span>
+<span class="n">finales</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># Predicciones finales</span>
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">ex</span><span class="o">.</span><span class="n">FINALES</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">"*.pkl"</span><span class="p">)):</span>  <span class="c1"># Reajustes finales</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s2">"rb"</span><span class="p">))</span>  <span class="c1"># Predicciones</span>
+    <span class="n">finales</span><span class="p">[(</span><span class="n">r</span><span class="p">[</span><span class="s2">"tarea"</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="s2">"modelo"</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="s2">"balanceo"</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="s2">"optimizador"</span><span class="p">])]</span> <span class="o">=</span> <span class="n">r</span>  <span class="c1"># Indexado</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Reajustes finales: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">finales</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>  <span class="c1"># 140</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reajustes finales: 140
+</pre></div>
+</div>
+</div>
+</div>
+<section id="robustez-media-desviacion-en-el-bucle-externo-y-sensibilidad-a-la-semilla">
+<h2>1. Robustez: media ± desviación en el bucle externo y sensibilidad a la semilla<a class="headerlink" href="#robustez-media-desviacion-en-el-bucle-externo-y-sensibilidad-a-la-semilla" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clf</span> <span class="o">=</span> <span class="n">tabla</span><span class="p">[</span><span class="n">tabla</span><span class="p">[</span><span class="s2">"tarea"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"clf"</span><span class="p">]</span>  <span class="c1"># Clasificación</span>
+<span class="n">ext</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">"modelo"</span><span class="p">,</span> <span class="s2">"balanceo"</span><span class="p">,</span> <span class="s2">"optimizador"</span><span class="p">])[</span><span class="s2">"AUC-PR"</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s2">"mean"</span><span class="p">,</span> <span class="s2">"std"</span><span class="p">])</span>  <span class="c1"># Media y desviación de los 3 pliegues</span>
+<span class="n">mej</span> <span class="o">=</span> <span class="n">ext</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"mean"</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"modelo"</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>  <span class="c1"># Mejor combinación de cada modelo</span>
+<span class="n">mej</span><span class="p">[</span><span class="s2">"media ± desv."</span><span class="p">]</span> <span class="o">=</span> <span class="n">mej</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">'mean'</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> ± </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">'std'</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Formato</span>
+<span class="n">mej</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"mean"</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)[[</span><span class="s2">"balanceo"</span><span class="p">,</span> <span class="s2">"optimizador"</span><span class="p">,</span> <span class="s2">"media ± desv."</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>balanceo</th>
+      <th>optimizador</th>
+      <th>media ± desv.</th>
+    </tr>
+    <tr>
+      <th>modelo</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>XGBoost</th>
+      <td>Sin balanceo</td>
+      <td>Genética (DEAP)</td>
+      <td>0.679 ± 0.104</td>
+    </tr>
+    <tr>
+      <th>Random Forest</th>
+      <td>class_weight balanced</td>
+      <td>Genética (DEAP)</td>
+      <td>0.678 ± 0.107</td>
+    </tr>
+    <tr>
+      <th>SVM</th>
+      <td>Sin balanceo</td>
+      <td>Genética (DEAP)</td>
+      <td>0.671 ± 0.107</td>
+    </tr>
+    <tr>
+      <th>Regresión logística</th>
+      <td>Sin balanceo</td>
+      <td>Genética (DEAP)</td>
+      <td>0.653 ± 0.112</td>
+    </tr>
+    <tr>
+      <th>KNN</th>
+      <td>Sin balanceo</td>
+      <td>Random Search</td>
+      <td>0.651 ± 0.116</td>
+    </tr>
+    <tr>
+      <th>Árbol de decisión</th>
+      <td>class_weight balanced</td>
+      <td>Bayesiana (Optuna TPE)</td>
+      <td>0.634 ± 0.115</td>
+    </tr>
+    <tr>
+      <th>Naive Bayes</th>
+      <td>ADASYN</td>
+      <td>Bayesiana (Optuna TPE)</td>
+      <td>0.546 ± 0.137</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rob</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">c3</span><span class="o">.</span><span class="n">RESULTADOS</span> <span class="o">/</span> <span class="s2">"robustez_semillas.joblib"</span><span class="p">)</span>  <span class="c1"># 5 semillas por modelo</span>
+<span class="n">sem</span> <span class="o">=</span> <span class="n">rob</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"modelo"</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s2">"AUC-PR media (5 semillas)"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"AUC-PR"</span><span class="p">,</span> <span class="s2">"mean"</span><span class="p">),</span> <span class="s2">"desv. por semilla"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"AUC-PR"</span><span class="p">,</span> <span class="s2">"std"</span><span class="p">),</span>
+                                   <span class="s2">"rango"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"AUC-PR"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">s</span><span class="o">.</span><span class="n">min</span><span class="p">()),</span> <span class="s2">"AUC-ROC desv. por semilla"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"AUC-ROC"</span><span class="p">,</span> <span class="s2">"std"</span><span class="p">)})</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"AUC-PR media (5 semillas)"</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">sem</span><span class="p">[</span><span class="s2">"desv. entre pliegues externos"</span><span class="p">]</span> <span class="o">=</span> <span class="n">mej</span><span class="p">[</span><span class="s2">"std"</span><span class="p">]</span>  <span class="c1"># Variabilidad por partición</span>
+<span class="n">sem</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>AUC-PR media (5 semillas)</th>
+      <th>desv. por semilla</th>
+      <th>rango</th>
+      <th>AUC-ROC desv. por semilla</th>
+      <th>desv. entre pliegues externos</th>
+    </tr>
+    <tr>
+      <th>modelo</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>XGBoost</th>
+      <td>0.8214</td>
+      <td>0.0015</td>
+      <td>0.0034</td>
+      <td>0.0004</td>
+      <td>0.1041</td>
+    </tr>
+    <tr>
+      <th>SVM</th>
+      <td>0.8197</td>
+      <td>0.0012</td>
+      <td>0.0031</td>
+      <td>0.0006</td>
+      <td>0.1068</td>
+    </tr>
+    <tr>
+      <th>Random Forest</th>
+      <td>0.8187</td>
+      <td>0.0007</td>
+      <td>0.0019</td>
+      <td>0.0002</td>
+      <td>0.1068</td>
+    </tr>
+    <tr>
+      <th>Regresión logística</th>
+      <td>0.8061</td>
+      <td>0.0006</td>
+      <td>0.0016</td>
+      <td>0.0003</td>
+      <td>0.1120</td>
+    </tr>
+    <tr>
+      <th>KNN</th>
+      <td>0.7995</td>
+      <td>0.0011</td>
+      <td>0.0028</td>
+      <td>0.0004</td>
+      <td>0.1160</td>
+    </tr>
+    <tr>
+      <th>Árbol de decisión</th>
+      <td>0.7851</td>
+      <td>0.0078</td>
+      <td>0.0212</td>
+      <td>0.0010</td>
+      <td>0.1146</td>
+    </tr>
+    <tr>
+      <th>Naive Bayes</th>
+      <td>0.7186</td>
+      <td>0.0007</td>
+      <td>0.0019</td>
+      <td>0.0008</td>
+      <td>0.1374</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Interpretación.</strong> La variabilidad por <strong>semilla</strong> (submuestra, remuestreo e inicialización) es pequeña: una desviación de 0,0006–0,0015 de AUC-PR en la prueba para todos salvo el árbol único (0,008, el más inestable, como se espera de un solo árbol). La variabilidad <strong>entre pliegues externos</strong> es unas 100 veces mayor (≈ 0,10), porque cada año tiene otra prevalencia. Las diferencias entre los tres mejores modelos (XGBoost, SVM y Random Forest: 0,821, 0,820 y 0,819) son del mismo orden que la variabilidad por semilla: <strong>no son mayores que la variabilidad intrínseca</strong>, lo que exige pruebas formales antes de declarar un ganador.</p>
+</section>
+<section id="clasificacion-etapa-1-prueba-global-de-friedman">
+<h2>2. Clasificación — Etapa 1: prueba global de Friedman<a class="headerlink" href="#clasificacion-etapa-1-prueba-global-de-friedman" title="Link to this heading">#</a></h2>
+<p>Bloques = las 100 semanas de la prueba (cada semana es un problema de ordenar el riesgo de 376 municipios); en cada semana se ordenan los modelos por AUC-ROC. Se aplica a los <strong>7 modelos</strong> (mejor combinación de cada uno) y a las <strong>112 combinaciones</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">auc_semanal</span><span class="p">(</span><span class="n">claves</span><span class="p">):</span>  <span class="c1"># Matriz semanas × modelos con el AUC-ROC de cada semana</span>
+    <span class="n">cols</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># Columnas</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">claves</span><span class="p">:</span>  <span class="c1"># Modelos</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">finales</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="s2">"p_te"</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>  <span class="c1"># Puntaje</span>
+        <span class="n">cols</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">w</span><span class="p">:</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_te</span><span class="p">[</span><span class="n">semanas</span> <span class="o">==</span> <span class="n">w</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="n">semanas</span> <span class="o">==</span> <span class="n">w</span><span class="p">])</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">semanas</span><span class="p">)</span> <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">y_te</span><span class="p">[</span><span class="n">semanas</span> <span class="o">==</span> <span class="n">w</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">}</span>  <span class="c1"># Semanas con ambas clases</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">cols</span><span class="p">)</span>  <span class="c1"># Tabla</span>
+
+<span class="n">siete</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">"clf"</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">r</span><span class="p">[</span><span class="s2">"balanceo"</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="s2">"optimizador"</span><span class="p">])</span> <span class="k">for</span> <span class="n">m</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">mej</span><span class="o">.</span><span class="n">iterrows</span><span class="p">()]</span>  <span class="c1"># Mejor combinación de cada modelo</span>
+<span class="n">A7</span> <span class="o">=</span> <span class="n">auc_semanal</span><span class="p">(</span><span class="n">siete</span><span class="p">)</span>  <span class="c1"># 100 semanas × 7 modelos</span>
+<span class="n">A7</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">siete</span><span class="p">]</span>  <span class="c1"># Nombres</span>
+<span class="n">f7</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">friedman</span><span class="p">(</span><span class="n">A7</span><span class="p">)</span>  <span class="c1"># Friedman</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"Estadístico de Friedman χ²_F"</span><span class="p">:</span> <span class="p">[</span><span class="n">f7</span><span class="p">[</span><span class="s2">"chi2"</span><span class="p">]],</span> <span class="s2">"g.l."</span><span class="p">:</span> <span class="p">[</span><span class="n">f7</span><span class="p">[</span><span class="s2">"gl"</span><span class="p">]],</span> <span class="s2">"valor p"</span><span class="p">:</span> <span class="p">[</span><span class="n">f7</span><span class="p">[</span><span class="s2">"p"</span><span class="p">]],</span> <span class="s2">"F de Iman-Davenport"</span><span class="p">:</span> <span class="p">[</span><span class="n">f7</span><span class="p">[</span><span class="s2">"F"</span><span class="p">]],</span> <span class="s2">"p (F)"</span><span class="p">:</span> <span class="p">[</span><span class="n">f7</span><span class="p">[</span><span class="s2">"p_F"</span><span class="p">]],</span>
+              <span class="s2">"bloques (semanas)"</span><span class="p">:</span> <span class="p">[</span><span class="n">f7</span><span class="p">[</span><span class="s2">"N"</span><span class="p">]],</span> <span class="s2">"Conclusión"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Se rechaza H0: hay diferencias"</span> <span class="k">if</span> <span class="n">f7</span><span class="p">[</span><span class="s2">"p"</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">0.05</span> <span class="k">else</span> <span class="s2">"No se rechaza H0"</span><span class="p">]})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Estadístico de Friedman χ²_F</th>
+      <th>g.l.</th>
+      <th>valor p</th>
+      <th>F de Iman-Davenport</th>
+      <th>p (F)</th>
+      <th>bloques (semanas)</th>
+      <th>Conclusión</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>437.5811</td>
+      <td>6</td>
+      <td>0.0000</td>
+      <td>266.7209</td>
+      <td>0.0000</td>
+      <td>100</td>
+      <td>Se rechaza H0: hay diferencias</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="clasificacion-etapa-2-nemenyi-y-diagrama-de-diferencia-critica">
+<h2>3. Clasificación — Etapa 2: Nemenyi y diagrama de Diferencia Crítica<a class="headerlink" href="#clasificacion-etapa-2-nemenyi-y-diagrama-de-diferencia-critica" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">diagrama_cd</span><span class="p">(</span><span class="n">rangos</span><span class="p">,</span> <span class="n">cd</span><span class="p">,</span> <span class="n">titulo</span><span class="p">,</span> <span class="n">alto</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>  <span class="c1"># Diagrama de diferencia crítica (una fila por modelo)</span>
+<span class="w">    </span><span class="sd">"""Cada modelo es un punto en su rango medio con una barra de longitud CD centrada en él (± CD/2): si las barras de dos</span>
+<span class="sd">    modelos no se tocan, su diferencia de rango supera la CD y son significativamente distintos según Nemenyi. Los modelos</span>
+<span class="sd">    cuyas barras tocan la franja del mejor (rojo) son estadísticamente indistinguibles de él."""</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">rangos</span><span class="o">.</span><span class="n">sort_values</span><span class="p">()</span>  <span class="c1"># Rangos (mejor arriba)</span>
+    <span class="n">nombres</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>  <span class="c1"># Etiquetas</span>
+    <span class="n">indist</span> <span class="o">=</span> <span class="n">r</span> <span class="o">-</span> <span class="n">r</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">cd</span>  <span class="c1"># Indistinguibles del mejor</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>  <span class="c1"># Figura</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">add_vrect</span><span class="p">(</span><span class="n">x0</span><span class="o">=</span><span class="n">r</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x1</span><span class="o">=</span><span class="n">r</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">cd</span><span class="p">,</span> <span class="n">fillcolor</span><span class="o">=</span><span class="n">ROJO</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.10</span><span class="p">,</span> <span class="n">line_width</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># Franja de la CD desde el mejor</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">add_scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">r</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">nombres</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">"markers"</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">indist</span><span class="p">,</span> <span class="n">ROJO</span><span class="p">,</span> <span class="n">AZUL</span><span class="p">)),</span>  <span class="c1"># Rango medio</span>
+                    <span class="n">error_x</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">"constant"</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">cd</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"#94a3b8"</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span> <span class="n">showlegend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                    <span class="n">hovertemplate</span><span class="o">=</span><span class="s2">"%</span><span class="si">{y}</span><span class="s2">: rango %</span><span class="si">{x:.2f}</span><span class="s2">&lt;extra&gt;&lt;/extra&gt;"</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">titulo</span><span class="p">,</span> <span class="n">xaxis_title</span><span class="o">=</span><span class="sa">f</span><span class="s2">"rango medio (1 = mejor) · barras de longitud CD = </span><span class="si">{</span><span class="n">cd</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">yaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">autorange</span><span class="o">=</span><span class="s2">"reversed"</span><span class="p">),</span>
+                      <span class="n">margin</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">l</span><span class="o">=</span><span class="mi">320</span><span class="p">))</span>  <span class="c1"># Formato</span>
+    <span class="n">mostrar</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">alto</span> <span class="ow">or</span> <span class="nb">max</span><span class="p">(</span><span class="mi">320</span><span class="p">,</span> <span class="mi">34</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="o">+</span> <span class="mi">120</span><span class="p">))</span>  <span class="c1"># Muestra</span>
+
+<span class="n">cd7</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">diferencia_critica</span><span class="p">(</span><span class="n">f7</span><span class="p">[</span><span class="s2">"k"</span><span class="p">],</span> <span class="n">f7</span><span class="p">[</span><span class="s2">"N"</span><span class="p">])</span>  <span class="c1"># Diferencia crítica</span>
+<span class="n">diagrama_cd</span><span class="p">(</span><span class="n">f7</span><span class="p">[</span><span class="s2">"rangos"</span><span class="p">],</span> <span class="n">cd7</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Diagrama de Diferencia Crítica — 7 modelos (Nemenyi, α = 0,05, N = </span><span class="si">{</span><span class="n">f7</span><span class="p">[</span><span class="s1">'N'</span><span class="p">]</span><span class="si">}</span><span class="s2"> semanas)"</span><span class="p">)</span>  <span class="c1"># Diagrama</span>
+<span class="n">f7</span><span class="p">[</span><span class="s2">"rangos"</span><span class="p">]</span><span class="o">.</span><span class="n">to_frame</span><span class="p">(</span><span class="s2">"rango medio"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>                        <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>                <div id="212d9039-d9b2-4ebc-bed7-c9cea24b0fef" class="plotly-graph-div" style="height:358px; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("212d9039-d9b2-4ebc-bed7-c9cea24b0fef")) {                    Plotly.newPlot(                        "212d9039-d9b2-4ebc-bed7-c9cea24b0fef",                        [{"error_x":{"color":"#94a3b8","thickness":2,"type":"constant","value":0.4503633217761082},"hovertemplate":"%{y}: rango %{x:.2f}\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":["#dc2626","#dc2626","#dc2626","#2563eb","#2563eb","#2563eb","#2563eb"],"size":10},"mode":"markers","showlegend":false,"x":[1.84,2.1,2.55,4.685,4.95,5.175,6.7],"y":["XGBoost","SVM","Random Forest","Regresi\u00f3n log\u00edstica","KNN","\u00c1rbol de decisi\u00f3n","Naive Bayes"],"type":"scatter"}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmapgl":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmapgl"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#2563eb","#dc2626","#16a34a","#d97706","#7c3aed","#64748b","#0891b2","#db2777"],"font":{"family":"Inter, Segoe UI, sans-serif","size":13},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"white","showlakes":true,"showland":true,"subunitcolor":"#C8D4E3"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"margin":{"b":50,"l":60,"r":30,"t":60},"paper_bgcolor":"white","plot_bgcolor":"white","polar":{"angularaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""},"bgcolor":"white","radialaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"yaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"zaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"baxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"bgcolor":"white","caxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2}}},"shapes":[{"fillcolor":"#dc2626","line":{"width":0},"opacity":0.1,"type":"rect","x0":1.84,"x1":2.7407266435522164,"xref":"x","y0":0,"y1":1,"yref":"y domain"}],"yaxis":{"autorange":"reversed"},"margin":{"l":320},"title":{"text":"Diagrama de Diferencia Cr\u00edtica \u2014 7 modelos (Nemenyi, \u03b1 = 0,05, N = 100 semanas)"},"xaxis":{"title":{"text":"rango medio (1 = mejor) \u00b7 barras de longitud CD = 0.90"}},"height":358},                        {"displaylogo": false, "responsive": true}                    )                };                            </script>        </div></div><div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>rango medio</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>XGBoost</th>
+      <td>1.8400</td>
+    </tr>
+    <tr>
+      <th>SVM</th>
+      <td>2.1000</td>
+    </tr>
+    <tr>
+      <th>Random Forest</th>
+      <td>2.5500</td>
+    </tr>
+    <tr>
+      <th>Regresión logística</th>
+      <td>4.6850</td>
+    </tr>
+    <tr>
+      <th>KNN</th>
+      <td>4.9500</td>
+    </tr>
+    <tr>
+      <th>Árbol de decisión</th>
+      <td>5.1750</td>
+    </tr>
+    <tr>
+      <th>Naive Bayes</th>
+      <td>6.7000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">todas</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">finales</span> <span class="k">if</span> <span class="n">k</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"clf"</span><span class="p">]</span>  <span class="c1"># 112 combinaciones</span>
+<span class="n">A112</span> <span class="o">=</span> <span class="n">auc_semanal</span><span class="p">(</span><span class="n">todas</span><span class="p">)</span>  <span class="c1"># 100 semanas × 112</span>
+<span class="n">A112</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">k</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> · </span><span class="si">{</span><span class="n">k</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'class_weight balanced'</span><span class="p">,</span><span class="w"> </span><span class="s1">'pesos'</span><span class="p">)</span><span class="si">}</span><span class="s2"> · </span><span class="si">{</span><span class="n">k</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">todas</span><span class="p">]</span>  <span class="c1"># Nombres cortos</span>
+<span class="n">f112</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">friedman</span><span class="p">(</span><span class="n">A112</span><span class="p">)</span>  <span class="c1"># Friedman sobre todo el universo</span>
+<span class="n">cd112</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">diferencia_critica</span><span class="p">(</span><span class="n">f112</span><span class="p">[</span><span class="s2">"k"</span><span class="p">],</span> <span class="n">f112</span><span class="p">[</span><span class="s2">"N"</span><span class="p">])</span>  <span class="c1"># CD con k = 112</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"112 combinaciones: χ²_F = </span><span class="si">{</span><span class="n">f112</span><span class="p">[</span><span class="s1">'chi2'</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">, g.l. = </span><span class="si">{</span><span class="n">f112</span><span class="p">[</span><span class="s1">'gl'</span><span class="p">]</span><span class="si">}</span><span class="s2">, p = </span><span class="si">{</span><span class="n">f112</span><span class="p">[</span><span class="s1">'p'</span><span class="p">]</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2"> · CD de Nemenyi = </span><span class="si">{</span><span class="n">cd112</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">top</span> <span class="o">=</span> <span class="n">f112</span><span class="p">[</span><span class="s2">"rangos"</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>  <span class="c1"># Las 20 mejores</span>
+<span class="n">lider</span> <span class="o">=</span> <span class="n">top</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Mejor rango</span>
+<span class="n">indist</span> <span class="o">=</span> <span class="n">f112</span><span class="p">[</span><span class="s2">"rangos"</span><span class="p">][</span><span class="n">f112</span><span class="p">[</span><span class="s2">"rangos"</span><span class="p">]</span> <span class="o">-</span> <span class="n">lider</span> <span class="o">&lt;</span> <span class="n">cd112</span><span class="p">]</span>  <span class="c1"># Indistinguibles del líder</span>
+<span class="n">diagrama_cd</span><span class="p">(</span><span class="n">top</span><span class="p">,</span> <span class="n">cd112</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Diferencia Crítica — 20 mejores de 112 combinaciones (CD = </span><span class="si">{</span><span class="n">cd112</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>  <span class="c1"># Diagrama</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Combinaciones estadísticamente indistinguibles de la mejor (</span><span class="si">{</span><span class="n">top</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">): </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">indist</span><span class="p">)</span><span class="si">}</span><span class="s2"> de 112"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>112 combinaciones: χ²_F = 7673.0, g.l. = 111, p = 0.00e+00 · CD de Nemenyi = 19.98
+</pre></div>
+</div>
+<div class="output text_html"><div>                        <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>                <div id="0990876d-c1b4-4890-9a39-17927ada674f" class="plotly-graph-div" style="height:800px; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("0990876d-c1b4-4890-9a39-17927ada674f")) {                    Plotly.newPlot(                        "0990876d-c1b4-4890-9a39-17927ada674f",                        [{"error_x":{"color":"#94a3b8","thickness":2,"type":"constant","value":9.992105492400764},"hovertemplate":"%{y}: rango %{x:.2f}\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":["#dc2626","#dc2626","#dc2626","#dc2626","#dc2626","#dc2626","#dc2626","#dc2626","#dc2626","#dc2626","#dc2626","#dc2626","#dc2626","#dc2626","#dc2626","#dc2626","#dc2626","#dc2626","#dc2626","#dc2626"],"size":10},"mode":"markers","showlegend":false,"x":[12.62,12.75,13.58,14.045,15.28,15.345,15.585,17.15,19.53,19.895,19.94,20.465,20.67,22.605,22.775,23.255,23.52,23.845,23.95,24.875],"y":["XGBoost \u00b7 pesos \u00b7 Random","XGBoost \u00b7 pesos \u00b7 Gen\u00e9tica","XGBoost \u00b7 Sin balanceo \u00b7 Gen\u00e9tica","XGBoost \u00b7 Sin balanceo \u00b7 Bayesiana","XGBoost \u00b7 Sin balanceo \u00b7 Grid","XGBoost \u00b7 pesos \u00b7 Bayesiana","XGBoost \u00b7 pesos \u00b7 Grid","SVM \u00b7 Sin balanceo \u00b7 Gen\u00e9tica","Random Forest \u00b7 pesos \u00b7 Bayesiana","Random Forest \u00b7 pesos \u00b7 Gen\u00e9tica","SVM \u00b7 Sin balanceo \u00b7 Bayesiana","Random Forest \u00b7 pesos \u00b7 Random","XGBoost \u00b7 Sin balanceo \u00b7 Random","Random Forest \u00b7 Sin balanceo \u00b7 Gen\u00e9tica","Random Forest \u00b7 pesos \u00b7 Grid","Random Forest \u00b7 SMOTE \u00b7 Gen\u00e9tica","SVM \u00b7 Sin balanceo \u00b7 Grid","Random Forest \u00b7 Sin balanceo \u00b7 Bayesiana","Random Forest \u00b7 Sin balanceo \u00b7 Random","XGBoost \u00b7 SMOTE \u00b7 Bayesiana"],"type":"scatter"}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmapgl":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmapgl"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#2563eb","#dc2626","#16a34a","#d97706","#7c3aed","#64748b","#0891b2","#db2777"],"font":{"family":"Inter, Segoe UI, sans-serif","size":13},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"white","showlakes":true,"showland":true,"subunitcolor":"#C8D4E3"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"margin":{"b":50,"l":60,"r":30,"t":60},"paper_bgcolor":"white","plot_bgcolor":"white","polar":{"angularaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""},"bgcolor":"white","radialaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"yaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"zaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"baxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"bgcolor":"white","caxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2}}},"shapes":[{"fillcolor":"#dc2626","line":{"width":0},"opacity":0.1,"type":"rect","x0":12.62,"x1":32.604210984801526,"xref":"x","y0":0,"y1":1,"yref":"y domain"}],"yaxis":{"autorange":"reversed"},"margin":{"l":320},"title":{"text":"Diferencia Cr\u00edtica \u2014 20 mejores de 112 combinaciones (CD = 19.98)"},"xaxis":{"title":{"text":"rango medio (1 = mejor) \u00b7 barras de longitud CD = 19.98"}},"height":800},                        {"displaylogo": false, "responsive": true}                    )                };                            </script>        </div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Combinaciones estadísticamente indistinguibles de la mejor (XGBoost · pesos · Random): 30 de 112
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Interpretación.</strong> Friedman rechaza con claridad que los 7 modelos sean equivalentes (<span class="math notranslate nohighlight">\(\chi^2_F = 437{,}6\)</span>, <span class="math notranslate nohighlight">\(p \approx 0\)</span>). Con Nemenyi (<span class="math notranslate nohighlight">\(CD = 0{,}90\)</span> para <span class="math notranslate nohighlight">\(k = 7\)</span> y <span class="math notranslate nohighlight">\(N = 100\)</span>), <strong>XGBoost (1,84), SVM (2,10) y Random Forest (2,55) forman un grupo estadísticamente indistinguible</strong>; regresión logística, KNN y el árbol forman un segundo grupo (4,7–5,2), y Naive Bayes queda solo al final (6,7). Sobre las 112 combinaciones, la CD crece a ≈ 20 (con <span class="math notranslate nohighlight">\(k = 112\)</span> es muy exigente) y <strong>30 combinaciones</strong> son indistinguibles de la mejor: casi todas de XGBoost, Random Forest y SVM con distintos balanceos y optimizadores. El diagrama resume en una figura lo que serían 9 730 comparaciones.</p>
+</section>
+<section id="comparaciones-dirigidas-delong-con-correccion-de-holm-bootstrap-bca-y-delta-de-cliff">
+<h2>4. Comparaciones dirigidas: DeLong con corrección de Holm, bootstrap BCa y delta de Cliff<a class="headerlink" href="#comparaciones-dirigidas-delong-con-correccion-de-holm-bootstrap-bca-y-delta-de-cliff" title="Link to this heading">#</a></h2>
+<p>Se comparan los <strong>tres mejores modelos</strong> de la Etapa 1 y la regresión logística como referencia lineal.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orden</span> <span class="o">=</span> <span class="n">f7</span><span class="p">[</span><span class="s2">"rangos"</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>  <span class="c1"># Modelos por rango</span>
+<span class="n">candidatos</span> <span class="o">=</span> <span class="n">orden</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="p">([</span><span class="s2">"Regresión logística"</span><span class="p">]</span> <span class="k">if</span> <span class="s2">"Regresión logística"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">orden</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span> <span class="k">else</span> <span class="p">[])</span>  <span class="c1"># Subconjunto reducido</span>
+<span class="n">punt</span> <span class="o">=</span> <span class="p">{</span><span class="n">m</span><span class="p">:</span> <span class="n">finales</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="s2">"p_te"</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">siete</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="p">[</span><span class="n">k</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="k">if</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">candidatos</span><span class="p">}</span>  <span class="c1"># Puntajes</span>
+<span class="n">pares</span> <span class="o">=</span> <span class="p">[(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">candidatos</span><span class="p">)</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">candidatos</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]]</span>  <span class="c1"># Pares</span>
+<span class="n">dl</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">delong_holm</span><span class="p">(</span><span class="n">y_te</span><span class="p">,</span> <span class="n">punt</span><span class="p">,</span> <span class="n">pares</span><span class="p">)</span>  <span class="c1"># DeLong + Holm</span>
+<span class="n">mun</span> <span class="o">=</span> <span class="n">te</span><span class="p">[</span><span class="s2">"COD_MUN_N"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>  <span class="c1"># Conglomerados</span>
+<span class="n">ic</span><span class="p">,</span> <span class="n">cliff</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>  <span class="c1"># Bootstrap BCa y Cliff</span>
+<span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">pares</span><span class="p">:</span>  <span class="c1"># Cada par</span>
+    <span class="n">obs</span><span class="p">,</span> <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">bca_municipios</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">y_te</span><span class="p">,</span> <span class="n">punt</span><span class="p">[</span><span class="n">a</span><span class="p">],</span> <span class="n">punt</span><span class="p">[</span><span class="n">b</span><span class="p">]],</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y_te</span><span class="p">)),</span> <span class="n">mun</span><span class="p">,</span>
+                                     <span class="k">lambda</span> <span class="n">M</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">M</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">M</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">M</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">M</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]),</span> <span class="n">B</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>  <span class="c1"># ΔAUC con BCa por municipio</span>
+    <span class="n">ic</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">lo</span><span class="p">,</span> <span class="n">hi</span><span class="p">))</span>  <span class="c1"># IC</span>
+    <span class="n">cliff</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">delta_cliff</span><span class="p">(</span><span class="n">A7</span><span class="p">[</span><span class="n">a</span><span class="p">],</span> <span class="n">A7</span><span class="p">[</span><span class="n">b</span><span class="p">]))</span>  <span class="c1"># Dominancia semanal</span>
+<span class="n">dl</span><span class="p">[</span><span class="s2">"IC 95 % BCa (municipios)"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">"[</span><span class="si">{</span><span class="n">lo</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">; </span><span class="si">{</span><span class="n">hi</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">]"</span> <span class="k">for</span> <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="ow">in</span> <span class="n">ic</span><span class="p">]</span>  <span class="c1"># IC bootstrap</span>
+<span class="n">dl</span><span class="p">[</span><span class="s2">"δ de Cliff (AUC semanal)"</span><span class="p">]</span> <span class="o">=</span> <span class="n">cliff</span>  <span class="c1"># Tamaño del efecto</span>
+<span class="n">dl</span><span class="p">[</span><span class="s2">"magnitud"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">st</span><span class="o">.</span><span class="n">magnitud_cliff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">cliff</span><span class="p">]</span>  <span class="c1"># Etiqueta</span>
+<span class="n">dl</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>modelo A</th>
+      <th>modelo B</th>
+      <th>ΔAUC (A − B)</th>
+      <th>IC 2,5 %</th>
+      <th>IC 97,5 %</th>
+      <th>p crudo</th>
+      <th>p Holm</th>
+      <th>IC 95 % BCa (municipios)</th>
+      <th>δ de Cliff (AUC semanal)</th>
+      <th>magnitud</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>XGBoost</td>
+      <td>SVM</td>
+      <td>0.0010</td>
+      <td>0.0000</td>
+      <td>0.0019</td>
+      <td>0.0475</td>
+      <td>0.0949</td>
+      <td>[-0.0002; 0.0023]</td>
+      <td>0.0134</td>
+      <td>despreciable</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>XGBoost</td>
+      <td>Random Forest</td>
+      <td>0.0014</td>
+      <td>0.0009</td>
+      <td>0.0018</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>[0.0007; 0.0020]</td>
+      <td>0.0446</td>
+      <td>despreciable</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>XGBoost</td>
+      <td>Regresión logística</td>
+      <td>0.0121</td>
+      <td>0.0107</td>
+      <td>0.0135</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>[0.0101; 0.0145]</td>
+      <td>0.3384</td>
+      <td>mediano</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>SVM</td>
+      <td>Random Forest</td>
+      <td>0.0004</td>
+      <td>-0.0006</td>
+      <td>0.0014</td>
+      <td>0.4257</td>
+      <td>0.4257</td>
+      <td>[-0.0010; 0.0015]</td>
+      <td>0.0252</td>
+      <td>despreciable</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>SVM</td>
+      <td>Regresión logística</td>
+      <td>0.0111</td>
+      <td>0.0099</td>
+      <td>0.0124</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>[0.0091; 0.0134]</td>
+      <td>0.3242</td>
+      <td>pequeño</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Random Forest</td>
+      <td>Regresión logística</td>
+      <td>0.0107</td>
+      <td>0.0093</td>
+      <td>0.0121</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>[0.0088; 0.0134]</td>
+      <td>0.2930</td>
+      <td>pequeño</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">icm</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># IC BCa de las métricas principales de los 7 modelos</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">siete</span><span class="p">:</span>  <span class="c1"># Cada modelo</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">finales</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="s2">"p_te"</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>  <span class="c1"># Puntaje</span>
+    <span class="k">for</span> <span class="n">nombre</span><span class="p">,</span> <span class="n">met</span> <span class="ow">in</span> <span class="p">[(</span><span class="s2">"AUC-ROC"</span><span class="p">,</span> <span class="n">roc_auc_score</span><span class="p">),</span> <span class="p">(</span><span class="s2">"AUC-PR"</span><span class="p">,</span> <span class="n">average_precision_score</span><span class="p">)]:</span>  <span class="c1"># Métricas</span>
+        <span class="n">v</span><span class="p">,</span> <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">bca_municipios</span><span class="p">(</span><span class="n">y_te</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">mun</span><span class="p">,</span> <span class="n">met</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>  <span class="c1"># BCa</span>
+        <span class="n">icm</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"modelo"</span><span class="p">:</span> <span class="n">k</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">"métrica"</span><span class="p">:</span> <span class="n">nombre</span><span class="p">,</span> <span class="s2">"valor"</span><span class="p">:</span> <span class="n">v</span><span class="p">,</span> <span class="s2">"IC 95 </span><span class="si">% i</span><span class="s2">nferior"</span><span class="p">:</span> <span class="n">lo</span><span class="p">,</span> <span class="s2">"IC 95 </span><span class="si">% s</span><span class="s2">uperior"</span><span class="p">:</span> <span class="n">hi</span><span class="p">})</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">icm</span><span class="p">)</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">"modelo"</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">"métrica"</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="s2">"valor"</span><span class="p">,</span> <span class="s2">"IC 95 </span><span class="si">% i</span><span class="s2">nferior"</span><span class="p">,</span> <span class="s2">"IC 95 </span><span class="si">% s</span><span class="s2">uperior"</span><span class="p">])</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="2" halign="left">valor</th>
+      <th colspan="2" halign="left">IC 95 % inferior</th>
+      <th colspan="2" halign="left">IC 95 % superior</th>
+    </tr>
+    <tr>
+      <th>métrica</th>
+      <th>AUC-PR</th>
+      <th>AUC-ROC</th>
+      <th>AUC-PR</th>
+      <th>AUC-ROC</th>
+      <th>AUC-PR</th>
+      <th>AUC-ROC</th>
+    </tr>
+    <tr>
+      <th>modelo</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>KNN</th>
+      <td>0.8008</td>
+      <td>0.8853</td>
+      <td>0.7755</td>
+      <td>0.8750</td>
+      <td>0.8253</td>
+      <td>0.8953</td>
+    </tr>
+    <tr>
+      <th>Naive Bayes</th>
+      <td>0.6757</td>
+      <td>0.8621</td>
+      <td>0.6474</td>
+      <td>0.8510</td>
+      <td>0.7016</td>
+      <td>0.8729</td>
+    </tr>
+    <tr>
+      <th>Random Forest</th>
+      <td>0.8184</td>
+      <td>0.8963</td>
+      <td>0.7934</td>
+      <td>0.8867</td>
+      <td>0.8419</td>
+      <td>0.9060</td>
+    </tr>
+    <tr>
+      <th>Regresión logística</th>
+      <td>0.8076</td>
+      <td>0.8856</td>
+      <td>0.7824</td>
+      <td>0.8754</td>
+      <td>0.8321</td>
+      <td>0.8956</td>
+    </tr>
+    <tr>
+      <th>SVM</th>
+      <td>0.8204</td>
+      <td>0.8967</td>
+      <td>0.7950</td>
+      <td>0.8868</td>
+      <td>0.8432</td>
+      <td>0.9066</td>
+    </tr>
+    <tr>
+      <th>XGBoost</th>
+      <td>0.8225</td>
+      <td>0.8977</td>
+      <td>0.7973</td>
+      <td>0.8882</td>
+      <td>0.8451</td>
+      <td>0.9072</td>
+    </tr>
+    <tr>
+      <th>Árbol de decisión</th>
+      <td>0.7920</td>
+      <td>0.8845</td>
+      <td>0.7645</td>
+      <td>0.8744</td>
+      <td>0.8167</td>
+      <td>0.8944</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Interpretación.</strong> Entre los finalistas, DeLong solo separa con claridad a los modelos de árboles y la SVM de la regresión logística (ΔAUC ≈ 0,011–0,012, <span class="math notranslate nohighlight">\(p &lt; 0{,}001\)</span> tras Holm, IC BCa que excluyen el 0, delta de Cliff pequeño a mediano). <strong>XGBoost frente a la SVM no es significativo tras Holm</strong> (<span class="math notranslate nohighlight">\(p\)</span> = 0,095) y <strong>la SVM frente a Random Forest tampoco</strong> (<span class="math notranslate nohighlight">\(p\)</span> = 0,43). XGBoost frente a Random Forest sí es significativo (<span class="math notranslate nohighlight">\(p &lt; 0{,}001\)</span>), pero la diferencia es de 0,0014 de AUC y el delta de Cliff es <strong>despreciable</strong> (0,045): con 37 600 filas, DeLong detecta diferencias sin relevancia práctica. Los intervalos BCa de AUC-PR de los tres mejores (≈ ±0,025) se superponen casi por completo. Conclusión: XGBoost es el mejor modelo puntual, pero <strong>XGBoost, SVM y Random Forest son, en la práctica, equivalentes</strong>; los tres son claramente superiores a los modelos lineales y de vecindad.</p>
+</section>
+<section id="regresion-secuencia-jerarquica">
+<h2>5. Regresión: secuencia jerárquica<a class="headerlink" href="#regresion-secuencia-jerarquica" title="Link to this heading">#</a></h2>
+<p>Las pérdidas se agregan por semana (error cuadrático medio de los 376 municipios en cada una de las 100 semanas de la prueba), lo que da series temporales de pérdidas comparables entre modelos.</p>
+<ol class="arabic simple">
+<li><p><strong>Model Confidence Set</strong> sobre las 28 combinaciones (α = 0,10, bootstrap estacionario por bloques).</p></li>
+<li><p><strong>Giacomini-White</strong> (habilidad condicional) entre los finalistas y <strong>Clark-West</strong> para el par anidado (persistencia ⊂ Ridge).</p></li>
+<li><p><strong>Diebold-Mariano con corrección HLN</strong> entre el mejor y el segundo, con <strong>bootstrap estacionario</strong> para el IC.</p></li>
+<li><p><strong>SPA de Hansen</strong>: ¿algún modelo supera genuinamente a la persistencia?</p></li>
+<li><p><strong>d de Cohen</strong> como tamaño del efecto.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_r</span> <span class="o">=</span> <span class="n">te</span><span class="p">[</span><span class="s2">"y_reg"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>  <span class="c1"># Objetivo de regresión</span>
+<span class="n">regs</span> <span class="o">=</span> <span class="p">{(</span><span class="n">k</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">k</span><span class="p">[</span><span class="mi">3</span><span class="p">]):</span> <span class="n">finales</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="s2">"p_te"</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">finales</span> <span class="k">if</span> <span class="n">k</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"reg"</span><span class="p">}</span>  <span class="c1"># 28 predicciones</span>
+<span class="n">perdidas</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2"> · </span><span class="si">{</span><span class="n">o</span><span class="si">}</span><span class="s2">"</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">((</span><span class="n">y_r</span> <span class="o">-</span> <span class="n">f</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">semanas</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span> <span class="k">for</span> <span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">o</span><span class="p">),</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">regs</span><span class="o">.</span><span class="n">items</span><span class="p">()})</span>  <span class="c1"># 100 semanas × 28</span>
+<span class="n">mcs_t</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">mcs</span><span class="p">(</span><span class="n">perdidas</span><span class="p">,</span> <span class="n">alfa</span><span class="o">=</span><span class="mf">0.10</span><span class="p">)</span>  <span class="c1"># Model Confidence Set</span>
+<span class="n">mcs_t</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>pérdida media</th>
+      <th>rango medio</th>
+      <th>p MCS</th>
+      <th>¿en el conjunto?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>XGBoost · Genética (DEAP)</th>
+      <td>0.3288</td>
+      <td>6.2600</td>
+      <td>1.0000</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>XGBoost · Random Search</th>
+      <td>0.3329</td>
+      <td>9.6000</td>
+      <td>0.0010</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>SVR · Genética (DEAP)</th>
+      <td>0.3330</td>
+      <td>6.0200</td>
+      <td>0.1800</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>SVR · Grid Search</th>
+      <td>0.3333</td>
+      <td>6.1500</td>
+      <td>0.1800</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>Random Forest · Grid Search</th>
+      <td>0.3338</td>
+      <td>9.7800</td>
+      <td>0.0000</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>Random Forest · Bayesiana (Optuna TPE)</th>
+      <td>0.3339</td>
+      <td>9.7200</td>
+      <td>0.0000</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>XGBoost · Bayesiana (Optuna TPE)</th>
+      <td>0.3341</td>
+      <td>10.0900</td>
+      <td>0.0010</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>SVR · Bayesiana (Optuna TPE)</th>
+      <td>0.3343</td>
+      <td>8.0500</td>
+      <td>0.0010</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>Random Forest · Genética (DEAP)</th>
+      <td>0.3379</td>
+      <td>11.9800</td>
+      <td>0.0010</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>Random Forest · Random Search</th>
+      <td>0.3388</td>
+      <td>12.4400</td>
+      <td>0.0010</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>Ridge · Genética (DEAP)</th>
+      <td>0.3388</td>
+      <td>10.9500</td>
+      <td>0.0010</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>Lasso · Bayesiana (Optuna TPE)</th>
+      <td>0.3391</td>
+      <td>11.2700</td>
+      <td>0.0010</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>Lasso · Genética (DEAP)</th>
+      <td>0.3391</td>
+      <td>11.5700</td>
+      <td>0.0010</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>Lasso · Grid Search</th>
+      <td>0.3392</td>
+      <td>11.8700</td>
+      <td>0.0010</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>Lasso · Random Search</th>
+      <td>0.3392</td>
+      <td>12.2700</td>
+      <td>0.0010</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>Ridge · Random Search</th>
+      <td>0.3397</td>
+      <td>13.2700</td>
+      <td>0.0010</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>Ridge · Bayesiana (Optuna TPE)</th>
+      <td>0.3399</td>
+      <td>14.0800</td>
+      <td>0.0000</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>Ridge · Grid Search</th>
+      <td>0.3399</td>
+      <td>14.7800</td>
+      <td>0.0000</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>SVR · Random Search</th>
+      <td>0.3418</td>
+      <td>12.4400</td>
+      <td>0.0010</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>XGBoost · Grid Search</th>
+      <td>0.3434</td>
+      <td>15.3600</td>
+      <td>0.0000</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>Árbol de decisión · Bayesiana (Optuna TPE)</th>
+      <td>0.3556</td>
+      <td>20.0200</td>
+      <td>0.0000</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>Árbol de decisión · Genética (DEAP)</th>
+      <td>0.3561</td>
+      <td>20.3800</td>
+      <td>0.0000</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>Árbol de decisión · Grid Search</th>
+      <td>0.3582</td>
+      <td>21.2000</td>
+      <td>0.0000</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>Árbol de decisión · Random Search</th>
+      <td>0.3617</td>
+      <td>21.6700</td>
+      <td>0.0000</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>KNN · Grid Search</th>
+      <td>0.3986</td>
+      <td>25.8800</td>
+      <td>0.0000</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>KNN · Bayesiana (Optuna TPE)</th>
+      <td>0.3987</td>
+      <td>25.7400</td>
+      <td>0.0000</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>KNN · Random Search</th>
+      <td>0.3995</td>
+      <td>26.3400</td>
+      <td>0.0000</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>KNN · Genética (DEAP)</th>
+      <td>0.4010</td>
+      <td>26.8200</td>
+      <td>0.0000</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">finalistas</span> <span class="o">=</span> <span class="n">mcs_t</span><span class="p">[</span><span class="n">mcs_t</span><span class="p">[</span><span class="s2">"¿en el conjunto?"</span><span class="p">]]</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>  <span class="c1"># Modelos en el MCS</span>
+<span class="n">mejor</span><span class="p">,</span> <span class="n">segundo</span> <span class="o">=</span> <span class="n">mcs_t</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">mcs_t</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># Los dos de menor pérdida</span>
+<span class="n">filas</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># Comparaciones dirigidas</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">finalistas</span><span class="p">[:</span><span class="mi">4</span><span class="p">]:</span>  <span class="c1"># Finalistas (hasta 4)</span>
+    <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">finalistas</span><span class="p">[:</span><span class="mi">4</span><span class="p">]:</span>  <span class="c1"># Pares</span>
+        <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">:</span>  <span class="c1"># Cada par una vez</span>
+            <span class="n">gw</span><span class="p">,</span> <span class="n">p_gw</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">giacomini_white</span><span class="p">(</span><span class="n">perdidas</span><span class="p">[</span><span class="n">a</span><span class="p">],</span> <span class="n">perdidas</span><span class="p">[</span><span class="n">b</span><span class="p">])</span>  <span class="c1"># Giacomini-White</span>
+            <span class="n">filas</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"modelo A"</span><span class="p">:</span> <span class="n">a</span><span class="p">,</span> <span class="s2">"modelo B"</span><span class="p">:</span> <span class="n">b</span><span class="p">,</span> <span class="s2">"GW"</span><span class="p">:</span> <span class="n">gw</span><span class="p">,</span> <span class="s2">"p GW"</span><span class="p">:</span> <span class="n">p_gw</span><span class="p">})</span>  <span class="c1"># Fila</span>
+<span class="n">gwt</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">filas</span><span class="p">)</span>  <span class="c1"># Tabla</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">gwt</span><span class="p">):</span>  <span class="c1"># Holm</span>
+    <span class="n">o_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">gwt</span><span class="p">[</span><span class="s2">"p GW"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span>  <span class="c1"># Orden</span>
+    <span class="n">gwt</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">gwt</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">o_</span><span class="p">],</span> <span class="s2">"p Holm"</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="o">.</span><span class="n">accumulate</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">gwt</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">gwt</span><span class="p">)))</span> <span class="o">*</span> <span class="n">gwt</span><span class="p">[</span><span class="s2">"p GW"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()[</span><span class="n">o_</span><span class="p">]))</span>  <span class="c1"># Ajuste</span>
+<span class="n">gwt</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>modelo A</th>
+      <th>modelo B</th>
+      <th>GW</th>
+      <th>p GW</th>
+      <th>p Holm</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>SVR · Genética (DEAP)</td>
+      <td>XGBoost · Genética (DEAP)</td>
+      <td>10.9697</td>
+      <td>0.0041</td>
+      <td>0.0074</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>SVR · Genética (DEAP)</td>
+      <td>SVR · Grid Search</td>
+      <td>25.8111</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>SVR · Grid Search</td>
+      <td>XGBoost · Genética (DEAP)</td>
+      <td>11.2103</td>
+      <td>0.0037</td>
+      <td>0.0074</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ridge</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">f</span> <span class="k">for</span> <span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">o</span><span class="p">),</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">regs</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">m</span> <span class="o">==</span> <span class="s2">"Ridge"</span> <span class="ow">and</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2"> · </span><span class="si">{</span><span class="n">o</span><span class="si">}</span><span class="s2">"</span> <span class="o">==</span> <span class="n">mcs_t</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mcs_t</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"Ridge"</span><span class="p">)]</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># Mejor Ridge</span>
+<span class="n">cw</span><span class="p">,</span> <span class="n">p_cw</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">clark_west</span><span class="p">(</span><span class="n">y_r</span><span class="p">,</span> <span class="n">te</span><span class="p">[</span><span class="s2">"lc_l0"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span> <span class="n">ridge</span><span class="p">)</span>  <span class="c1"># Persistencia (anidada: un solo regresor con coeficiente 1) frente a Ridge</span>
+<span class="n">d_med</span><span class="p">,</span> <span class="n">hln</span><span class="p">,</span> <span class="n">p_dm</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">diebold_mariano_perdidas</span><span class="p">(</span><span class="n">perdidas</span><span class="p">[</span><span class="n">segundo</span><span class="p">],</span> <span class="n">perdidas</span><span class="p">[</span><span class="n">mejor</span><span class="p">],</span> <span class="n">h</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># DM-HLN (positivo: el mejor tiene menos pérdida)</span>
+<span class="n">m_bs</span><span class="p">,</span> <span class="n">lo_bs</span><span class="p">,</span> <span class="n">hi_bs</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">ic_bootstrap_estacionario</span><span class="p">(</span><span class="n">perdidas</span><span class="p">[</span><span class="n">segundo</span><span class="p">]</span> <span class="o">-</span> <span class="n">perdidas</span><span class="p">[</span><span class="n">mejor</span><span class="p">])</span>  <span class="c1"># IC con bootstrap estacionario</span>
+<span class="n">pers</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">((</span><span class="n">y_r</span> <span class="o">-</span> <span class="n">te</span><span class="p">[</span><span class="s2">"lc_l0"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">semanas</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>  <span class="c1"># Pérdida semanal de la persistencia</span>
+<span class="n">p_spa</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">spa</span><span class="p">(</span><span class="n">pers</span><span class="p">,</span> <span class="n">perdidas</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span>  <span class="c1"># SPA frente a la persistencia</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">"prueba"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Clark-West (persistencia ⊂ Ridge)"</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Diebold-Mariano HLN (</span><span class="si">{</span><span class="n">segundo</span><span class="si">}</span><span class="s2"> vs </span><span class="si">{</span><span class="n">mejor</span><span class="si">}</span><span class="s2">)"</span><span class="p">,</span> <span class="s2">"SPA de Hansen (benchmark: persistencia)"</span><span class="p">],</span>
+    <span class="s2">"estadístico"</span><span class="p">:</span> <span class="p">[</span><span class="n">cw</span><span class="p">,</span> <span class="n">hln</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">],</span> <span class="s2">"valor p"</span><span class="p">:</span> <span class="p">[</span><span class="n">p_cw</span><span class="p">,</span> <span class="n">p_dm</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">p_spa</span><span class="p">[</span><span class="s2">"consistent"</span><span class="p">])],</span>
+    <span class="s2">"detalle"</span><span class="p">:</span> <span class="p">[</span><span class="sa">f</span><span class="s2">"H1: Ridge predice mejor que la persistencia"</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"diferencia media de pérdida </span><span class="si">{</span><span class="n">d_med</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, IC 95 % bootstrap estacionario [</span><span class="si">{</span><span class="n">lo_bs</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">; </span><span class="si">{</span><span class="n">hi_bs</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">]"</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">"p inferior </span><span class="si">{</span><span class="nb">float</span><span class="p">(</span><span class="n">p_spa</span><span class="p">[</span><span class="s1">'lower'</span><span class="p">])</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, consistente </span><span class="si">{</span><span class="nb">float</span><span class="p">(</span><span class="n">p_spa</span><span class="p">[</span><span class="s1">'consistent'</span><span class="p">])</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, superior </span><span class="si">{</span><span class="nb">float</span><span class="p">(</span><span class="n">p_spa</span><span class="p">[</span><span class="s1">'upper'</span><span class="p">])</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">],</span>
+    <span class="s2">"d de Cohen"</span><span class="p">:</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">st</span><span class="o">.</span><span class="n">d_cohen</span><span class="p">(</span><span class="n">perdidas</span><span class="p">[</span><span class="n">segundo</span><span class="p">],</span> <span class="n">perdidas</span><span class="p">[</span><span class="n">mejor</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">]})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>prueba</th>
+      <th>estadístico</th>
+      <th>valor p</th>
+      <th>detalle</th>
+      <th>d de Cohen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Clark-West (persistencia ⊂ Ridge)</td>
+      <td>77.5897</td>
+      <td>0.0000</td>
+      <td>H1: Ridge predice mejor que la persistencia</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Diebold-Mariano HLN (XGBoost · Random Search v...</td>
+      <td>6.3587</td>
+      <td>0.0000</td>
+      <td>diferencia media de pérdida 0.0041, IC 95 % bo...</td>
+      <td>0.0659</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>SPA de Hansen (benchmark: persistencia)</td>
+      <td>NaN</td>
+      <td>0.0000</td>
+      <td>p inferior 0.000, consistente 0.000, superior ...</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Interpretación.</strong></p>
+<ol class="arabic simple">
+<li><p><strong>MCS</strong> (α = 0,10): el conjunto de confianza retiene solo <strong>3 de 28</strong> combinaciones: XGBoost con el genético y la SVR con el genético y con la malla. Las demás son significativamente peores que la mejor.</p></li>
+<li><p><strong>Giacomini-White:</strong> entre los finalistas, la habilidad predictiva <strong>condicional</strong> sí difiere (p de Holm &lt; 0,01): aunque en promedio son indistinguibles, uno es mejor que otro según el estado reciente (por ejemplo, semanas de subida epidémica frente a semanas tranquilas). <strong>Clark-West</strong> confirma que Ridge supera a la persistencia, el modelo anidado más simple (<span class="math notranslate nohighlight">\(p &lt; 0{,}001\)</span>).</p></li>
+<li><p><strong>Diebold-Mariano con HLN</strong> entre los dos de menor pérdida media: la diferencia es significativa (<span class="math notranslate nohighlight">\(p &lt; 0{,}001\)</span>, IC por bootstrap estacionario que excluye el 0), pero su <strong>tamaño de efecto es mínimo</strong> (d de Cohen 0,07).</p></li>
+<li><p><strong>SPA</strong> rechaza que ningún modelo supere a la persistencia (<span class="math notranslate nohighlight">\(p &lt; 0{,}001\)</span>): la mejora sobre la línea base trivial es genuina y no un artefacto de haber probado 28 modelos (<em>data snooping</em>).</p></li>
+</ol>
+<p>Igual que en clasificación: los modelos de árboles y la SVR con núcleo aproximado son los mejores y superan con claridad a la línea base, pero las diferencias entre los mejores son pequeñas.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./cuadernos"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="7_interpretabilidad.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">Interpretabilidad: valores de Shapley (SHAP) y LIME</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../conclusiones.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">Conclusiones</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#robustez-media-desviacion-en-el-bucle-externo-y-sensibilidad-a-la-semilla">1. Robustez: media ± desviación en el bucle externo y sensibilidad a la semilla</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-etapa-1-prueba-global-de-friedman">2. Clasificación — Etapa 1: prueba global de Friedman</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-etapa-2-nemenyi-y-diagrama-de-diferencia-critica">3. Clasificación — Etapa 2: Nemenyi y diagrama de Diferencia Crítica</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparaciones-dirigidas-delong-con-correccion-de-holm-bootstrap-bca-y-delta-de-cliff">4. Comparaciones dirigidas: DeLong con corrección de Holm, bootstrap BCa y delta de Cliff</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regresion-secuencia-jerarquica">5. Regresión: secuencia jerárquica</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Daniel Serrano Romero
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

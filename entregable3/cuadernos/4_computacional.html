@@ -1,0 +1,1582 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Optimización computacional &#8212; Tercer Entregable – Modelos, optimización y comparación estadística</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/autor.css?v=483c0dd5" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'cuadernos/4_computacional';</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Resultados de clasificación" href="5_clasificacion.html" />
+    <link rel="prev" title="Optimización de hiperparámetros: comparación de métodos" href="3_optimizacion.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logoUN.png" class="logo__image only-light" alt="Tercer Entregable – Modelos, optimización y comparación estadística - Home"/>
+    <script>document.write(`<img src="../_static/logoUN.png" class="logo__image only-dark" alt="Tercer Entregable – Modelos, optimización y comparación estadística - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><!-- Tarjeta del autor en la barra lateral izquierda (visible en todas las páginas del libro) -->
+<div class="tarjeta-autor">
+  <img src="../_static/foto_author_DSR_sidebar.png" alt="Daniel Serrano Romero" class="tarjeta-autor__foto">
+  <div class="tarjeta-autor__nombre">Daniel Serrano Romero</div>
+  <div class="tarjeta-autor__detalle">Maestría en Matemáticas</div>
+  <div class="tarjeta-autor__detalle">Machine Learning</div>
+</div></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Búsqueda</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Tercer Entregable: modelos de Machine Learning, optimización y comparación estadística
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Datos y diseño</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1_datos.html">Datos: ETL y EDA mejorado</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_diseno.html">Diseño experimental: 140 modelos con validación anidada</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Optimización</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="3_optimizacion.html">Optimización de hiperparámetros: comparación de métodos</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Optimización computacional</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resultados</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="5_clasificacion.html">Resultados de clasificación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6_regresion.html">Resultados de regresión: log(1 + casos) en <span class="math notranslate nohighlight">\(t + 4\)</span></a></li>
+<li class="toctree-l1"><a class="reference internal" href="7_interpretabilidad.html">Interpretabilidad: valores de Shapley (SHAP) y LIME</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Comparación estadística</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="8_estadistica.html">Robustez y comparación estadística</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Cierre</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../conclusiones.html">Conclusiones</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/cuadernos/4_computacional.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="claro/oscuro" aria-label="claro/oscuro" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Optimización computacional</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complejidad-teorica-frente-a-tiempo-empirico">1. Complejidad teórica frente a tiempo empírico</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#knn-busqueda-exhaustiva-kd-tree-ball-tree-y-faiss">2. KNN: búsqueda exhaustiva, KD-Tree, Ball Tree y FAISS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-lineales-solvers-saga">3. Modelos lineales: solvers (SAGA)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#naive-bayes-incremental-partial-fit">4. Naive Bayes incremental (<code class="docutils literal notranslate"><span class="pre">partial_fit</span></code>)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xgboost-hist-frente-a-exact-y-parada-temprana">5. XGBoost: <code class="docutils literal notranslate"><span class="pre">hist</span></code> frente a <code class="docutils literal notranslate"><span class="pre">exact</span></code> y parada temprana</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#svm-nucleo-exacto-frente-a-aproximaciones">6. SVM: núcleo exacto frente a aproximaciones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paralelizacion">7. Paralelización</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perfilamiento-y-memoria">8. Perfilamiento y memoria</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-comparativa-modelo-estandar-frente-a-optimizado">9. Tabla comparativa: modelo estándar frente a optimizado</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="optimizacion-computacional">
+<h1>Optimización computacional<a class="headerlink" href="#optimizacion-computacional" title="Link to this heading">#</a></h1>
+<p>Cada mejora se sustenta primero en la <strong>complejidad asintótica</strong> (en función de <span class="math notranslate nohighlight">\(n\)</span> filas, <span class="math notranslate nohighlight">\(p\)</span> variables, <span class="math notranslate nohighlight">\(k\)</span> vecinos, <span class="math notranslate nohighlight">\(T\)</span> árboles de profundidad <span class="math notranslate nohighlight">\(d\)</span> y <span class="math notranslate nohighlight">\(m\)</span> componentes) y después se contrasta con el <strong>tiempo empírico</strong>. Las mediciones se hicieron con el experimento principal terminado (sin competencia por los núcleos), con la mediana de 3 repeticiones.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>  <span class="c1"># Rutas</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>  <span class="c1"># Configuración del intérprete</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">"LOKY_MAX_CPU_COUNT"</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">()))</span>  <span class="c1"># Evita un aviso de joblib en Windows</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">[:</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s2">".."</span><span class="p">),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s2">"../.."</span><span class="p">),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s2">"../../entregable1"</span><span class="p">)]</span>  <span class="c1"># e3, src y e1</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>  <span class="c1"># Control de avisos</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">"ignore"</span><span class="p">)</span>  <span class="c1"># Oculta avisos de versiones</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">contextlib</span><span class="o">,</span><span class="w"> </span><span class="nn">io</span>  <span class="c1"># Silenciar un diagnóstico de joblib en Windows</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">joblib.externals.loky</span><span class="w"> </span><span class="kn">import</span> <span class="n">cpu_count</span>  <span class="c1"># Conteo de núcleos</span>
+<span class="k">with</span> <span class="n">contextlib</span><span class="o">.</span><span class="n">redirect_stderr</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">()):</span>  <span class="c1"># joblib imprime un diagnóstico al no encontrar «wmic»</span>
+    <span class="n">cpu_count</span><span class="p">(</span><span class="n">only_physical_cores</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Se calcula una vez (queda en caché)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>  <span class="c1"># Lectura de resultados</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>  <span class="c1"># Cálculo numérico</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>  <span class="c1"># Tablas</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">plotly.express</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">px</span>  <span class="c1"># Figuras rápidas</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">plotly.graph_objects</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span>  <span class="c1"># Figuras detalladas</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">plotly.subplots</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_subplots</span>  <span class="c1"># Paneles</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Markdown</span><span class="p">,</span> <span class="n">display</span>  <span class="c1"># Texto enriquecido</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">e1.figuras</span><span class="w"> </span><span class="kn">import</span> <span class="n">mostrar</span><span class="p">,</span> <span class="n">AZUL</span><span class="p">,</span> <span class="n">ROJO</span><span class="p">,</span> <span class="n">VERDE</span><span class="p">,</span> <span class="n">AMBAR</span><span class="p">,</span> <span class="n">GRIS</span><span class="p">,</span> <span class="n">MORADO</span>  <span class="c1"># Estilo de figuras (tema claro del informe)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">e3</span><span class="w"> </span><span class="kn">import</span> <span class="n">config</span> <span class="k">as</span> <span class="n">c3</span><span class="p">,</span> <span class="n">datos</span> <span class="k">as</span> <span class="n">dd</span><span class="p">,</span> <span class="n">modelos</span> <span class="k">as</span> <span class="n">mo</span><span class="p">,</span> <span class="n">optimizadores</span> <span class="k">as</span> <span class="n">op</span><span class="p">,</span> <span class="n">experimento</span> <span class="k">as</span> <span class="n">ex</span>  <span class="c1"># Código del entregable</span>
+<span class="n">c3</span><span class="o">.</span><span class="n">fijar_semilla</span><span class="p">()</span>  <span class="c1"># Semilla global (42)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.width"</span><span class="p">,</span> <span class="mi">170</span><span class="p">)</span>  <span class="c1"># Ancho de las tablas</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.max_columns"</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>  <span class="c1"># Columnas visibles</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.float_format"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s2">,.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>  <span class="c1"># Cuatro decimales</span>
+<span class="n">COLORES</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"Grid Search"</span><span class="p">:</span> <span class="n">GRIS</span><span class="p">,</span> <span class="s2">"Random Search"</span><span class="p">:</span> <span class="n">AMBAR</span><span class="p">,</span> <span class="s2">"Bayesiana (Optuna TPE)"</span><span class="p">:</span> <span class="n">AZUL</span><span class="p">,</span> <span class="s2">"Genética (DEAP)"</span><span class="p">:</span> <span class="n">VERDE</span><span class="p">,</span> <span class="s2">"Successive Halving"</span><span class="p">:</span> <span class="n">MORADO</span><span class="p">}</span>  <span class="c1"># Color por optimizador</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">joblib</span>  <span class="c1"># Lectura</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">c3</span><span class="o">.</span><span class="n">RESULTADOS</span> <span class="o">/</span> <span class="s2">"complejidad.joblib"</span><span class="p">)</span>  <span class="c1"># Resultados del análisis computacional</span>
+<span class="n">C</span><span class="p">[</span><span class="s2">"teoria"</span><span class="p">]</span>  <span class="c1"># Complejidad teórica</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>entrenamiento</th>
+      <th>inferencia</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>KNN (fuerza bruta)</th>
+      <td>O(1) (almacena)</td>
+      <td>O(n·p) por consulta</td>
+    </tr>
+    <tr>
+      <th>KNN (KD-Tree / Ball Tree)</th>
+      <td>O(p·n log n)</td>
+      <td>≈ O(log n) por consulta en baja dimensión; se ...</td>
+    </tr>
+    <tr>
+      <th>KNN (FAISS HNSW, aproximado)</th>
+      <td>O(n log n)</td>
+      <td>≈ O(log n) por consulta, con pérdida controlad...</td>
+    </tr>
+    <tr>
+      <th>Naive Bayes</th>
+      <td>O(n·p)</td>
+      <td>O(p) por fila</td>
+    </tr>
+    <tr>
+      <th>Regresión logística</th>
+      <td>O(n·p) por iteración</td>
+      <td>O(p) por fila</td>
+    </tr>
+    <tr>
+      <th>Árbol de decisión</th>
+      <td>O(p·n log n)</td>
+      <td>O(d) por fila</td>
+    </tr>
+    <tr>
+      <th>Random Forest</th>
+      <td>O(T·p'·n log n), p' = √p</td>
+      <td>O(T·d) por fila</td>
+    </tr>
+    <tr>
+      <th>XGBoost (hist)</th>
+      <td>O(T·n·p) (histogramas de B contenedores)</td>
+      <td>O(T·d) por fila</td>
+    </tr>
+    <tr>
+      <th>XGBoost (exact)</th>
+      <td>O(T·p·n log n) (ordena cada variable)</td>
+      <td>O(T·d) por fila</td>
+    </tr>
+    <tr>
+      <th>SVM núcleo RBF exacto</th>
+      <td>O(n²·p) a O(n³)</td>
+      <td>O(n_sv·p) por fila</td>
+    </tr>
+    <tr>
+      <th>SVM Nyström + lineal</th>
+      <td>O(n·m·p + n·m²)</td>
+      <td>O(m·p) por fila</td>
+    </tr>
+    <tr>
+      <th>SVM lineal / SGD</th>
+      <td>O(n·p) por época</td>
+      <td>O(p) por fila</td>
+    </tr>
+    <tr>
+      <th>Ridge / Lasso (SAGA)</th>
+      <td>O(n·p) por iteración</td>
+      <td>O(p) por fila</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<section id="complejidad-teorica-frente-a-tiempo-empirico">
+<h2>1. Complejidad teórica frente a tiempo empírico<a class="headerlink" href="#complejidad-teorica-frente-a-tiempo-empirico" title="Link to this heading">#</a></h2>
+<p>Se mide el tiempo de ajuste y de predicción variando <span class="math notranslate nohighlight">\(n\)</span> de 2 500 a 80 000 filas. Si el tiempo crece como <span class="math notranslate nohighlight">\(n^{b}\)</span>, la pendiente de <span class="math notranslate nohighlight">\(\log t\)</span> frente a <span class="math notranslate nohighlight">\(\log n\)</span> estima el <strong>exponente empírico</strong> <span class="math notranslate nohighlight">\(b\)</span>, que se compara con el teórico.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tiempos</span><span class="p">,</span> <span class="n">exponentes</span> <span class="o">=</span> <span class="n">C</span><span class="p">[</span><span class="s2">"escalamiento"</span><span class="p">]</span>  <span class="c1"># Tiempos y exponentes</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">make_subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">subplot_titles</span><span class="o">=</span><span class="p">(</span><span class="s2">"Ajuste"</span><span class="p">,</span> <span class="s2">"Predicción de 1 000 filas"</span><span class="p">))</span>  <span class="c1"># Dos paneles</span>
+<span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="p">(</span><span class="n">nombre</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tiempos</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"modelo"</span><span class="p">)):</span>  <span class="c1"># Cada modelo</span>
+    <span class="n">col</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">qualitative</span><span class="o">.</span><span class="n">Bold</span><span class="p">[</span><span class="n">j</span> <span class="o">%</span> <span class="mi">10</span><span class="p">]</span>  <span class="c1"># Color</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">add_scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">g</span><span class="p">[</span><span class="s2">"n"</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">g</span><span class="p">[</span><span class="s2">"ajuste (s)"</span><span class="p">],</span> <span class="n">mode</span><span class="o">=</span><span class="s2">"lines+markers"</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">nombre</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">col</span><span class="p">),</span> <span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Ajuste</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">add_scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">g</span><span class="p">[</span><span class="s2">"n"</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">g</span><span class="p">[</span><span class="s2">"predicción 1000 filas (s)"</span><span class="p">],</span> <span class="n">mode</span><span class="o">=</span><span class="s2">"lines+markers"</span><span class="p">,</span> <span class="n">showlegend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">col</span><span class="p">),</span> <span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Predicción</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">update_xaxes</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">"log"</span><span class="p">,</span> <span class="n">title_text</span><span class="o">=</span><span class="s2">"n (log)"</span><span class="p">)</span>  <span class="c1"># Escala log</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">update_yaxes</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">"log"</span><span class="p">,</span> <span class="n">title_text</span><span class="o">=</span><span class="s2">"segundos (log)"</span><span class="p">)</span>  <span class="c1"># Escala log</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">"Escalamiento empírico (ejes logarítmicos: la pendiente es el exponente)"</span><span class="p">)</span>  <span class="c1"># Título</span>
+<span class="n">mostrar</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="mi">460</span><span class="p">)</span>  <span class="c1"># Muestra</span>
+<span class="n">teorico</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"KNN"</span><span class="p">:</span> <span class="s2">"0 (ajuste) / 1 (predicción)"</span><span class="p">,</span> <span class="s2">"Naive Bayes"</span><span class="p">:</span> <span class="s2">"1 / 0"</span><span class="p">,</span> <span class="s2">"Regresión logística"</span><span class="p">:</span> <span class="s2">"≈ 1 / 0"</span><span class="p">,</span> <span class="s2">"Árbol de decisión"</span><span class="p">:</span> <span class="s2">"≈ 1 (n log n) / 0"</span><span class="p">,</span>
+           <span class="s2">"Random Forest"</span><span class="p">:</span> <span class="s2">"≈ 1 (n log n) / 0"</span><span class="p">,</span> <span class="s2">"XGBoost"</span><span class="p">:</span> <span class="s2">"≈ 1 / 0"</span><span class="p">,</span> <span class="s2">"SVM (Nyström + lineal)"</span><span class="p">:</span> <span class="s2">"1 / 0"</span><span class="p">,</span> <span class="s2">"SVM RBF exacto"</span><span class="p">:</span> <span class="s2">"2 a 3 / ≈ 1 (n_sv crece con n)"</span><span class="p">}</span>
+<span class="n">exponentes</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s2">"exponente teórico (ajuste / predicción)"</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">teorico</span><span class="p">)})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>                        <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>                <div id="96510171-dd17-424f-aa41-4299c95b0598" class="plotly-graph-div" style="height:460px; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("96510171-dd17-424f-aa41-4299c95b0598")) {                    Plotly.newPlot(                        "96510171-dd17-424f-aa41-4299c95b0598",                        [{"line":{"color":"rgb(127, 60, 141)"},"mode":"lines+markers","name":"KNN","x":[2500,5000,10000,20000,40000,80000],"y":[0.0009604999999908159,0.002394699999996419,0.004906599999998207,0.0098433,0.017821499999996604,0.0358489999999847],"type":"scatter","xaxis":"x","yaxis":"y"},{"line":{"color":"rgb(127, 60, 141)"},"mode":"lines+markers","showlegend":false,"x":[2500,5000,10000,20000,40000,80000],"y":[0.021391200000010713,0.011636150000001066,0.02009774999999081,0.031252100000003225,0.04849500000000262,0.08014704999999367],"type":"scatter","xaxis":"x2","yaxis":"y2"},{"line":{"color":"rgb(17, 165, 121)"},"mode":"lines+markers","name":"Naive Bayes","x":[2500,5000,10000,20000,40000,80000],"y":[0.002297699999985525,0.005502599999999802,0.00966080000000602,0.017227600000012444,0.023565699999977596,0.047454299999998284],"type":"scatter","xaxis":"x","yaxis":"y"},{"line":{"color":"rgb(17, 165, 121)"},"mode":"lines+markers","showlegend":false,"x":[2500,5000,10000,20000,40000,80000],"y":[0.00034720000000731943,0.0003166999999990594,0.00027790000000038617,0.0001927499999965221,0.00018615000000465898,0.0001505500000007487],"type":"scatter","xaxis":"x2","yaxis":"y2"},{"line":{"color":"rgb(57, 105, 172)"},"mode":"lines+markers","name":"Random Forest","x":[2500,5000,10000,20000,40000,80000],"y":[0.5094306000000017,1.0841245000000015,2.5226152000000184,5.536459000000008,11.622022000000015,23.675471399999992],"type":"scatter","xaxis":"x","yaxis":"y"},{"line":{"color":"rgb(57, 105, 172)"},"mode":"lines+markers","showlegend":false,"x":[2500,5000,10000,20000,40000,80000],"y":[0.004370199999996771,0.00506545000000358,0.005231199999997216,0.006444000000001893,0.006607349999995904,0.00682505000000333],"type":"scatter","xaxis":"x2","yaxis":"y2"},{"line":{"color":"rgb(242, 183, 1)"},"mode":"lines+markers","name":"Regresi\u00f3n log\u00edstica","x":[2500,5000,10000,20000,40000,80000],"y":[0.006984200000005103,0.011817400000012412,0.019987100000008695,0.03282559999999535,0.07412199999998847,0.1961281000000099],"type":"scatter","xaxis":"x","yaxis":"y"},{"line":{"color":"rgb(242, 183, 1)"},"mode":"lines+markers","showlegend":false,"x":[2500,5000,10000,20000,40000,80000],"y":[0.0001336499999951002,0.00019174999999904685,0.00014874999999392458,0.0002460999999982505,0.0001644999999967922,0.0001738999999929547],"type":"scatter","xaxis":"x2","yaxis":"y2"},{"line":{"color":"rgb(231, 63, 116)"},"mode":"lines+markers","name":"SVM (Nystr\u00f6m + lineal)","x":[2500,5000,10000,20000,40000,80000],"y":[0.08393630000000485,0.13915299999996478,0.24437289999997347,0.552809199999956,1.123224300000004,3.2975347000000284],"type":"scatter","xaxis":"x","yaxis":"y"},{"line":{"color":"rgb(231, 63, 116)"},"mode":"lines+markers","showlegend":false,"x":[2500,5000,10000,20000,40000,80000],"y":[0.003934850000007373,0.0042363500000135446,0.0037837000000138232,0.004023950000004106,0.004510350000003882,0.004462150000023257],"type":"scatter","xaxis":"x2","yaxis":"y2"},{"line":{"color":"rgb(128, 186, 90)"},"mode":"lines+markers","name":"SVM RBF exacto","x":[2500,5000,10000,20000],"y":[0.04612489999999525,0.1893404000000487,0.7440437999999858,2.9765901999999755],"type":"scatter","xaxis":"x","yaxis":"y"},{"line":{"color":"rgb(128, 186, 90)"},"mode":"lines+markers","showlegend":false,"x":[2500,5000,10000,20000],"y":[0.027299900000002708,0.0530827499999873,0.09303560000000743,0.17658520000000522],"type":"scatter","xaxis":"x2","yaxis":"y2"},{"line":{"color":"rgb(230, 131, 16)"},"mode":"lines+markers","name":"XGBoost","x":[2500,5000,10000,20000,40000,80000],"y":[0.2686747000000196,0.29952800000000934,0.43747170000000324,0.6004097999999658,1.0612421000000154,1.6564989999999966],"type":"scatter","xaxis":"x","yaxis":"y"},{"line":{"color":"rgb(230, 131, 16)"},"mode":"lines+markers","showlegend":false,"x":[2500,5000,10000,20000,40000,80000],"y":[0.0027117500000031214,0.002418750000003911,0.002927999999997155,0.0027569000000084998,0.002696899999989455,0.002412599999985332],"type":"scatter","xaxis":"x2","yaxis":"y2"},{"line":{"color":"rgb(0, 134, 149)"},"mode":"lines+markers","name":"\u00c1rbol de decisi\u00f3n","x":[2500,5000,10000,20000,40000,80000],"y":[0.045290399999998954,0.08169800000001715,0.19409900000002267,0.4150515000000041,0.9294943999999816,1.9374396000000047],"type":"scatter","xaxis":"x","yaxis":"y"},{"line":{"color":"rgb(0, 134, 149)"},"mode":"lines+markers","showlegend":false,"x":[2500,5000,10000,20000,40000,80000],"y":[9.570000000280743e-05,8.59999999960337e-05,0.00010774999999796364,9.760000000369473e-05,0.00012884999999585034,0.00015505000000359814],"type":"scatter","xaxis":"x2","yaxis":"y2"}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmapgl":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmapgl"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#2563eb","#dc2626","#16a34a","#d97706","#7c3aed","#64748b","#0891b2","#db2777"],"font":{"family":"Inter, Segoe UI, sans-serif","size":13},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"white","showlakes":true,"showland":true,"subunitcolor":"#C8D4E3"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"margin":{"b":50,"l":60,"r":30,"t":60},"paper_bgcolor":"white","plot_bgcolor":"white","polar":{"angularaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""},"bgcolor":"white","radialaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"yaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"zaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"baxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"bgcolor":"white","caxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2}}},"xaxis":{"anchor":"y","domain":[0.0,0.45],"title":{"text":"n (log)"},"type":"log"},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"segundos (log)"},"type":"log"},"xaxis2":{"anchor":"y2","domain":[0.55,1.0],"title":{"text":"n (log)"},"type":"log"},"yaxis2":{"anchor":"x2","domain":[0.0,1.0],"title":{"text":"segundos (log)"},"type":"log"},"annotations":[{"font":{"size":16},"showarrow":false,"text":"Ajuste","x":0.225,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"},{"font":{"size":16},"showarrow":false,"text":"Predicci\u00f3n de 1 000 filas","x":0.775,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"}],"title":{"text":"Escalamiento emp\u00edrico (ejes logar\u00edtmicos: la pendiente es el exponente)"},"height":460},                        {"displaylogo": false, "responsive": true}                    )                };                            </script>        </div></div><div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>exponente ajuste</th>
+      <th>exponente predicción</th>
+      <th>exponente teórico (ajuste / predicción)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>KNN</th>
+      <td>0.9669</td>
+      <td>0.6839</td>
+      <td>0 (ajuste) / 1 (predicción)</td>
+    </tr>
+    <tr>
+      <th>Naive Bayes</th>
+      <td>0.7503</td>
+      <td>-0.2724</td>
+      <td>1 / 0</td>
+    </tr>
+    <tr>
+      <th>Random Forest</th>
+      <td>1.1101</td>
+      <td>0.1197</td>
+      <td>≈ 1 (n log n) / 0</td>
+    </tr>
+    <tr>
+      <th>Regresión logística</th>
+      <td>0.9996</td>
+      <td>-0.0137</td>
+      <td>≈ 1 / 0</td>
+    </tr>
+    <tr>
+      <th>SVM (Nyström + lineal)</th>
+      <td>1.1334</td>
+      <td>0.0403</td>
+      <td>1 / 0</td>
+    </tr>
+    <tr>
+      <th>SVM RBF exacto</th>
+      <td>1.9873</td>
+      <td>0.8670</td>
+      <td>2 a 3 / ≈ 1 (n_sv crece con n)</td>
+    </tr>
+    <tr>
+      <th>XGBoost</th>
+      <td>0.6213</td>
+      <td>-0.0126</td>
+      <td>≈ 1 / 0</td>
+    </tr>
+    <tr>
+      <th>Árbol de decisión</th>
+      <td>1.1395</td>
+      <td>0.1959</td>
+      <td>≈ 1 (n log n) / 0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Interpretación.</strong> Los exponentes empíricos coinciden con la teoría en los casos claros: la regresión logística escala linealmente (1,00); el árbol y Random Forest, como <span class="math notranslate nohighlight">\(n \log n\)</span> (1,11–1,14); la SVM con Nyström, linealmente (1,13); y la <strong>SVM con núcleo exacto, cuadráticamente (1,99)</strong>, con una predicción que también crece con <span class="math notranslate nohighlight">\(n\)</span> (0,87) porque crece el número de vectores de soporte. Las desviaciones tienen explicación: KNN no «solo almacena» (scikit-learn construye un árbol en el ajuste, de ahí el exponente ≈ 1, y la búsqueda en árbol hace la predicción sublineal, 0,68); Naive Bayes y XGBoost (0,62–0,75) quedan por debajo de 1 porque en este rango de <span class="math notranslate nohighlight">\(n\)</span> pesan los costos fijos (en XGBoost, construir los histogramas de contenedores). En los modelos de costo constante por fila, el tiempo de predicción no depende de <span class="math notranslate nohighlight">\(n\)</span> (exponente ≈ 0).</p>
+</section>
+<section id="knn-busqueda-exhaustiva-kd-tree-ball-tree-y-faiss">
+<h2>2. KNN: búsqueda exhaustiva, KD-Tree, Ball Tree y FAISS<a class="headerlink" href="#knn-busqueda-exhaustiva-kd-tree-ball-tree-y-faiss" title="Link to this heading">#</a></h2>
+<p>La búsqueda exhaustiva cuesta <span class="math notranslate nohighlight">\(O(n \cdot p)\)</span> por consulta. KD-Tree y Ball Tree podan regiones del espacio (<span class="math notranslate nohighlight">\(\approx O(\log n)\)</span> en baja dimensión) pero con <span class="math notranslate nohighlight">\(p = 34\)</span> la poda pierde eficacia (maldición de la dimensionalidad). FAISS HNSW construye un grafo navegable de varias capas y encuentra vecinos <strong>aproximados</strong> en tiempo casi logarítmico; el costo es una fracción de vecinos incorrectos (recall&#64;k &lt; 1).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">[</span><span class="s2">"knn"</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>construcción (s)</th>
+      <th>consulta 1000 (s)</th>
+      <th>recall@k frente a exacto</th>
+      <th>AUC-ROC (voto de vecinos)</th>
+    </tr>
+    <tr>
+      <th>método</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>scikit-learn brute</th>
+      <td>0.0110</td>
+      <td>0.0432</td>
+      <td>1.0000</td>
+      <td>0.8895</td>
+    </tr>
+    <tr>
+      <th>scikit-learn kd_tree</th>
+      <td>0.2648</td>
+      <td>2.5269</td>
+      <td>1.0000</td>
+      <td>0.8895</td>
+    </tr>
+    <tr>
+      <th>scikit-learn ball_tree</th>
+      <td>0.1363</td>
+      <td>3.5497</td>
+      <td>1.0000</td>
+      <td>0.8895</td>
+    </tr>
+    <tr>
+      <th>FAISS exacto (IndexFlatL2)</th>
+      <td>0.0242</td>
+      <td>0.0359</td>
+      <td>1.0000</td>
+      <td>0.8895</td>
+    </tr>
+    <tr>
+      <th>FAISS aproximado (HNSW, M = 32)</th>
+      <td>0.3155</td>
+      <td>0.0033</td>
+      <td>0.9321</td>
+      <td>0.8882</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Interpretación.</strong> Con <span class="math notranslate nohighlight">\(p = 34\)</span>, KD-Tree y Ball Tree son <strong>60–80 veces más lentos</strong> que la fuerza bruta (2,5–3,5 s frente a 0,04 s por 1 000 consultas): la poda deja de funcionar en dimensión media (maldición de la dimensionalidad), mientras que la fuerza bruta se reduce a un producto de matrices optimizado (BLAS). FAISS <strong>HNSW</strong> responde 13 veces más rápido que la fuerza bruta (0,003 s) recuperando el 93 % de los vecinos exactos, con un AUC-ROC casi idéntico (0,888 frente a 0,890): el compromiso exactitud–velocidad es muy favorable porque el voto de 51 vecinos tolera que algunos sean aproximados.</p>
+</section>
+<section id="modelos-lineales-solvers-saga">
+<h2>3. Modelos lineales: solvers (SAGA)<a class="headerlink" href="#modelos-lineales-solvers-saga" title="Link to this heading">#</a></h2>
+<p>SAGA es un gradiente estocástico con reducción de varianza: cada iteración cuesta <span class="math notranslate nohighlight">\(O(p)\)</span> por fila (<span class="math notranslate nohighlight">\(O(n \cdot p)\)</span> por época), admite L1 y escala a datos grandes y dispersos. Se compara con lbfgs/liblinear (logística) y con Cholesky / descenso por coordenadas (Ridge / Lasso), con las 132 728 filas del entrenamiento.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">[</span><span class="s2">"lineales"</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ajuste (s)</th>
+      <th>métrica en 2022</th>
+      <th>métrica</th>
+    </tr>
+    <tr>
+      <th>modelo</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Regresión logística (lbfgs)</th>
+      <td>0.3783</td>
+      <td>0.8978</td>
+      <td>AUC-ROC</td>
+    </tr>
+    <tr>
+      <th>Regresión logística (liblinear)</th>
+      <td>0.6448</td>
+      <td>0.8981</td>
+      <td>AUC-ROC</td>
+    </tr>
+    <tr>
+      <th>Regresión logística (saga)</th>
+      <td>2.4813</td>
+      <td>0.8978</td>
+      <td>AUC-ROC</td>
+    </tr>
+    <tr>
+      <th>Ridge (auto)</th>
+      <td>0.0537</td>
+      <td>0.4610</td>
+      <td>RMSE</td>
+    </tr>
+    <tr>
+      <th>Ridge (saga)</th>
+      <td>9.7345</td>
+      <td>0.4610</td>
+      <td>RMSE</td>
+    </tr>
+    <tr>
+      <th>Lasso (descenso por coordenadas)</th>
+      <td>9.1334</td>
+      <td>0.4611</td>
+      <td>RMSE</td>
+    </tr>
+    <tr>
+      <th>Lasso (SGD, penalización L1)</th>
+      <td>0.2640</td>
+      <td>0.4633</td>
+      <td>RMSE</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Interpretación.</strong> Con datos densos, estandarizados y solo 34 variables, <strong>SAGA no es la opción más rápida</strong>: lbfgs ajusta la logística en 0,4 s frente a 2,5 s de SAGA, y Ridge con su solución cerrada (Cholesky, <span class="math notranslate nohighlight">\(O(np^2 + p^3)\)</span>) tarda 0,05 s frente a 9,7 s, con métricas idénticas. SAGA brilla cuando <span class="math notranslate nohighlight">\(n\)</span> y <span class="math notranslate nohighlight">\(p\)</span> son enormes o dispersos, o con L1 (es el único solver de la logística que admite todas las penalizaciones). Para Lasso, el SGD con L1 es 35 veces más rápido que el descenso por coordenadas con un RMSE casi igual (0,463 frente a 0,461). La lección: el solver eficiente depende de la forma de los datos, y aquí se verifica en lugar de suponerse.</p>
+</section>
+<section id="naive-bayes-incremental-partial-fit">
+<h2>4. Naive Bayes incremental (<code class="docutils literal notranslate"><span class="pre">partial_fit</span></code>)<a class="headerlink" href="#naive-bayes-incremental-partial-fit" title="Link to this heading">#</a></h2>
+<p>Naive Bayes gaussiano solo necesita, por clase, conteos, medias y varianzas: se actualizan por lotes con las fórmulas de Chan et al., así que el modelo final es el mismo y los datos nunca necesitan estar completos en memoria.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">[</span><span class="s2">"naive_bayes"</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>AUC-ROC 2022</th>
+      <th>memoria pico (MB)</th>
+      <th>máx. diferencia de medias</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>fit completo</th>
+      <td>0.8981</td>
+      <td>64.8526</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>partial_fit en 10 lotes</th>
+      <td>0.8981</td>
+      <td>6.7107</td>
+      <td>0.0000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Interpretación.</strong> <code class="docutils literal notranslate"><span class="pre">partial_fit</span></code> en 10 lotes produce <strong>exactamente el mismo modelo</strong> (diferencia de medias 0, mismo AUC) con <strong>10 veces menos memoria</strong> pico (6,7 MB frente a 64,9 MB): los estadísticos suficientes de Naive Bayes se actualizan exactamente. Permite entrenar con datos que no caben en memoria o que llegan semana a semana.</p>
+</section>
+<section id="xgboost-hist-frente-a-exact-y-parada-temprana">
+<h2>5. XGBoost: <code class="docutils literal notranslate"><span class="pre">hist</span></code> frente a <code class="docutils literal notranslate"><span class="pre">exact</span></code> y parada temprana<a class="headerlink" href="#xgboost-hist-frente-a-exact-y-parada-temprana" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">[</span><span class="s2">"xgboost"</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ajuste (s)</th>
+      <th>árboles</th>
+      <th>AUC-PR 2022</th>
+    </tr>
+    <tr>
+      <th>variante</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>tree_method = exact (300 árboles)</th>
+      <td>23.2525</td>
+      <td>300</td>
+      <td>0.7088</td>
+    </tr>
+    <tr>
+      <th>tree_method = hist (300 árboles)</th>
+      <td>1.4618</td>
+      <td>300</td>
+      <td>0.7078</td>
+    </tr>
+    <tr>
+      <th>hist + parada temprana (máx. 2 000, paciencia 50)</th>
+      <td>1.5170</td>
+      <td>125</td>
+      <td>0.7120</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Interpretación.</strong> El método <code class="docutils literal notranslate"><span class="pre">hist</span></code> es <strong>16 veces más rápido</strong> que <code class="docutils literal notranslate"><span class="pre">exact</span></code> (1,5 s frente a 23,3 s) con el mismo AUC-PR: discretiza cada variable en contenedores y evita ordenar las 132 728 filas en cada división. La <strong>parada temprana</strong> con 2022 como conjunto independiente se detiene en 125 árboles (de un máximo de 2 000) y mejora el AUC-PR (0,712 frente a 0,708 con 300 árboles): menos cómputo y menos sobreajuste a la vez.</p>
+</section>
+<section id="svm-nucleo-exacto-frente-a-aproximaciones">
+<h2>6. SVM: núcleo exacto frente a aproximaciones<a class="headerlink" href="#svm-nucleo-exacto-frente-a-aproximaciones" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">svm</span> <span class="o">=</span> <span class="n">C</span><span class="p">[</span><span class="s2">"svm"</span><span class="p">]</span>  <span class="c1"># Tiempos por variante y tamaño</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">make_subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">subplot_titles</span><span class="o">=</span><span class="p">(</span><span class="s2">"Ajuste (s)"</span><span class="p">,</span> <span class="s2">"AUC-PR en 2022"</span><span class="p">))</span>  <span class="c1"># Dos paneles</span>
+<span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">svm</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"variante"</span><span class="p">)):</span>  <span class="c1"># Variantes</span>
+    <span class="n">col</span> <span class="o">=</span> <span class="p">[</span><span class="n">ROJO</span><span class="p">,</span> <span class="n">AZUL</span><span class="p">,</span> <span class="n">VERDE</span><span class="p">,</span> <span class="n">AMBAR</span><span class="p">][</span><span class="n">j</span> <span class="o">%</span> <span class="mi">4</span><span class="p">]</span>  <span class="c1"># Color</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">add_scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">g</span><span class="p">[</span><span class="s2">"n"</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">g</span><span class="p">[</span><span class="s2">"ajuste (s)"</span><span class="p">],</span> <span class="n">mode</span><span class="o">=</span><span class="s2">"lines+markers"</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">v</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">col</span><span class="p">),</span> <span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Tiempo</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">add_scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">g</span><span class="p">[</span><span class="s2">"n"</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">g</span><span class="p">[</span><span class="s2">"AUC-PR 2022"</span><span class="p">],</span> <span class="n">mode</span><span class="o">=</span><span class="s2">"lines+markers"</span><span class="p">,</span> <span class="n">showlegend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">col</span><span class="p">),</span> <span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Calidad</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">update_xaxes</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">"log"</span><span class="p">,</span> <span class="n">title_text</span><span class="o">=</span><span class="s2">"n (log)"</span><span class="p">)</span>  <span class="c1"># Escala</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">update_yaxes</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">"log"</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Escala</span>
+<span class="n">mostrar</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>  <span class="c1"># Muestra</span>
+<span class="n">svm</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">"variante"</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">"n"</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="s2">"ajuste (s)"</span><span class="p">,</span> <span class="s2">"AUC-PR 2022"</span><span class="p">])</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>                        <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>                <div id="2d3a6b66-a769-4bec-ad8f-7cfb7c38ce79" class="plotly-graph-div" style="height:400px; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("2d3a6b66-a769-4bec-ad8f-7cfb7c38ce79")) {                    Plotly.newPlot(                        "2d3a6b66-a769-4bec-ad8f-7cfb7c38ce79",                        [{"line":{"color":"#dc2626"},"mode":"lines+markers","name":"LinearSVC","x":[2500,5000,10000,20000],"y":[0.007652300000017931,0.015973499999972773,0.02597179999997934,0.07496199999997089],"type":"scatter","xaxis":"x","yaxis":"y"},{"line":{"color":"#dc2626"},"mode":"lines+markers","showlegend":false,"x":[2500,5000,10000,20000],"y":[0.6723110856943422,0.6692293151798838,0.6689289076305241,0.6724192056248741],"type":"scatter","xaxis":"x2","yaxis":"y2"},{"line":{"color":"#2563eb"},"mode":"lines+markers","name":"Nystr\u00f6m (300) + LinearSVC","x":[2500,5000,10000,20000],"y":[0.08203470000000834,0.1364618000000064,0.24884949999994888,0.5716343000000279],"type":"scatter","xaxis":"x","yaxis":"y"},{"line":{"color":"#2563eb"},"mode":"lines+markers","showlegend":false,"x":[2500,5000,10000,20000],"y":[0.6543131078996971,0.6575196950119603,0.6613605402206963,0.6728223694064366],"type":"scatter","xaxis":"x2","yaxis":"y2"},{"line":{"color":"#16a34a"},"mode":"lines+markers","name":"SGD (bisagra)","x":[2500,5000,10000,20000],"y":[0.006838899999991099,0.016566500000010365,0.030806699999970988,0.04425279999998111],"type":"scatter","xaxis":"x","yaxis":"y"},{"line":{"color":"#16a34a"},"mode":"lines+markers","showlegend":false,"x":[2500,5000,10000,20000],"y":[0.4897862536807955,0.6093268983698946,0.6568569131186297,0.656952379248863],"type":"scatter","xaxis":"x2","yaxis":"y2"},{"line":{"color":"#d97706"},"mode":"lines+markers","name":"SVC RBF exacto","x":[2500,5000,10000,20000],"y":[0.047202299999980823,0.16375970000001416,0.8134514999999851,3.1898798000000284],"type":"scatter","xaxis":"x","yaxis":"y"},{"line":{"color":"#d97706"},"mode":"lines+markers","showlegend":false,"x":[2500,5000,10000,20000],"y":[0.6131397094150093,0.6407976748180739,0.6091750212825371,0.6262356963102857],"type":"scatter","xaxis":"x2","yaxis":"y2"}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmapgl":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmapgl"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#2563eb","#dc2626","#16a34a","#d97706","#7c3aed","#64748b","#0891b2","#db2777"],"font":{"family":"Inter, Segoe UI, sans-serif","size":13},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"white","showlakes":true,"showland":true,"subunitcolor":"#C8D4E3"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"margin":{"b":50,"l":60,"r":30,"t":60},"paper_bgcolor":"white","plot_bgcolor":"white","polar":{"angularaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""},"bgcolor":"white","radialaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"yaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"zaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"baxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"bgcolor":"white","caxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2}}},"xaxis":{"anchor":"y","domain":[0.0,0.45],"title":{"text":"n (log)"},"type":"log"},"yaxis":{"anchor":"x","domain":[0.0,1.0],"type":"log"},"xaxis2":{"anchor":"y2","domain":[0.55,1.0],"title":{"text":"n (log)"},"type":"log"},"yaxis2":{"anchor":"x2","domain":[0.0,1.0]},"annotations":[{"font":{"size":16},"showarrow":false,"text":"Ajuste (s)","x":0.225,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"},{"font":{"size":16},"showarrow":false,"text":"AUC-PR en 2022","x":0.775,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"}],"height":400},                        {"displaylogo": false, "responsive": true}                    )                };                            </script>        </div></div><div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="4" halign="left">AUC-PR 2022</th>
+      <th colspan="4" halign="left">ajuste (s)</th>
+    </tr>
+    <tr>
+      <th>n</th>
+      <th>2500</th>
+      <th>5000</th>
+      <th>10000</th>
+      <th>20000</th>
+      <th>2500</th>
+      <th>5000</th>
+      <th>10000</th>
+      <th>20000</th>
+    </tr>
+    <tr>
+      <th>variante</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>LinearSVC</th>
+      <td>0.6720</td>
+      <td>0.6690</td>
+      <td>0.6690</td>
+      <td>0.6720</td>
+      <td>0.0080</td>
+      <td>0.0160</td>
+      <td>0.0260</td>
+      <td>0.0750</td>
+    </tr>
+    <tr>
+      <th>Nyström (300) + LinearSVC</th>
+      <td>0.6540</td>
+      <td>0.6580</td>
+      <td>0.6610</td>
+      <td>0.6730</td>
+      <td>0.0820</td>
+      <td>0.1360</td>
+      <td>0.2490</td>
+      <td>0.5720</td>
+    </tr>
+    <tr>
+      <th>SGD (bisagra)</th>
+      <td>0.4900</td>
+      <td>0.6090</td>
+      <td>0.6570</td>
+      <td>0.6570</td>
+      <td>0.0070</td>
+      <td>0.0170</td>
+      <td>0.0310</td>
+      <td>0.0440</td>
+    </tr>
+    <tr>
+      <th>SVC RBF exacto</th>
+      <td>0.6130</td>
+      <td>0.6410</td>
+      <td>0.6090</td>
+      <td>0.6260</td>
+      <td>0.0470</td>
+      <td>0.1640</td>
+      <td>0.8130</td>
+      <td>3.1900</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Interpretación.</strong> El tiempo del núcleo exacto crece de forma <strong>cuadrática</strong>: de 0,05 s a 3,2 s al pasar de 2 500 a 20 000 filas (×64 para ×8 filas), y su AUC-PR (0,61–0,64 con hiperparámetros por defecto) no mejora con más datos. Nyström + LinearSVC escala linealmente (0,57 s con 20 000 filas) y logra AUC-PR 0,673; LinearSVC sin núcleo es aún más rápido (0,08 s) con un AUC-PR casi igual, señal de que el problema es casi lineal en estas variables. SGD necesita más datos para converger (0,49 con 2 500 filas, 0,66 desde 10 000). Por eso la SVM del experimento usa Nyström: conserva la flexibilidad del núcleo RBF sin el costo cuadrático.</p>
+</section>
+<section id="paralelizacion">
+<h2>7. Paralelización<a class="headerlink" href="#paralelizacion" title="Link to this heading">#</a></h2>
+<p>Dos niveles: <strong>entre combinaciones</strong> (el experimento corrió 10 procesos con <code class="docutils literal notranslate"><span class="pre">joblib</span></code>/<code class="docutils literal notranslate"><span class="pre">loky</span></code>, cada uno con <code class="docutils literal notranslate"><span class="pre">n_jobs</span> <span class="pre">=</span> <span class="pre">1</span></code> para no sobresuscribir los núcleos) y <strong>dentro de un modelo</strong> (<code class="docutils literal notranslate"><span class="pre">n_jobs</span></code> de Random Forest).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">[</span><span class="s2">"paralelo"</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>segundos</th>
+      <th>aceleración</th>
+      <th>eficiencia</th>
+    </tr>
+    <tr>
+      <th>configuración</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Random Forest, n_jobs = 1</th>
+      <td>17.2830</td>
+      <td>1.0000</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>Random Forest, n_jobs = 2</th>
+      <td>9.1001</td>
+      <td>1.8992</td>
+      <td>0.9496</td>
+    </tr>
+    <tr>
+      <th>Random Forest, n_jobs = 4</th>
+      <td>5.1835</td>
+      <td>3.3343</td>
+      <td>0.8336</td>
+    </tr>
+    <tr>
+      <th>Random Forest, n_jobs = 8</th>
+      <td>3.5186</td>
+      <td>4.9119</td>
+      <td>0.6140</td>
+    </tr>
+    <tr>
+      <th>4 pliegues de regresión logística, backend loky</th>
+      <td>1.2183</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4 pliegues de regresión logística, backend threading</th>
+      <td>0.2278</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4 pliegues de regresión logística, secuencial</th>
+      <td>0.3096</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Interpretación.</strong> Random Forest acelera 1,9× con 2 núcleos, 3,3× con 4 y 4,9× con 8 (eficiencia 0,61): la paralelización de árboles es casi perfecta hasta 4 núcleos, y después pesan las partes secuenciales (ley de Amdahl) y que el equipo tiene 6 núcleos físicos (12 lógicos). Para tareas cortas, paralelizar con procesos (<strong>loky</strong>) es <strong>más lento</strong> que no paralelizar (1,22 s frente a 0,31 s): crear procesos y serializar los datos cuesta más que el cálculo; con <strong>hilos</strong> (0,23 s) sí se gana, porque los solvers liberan el GIL. Por eso el experimento paraleliza al nivel más grueso, <strong>entre combinaciones</strong> (10 procesos con <code class="docutils literal notranslate"><span class="pre">n_jobs</span> <span class="pre">=</span> <span class="pre">1</span></code> dentro de cada modelo): 420 tareas en 105 minutos. <strong>Dask o Ray</strong> solo se justificarían para repartir las tareas entre varias máquinas; en un solo equipo de 12 núcleos, joblib basta. <strong>GPU:</strong> el equipo no tiene GPU NVIDIA, así que <code class="docutils literal notranslate"><span class="pre">device='cuda'</span></code> de XGBoost no pudo medirse; con <code class="docutils literal notranslate"><span class="pre">hist</span></code> en CPU el ajuste ya tarda ≈ 1,5 s.</p>
+</section>
+<section id="perfilamiento-y-memoria">
+<h2>8. Perfilamiento y memoria<a class="headerlink" href="#perfilamiento-y-memoria" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">[</span><span class="s2">"perfil"</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>función</th>
+      <th>llamadas</th>
+      <th>tiempo propio (s)</th>
+      <th>tiempo acumulado (s)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>ejecutar_tarea (ielSR/Projects/proyecto_dengue...</td>
+      <td>1</td>
+      <td>0.0004</td>
+      <td>10.3826</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>fit (/imblearn/pipeline.py)</td>
+      <td>9</td>
+      <td>0.0004</td>
+      <td>7.7336</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>inner_f (/xgboost/core.py)</td>
+      <td>108</td>
+      <td>0.0010</td>
+      <td>7.0816</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>fit (/xgboost/sklearn.py)</td>
+      <td>9</td>
+      <td>0.0005</td>
+      <td>7.0806</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>bayesiana (lSR/Projects/proyecto_dengue/entreg...</td>
+      <td>1</td>
+      <td>0.0000</td>
+      <td>6.9334</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>optimize (/optuna/study/study.py)</td>
+      <td>1</td>
+      <td>0.0000</td>
+      <td>6.9330</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>_optimize (/optuna/study/_optimize.py)</td>
+      <td>1</td>
+      <td>0.0000</td>
+      <td>6.9330</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>_optimize_sequential (/optuna/study/_optimize.py)</td>
+      <td>1</td>
+      <td>0.0001</td>
+      <td>6.9330</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>_run_trial (/optuna/study/_optimize.py)</td>
+      <td>4</td>
+      <td>0.0001</td>
+      <td>6.9329</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>f (lSR/Projects/proyecto_dengue/entregable3/e3...</td>
+      <td>4</td>
+      <td>0.0001</td>
+      <td>6.9305</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>objetivo (ielSR/Projects/proyecto_dengue/entre...</td>
+      <td>4</td>
+      <td>0.0191</td>
+      <td>6.9201</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>train (/xgboost/training.py)</td>
+      <td>9</td>
+      <td>0.0050</td>
+      <td>6.0024</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>update (/xgboost/core.py)</td>
+      <td>969</td>
+      <td>5.8577</td>
+      <td>5.8941</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>datos (ielSR/Projects/proyecto_dengue/entregab...</td>
+      <td>1</td>
+      <td>0.0036</td>
+      <td>2.4003</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>cargar (C:/DanielSR/Projects/proyecto_dengue/e...</td>
+      <td>1</td>
+      <td>0.0057</td>
+      <td>2.3966</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">[</span><span class="s2">"memoria"</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>memoria adicional pico (MB)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>KNN</th>
+      <td>19.7344</td>
+    </tr>
+    <tr>
+      <th>Naive Bayes</th>
+      <td>18.6562</td>
+    </tr>
+    <tr>
+      <th>Regresión logística</th>
+      <td>10.3906</td>
+    </tr>
+    <tr>
+      <th>Árbol de decisión</th>
+      <td>5.1914</td>
+    </tr>
+    <tr>
+      <th>Random Forest</th>
+      <td>12.1250</td>
+    </tr>
+    <tr>
+      <th>XGBoost (hist)</th>
+      <td>7.2734</td>
+    </tr>
+    <tr>
+      <th>SVM Nyström + lineal</th>
+      <td>279.2930</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Interpretación.</strong> El perfil de una tarea anidada muestra que el <strong>≈ 70 % del tiempo</strong> está en el entrenamiento de XGBoost (<code class="docutils literal notranslate"><span class="pre">update</span></code> de los árboles) y ≈ 23 % en cargar los datos, un costo que se paga una sola vez por proceso gracias a la caché (<code class="docutils literal notranslate"><span class="pre">lru_cache</span></code>). Optuna, el remuestreo y el Pipeline cuestan casi nada: optimizarlos sería prematuro. En memoria, la SVM con Nyström es la más exigente (≈ 280 MB: la matriz de 300 componentes por fila), mientras los árboles necesitan pocos MB.</p>
+</section>
+<section id="tabla-comparativa-modelo-estandar-frente-a-optimizado">
+<h2>9. Tabla comparativa: modelo estándar frente a optimizado<a class="headerlink" href="#tabla-comparativa-modelo-estandar-frente-a-optimizado" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">knn</span><span class="p">,</span> <span class="n">lin</span><span class="p">,</span> <span class="n">xg</span><span class="p">,</span> <span class="n">nb</span> <span class="o">=</span> <span class="n">C</span><span class="p">[</span><span class="s2">"knn"</span><span class="p">],</span> <span class="n">C</span><span class="p">[</span><span class="s2">"lineales"</span><span class="p">],</span> <span class="n">C</span><span class="p">[</span><span class="s2">"xgboost"</span><span class="p">],</span> <span class="n">C</span><span class="p">[</span><span class="s2">"naive_bayes"</span><span class="p">]</span>  <span class="c1"># Resultados</span>
+<span class="n">sv</span> <span class="o">=</span> <span class="n">C</span><span class="p">[</span><span class="s2">"svm"</span><span class="p">][</span><span class="n">C</span><span class="p">[</span><span class="s2">"svm"</span><span class="p">][</span><span class="s2">"n"</span><span class="p">]</span> <span class="o">==</span> <span class="n">C</span><span class="p">[</span><span class="s2">"svm"</span><span class="p">][</span><span class="s2">"n"</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"variante"</span><span class="p">)</span>  <span class="c1"># SVM con el n más grande</span>
+<span class="n">mem</span> <span class="o">=</span> <span class="n">C</span><span class="p">[</span><span class="s2">"memoria"</span><span class="p">][</span><span class="s2">"memoria adicional pico (MB)"</span><span class="p">]</span>  <span class="c1"># Memoria</span>
+<span class="n">comparacion</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span>
+    <span class="p">{</span><span class="s2">"modelo"</span><span class="p">:</span> <span class="s2">"KNN"</span><span class="p">,</span> <span class="s2">"estándar"</span><span class="p">:</span> <span class="s2">"fuerza bruta"</span><span class="p">,</span> <span class="s2">"optimizado"</span><span class="p">:</span> <span class="s2">"FAISS HNSW"</span><span class="p">,</span> <span class="s2">"complejidad estándar → optimizada (consulta)"</span><span class="p">:</span> <span class="s2">"O(n·p) → ≈ O(log n)"</span><span class="p">,</span>
+     <span class="s2">"consulta 1000 estándar (s)"</span><span class="p">:</span> <span class="n">knn</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">"scikit-learn brute"</span><span class="p">,</span> <span class="s2">"consulta 1000 (s)"</span><span class="p">],</span> <span class="s2">"consulta 1000 optimizada (s)"</span><span class="p">:</span> <span class="n">knn</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">"FAISS aproximado (HNSW, M = 32)"</span><span class="p">,</span> <span class="s2">"consulta 1000 (s)"</span><span class="p">],</span>
+     <span class="s2">"Δ desempeño"</span><span class="p">:</span> <span class="n">knn</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">"FAISS aproximado (HNSW, M = 32)"</span><span class="p">,</span> <span class="s2">"AUC-ROC (voto de vecinos)"</span><span class="p">]</span> <span class="o">-</span> <span class="n">knn</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">"scikit-learn brute"</span><span class="p">,</span> <span class="s2">"AUC-ROC (voto de vecinos)"</span><span class="p">]},</span>
+    <span class="p">{</span><span class="s2">"modelo"</span><span class="p">:</span> <span class="s2">"XGBoost"</span><span class="p">,</span> <span class="s2">"estándar"</span><span class="p">:</span> <span class="s2">"exact, 300 árboles"</span><span class="p">,</span> <span class="s2">"optimizado"</span><span class="p">:</span> <span class="s2">"hist + parada temprana"</span><span class="p">,</span> <span class="s2">"complejidad estándar → optimizada (consulta)"</span><span class="p">:</span> <span class="s2">"O(T·p·n log n) → O(T'·n·p), T' &lt; T"</span><span class="p">,</span>
+     <span class="s2">"ajuste estándar (s)"</span><span class="p">:</span> <span class="n">xg</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">"ajuste (s)"</span><span class="p">],</span> <span class="s2">"ajuste optimizado (s)"</span><span class="p">:</span> <span class="n">xg</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="s2">"ajuste (s)"</span><span class="p">],</span> <span class="s2">"Δ desempeño"</span><span class="p">:</span> <span class="n">xg</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="s2">"AUC-PR 2022"</span><span class="p">]</span> <span class="o">-</span> <span class="n">xg</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">"AUC-PR 2022"</span><span class="p">]},</span>
+    <span class="p">{</span><span class="s2">"modelo"</span><span class="p">:</span> <span class="s2">"SVM"</span><span class="p">,</span> <span class="s2">"estándar"</span><span class="p">:</span> <span class="s2">"núcleo RBF exacto"</span><span class="p">,</span> <span class="s2">"optimizado"</span><span class="p">:</span> <span class="s2">"Nyström + LinearSVC"</span><span class="p">,</span> <span class="s2">"complejidad estándar → optimizada (consulta)"</span><span class="p">:</span> <span class="s2">"O(n²·p)–O(n³) → O(n·m·p)"</span><span class="p">,</span>
+     <span class="s2">"ajuste estándar (s)"</span><span class="p">:</span> <span class="n">sv</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">"SVC RBF exacto"</span><span class="p">,</span> <span class="s2">"ajuste (s)"</span><span class="p">],</span> <span class="s2">"ajuste optimizado (s)"</span><span class="p">:</span> <span class="n">sv</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">"Nyström (300) + LinearSVC"</span><span class="p">,</span> <span class="s2">"ajuste (s)"</span><span class="p">],</span>
+     <span class="s2">"Δ desempeño"</span><span class="p">:</span> <span class="n">sv</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">"Nyström (300) + LinearSVC"</span><span class="p">,</span> <span class="s2">"AUC-PR 2022"</span><span class="p">]</span> <span class="o">-</span> <span class="n">sv</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">"SVC RBF exacto"</span><span class="p">,</span> <span class="s2">"AUC-PR 2022"</span><span class="p">]},</span>
+    <span class="p">{</span><span class="s2">"modelo"</span><span class="p">:</span> <span class="s2">"Regresión logística"</span><span class="p">,</span> <span class="s2">"estándar"</span><span class="p">:</span> <span class="s2">"lbfgs"</span><span class="p">,</span> <span class="s2">"optimizado"</span><span class="p">:</span> <span class="s2">"saga"</span><span class="p">,</span> <span class="s2">"complejidad estándar → optimizada (consulta)"</span><span class="p">:</span> <span class="s2">"O(n·p) por iteración (ambos)"</span><span class="p">,</span>
+     <span class="s2">"ajuste estándar (s)"</span><span class="p">:</span> <span class="n">lin</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">"Regresión logística (lbfgs)"</span><span class="p">,</span> <span class="s2">"ajuste (s)"</span><span class="p">],</span> <span class="s2">"ajuste optimizado (s)"</span><span class="p">:</span> <span class="n">lin</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">"Regresión logística (saga)"</span><span class="p">,</span> <span class="s2">"ajuste (s)"</span><span class="p">],</span>
+     <span class="s2">"Δ desempeño"</span><span class="p">:</span> <span class="n">lin</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">"Regresión logística (saga)"</span><span class="p">,</span> <span class="s2">"métrica en 2022"</span><span class="p">]</span> <span class="o">-</span> <span class="n">lin</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">"Regresión logística (lbfgs)"</span><span class="p">,</span> <span class="s2">"métrica en 2022"</span><span class="p">]},</span>
+    <span class="p">{</span><span class="s2">"modelo"</span><span class="p">:</span> <span class="s2">"Naive Bayes"</span><span class="p">,</span> <span class="s2">"estándar"</span><span class="p">:</span> <span class="s2">"fit completo"</span><span class="p">,</span> <span class="s2">"optimizado"</span><span class="p">:</span> <span class="s2">"partial_fit por lotes"</span><span class="p">,</span> <span class="s2">"complejidad estándar → optimizada (consulta)"</span><span class="p">:</span> <span class="s2">"O(n·p) (igual); memoria O(n·p) → O(lote·p)"</span><span class="p">,</span>
+     <span class="s2">"memoria estándar (MB)"</span><span class="p">:</span> <span class="n">nb</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">"memoria pico (MB)"</span><span class="p">],</span> <span class="s2">"memoria optimizada (MB)"</span><span class="p">:</span> <span class="n">nb</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">"memoria pico (MB)"</span><span class="p">],</span> <span class="s2">"Δ desempeño"</span><span class="p">:</span> <span class="n">nb</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">"AUC-ROC 2022"</span><span class="p">]</span> <span class="o">-</span> <span class="n">nb</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">"AUC-ROC 2022"</span><span class="p">]},</span>
+<span class="p">])</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"modelo"</span><span class="p">)</span>
+<span class="n">comparacion</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>estándar</th>
+      <th>optimizado</th>
+      <th>complejidad estándar → optimizada (consulta)</th>
+      <th>consulta 1000 estándar (s)</th>
+      <th>consulta 1000 optimizada (s)</th>
+      <th>Δ desempeño</th>
+      <th>ajuste estándar (s)</th>
+      <th>ajuste optimizado (s)</th>
+      <th>memoria estándar (MB)</th>
+      <th>memoria optimizada (MB)</th>
+    </tr>
+    <tr>
+      <th>modelo</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>KNN</th>
+      <td>fuerza bruta</td>
+      <td>FAISS HNSW</td>
+      <td>O(n·p) → ≈ O(log n)</td>
+      <td>0.0432</td>
+      <td>0.0033</td>
+      <td>-0.0013</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>XGBoost</th>
+      <td>exact, 300 árboles</td>
+      <td>hist + parada temprana</td>
+      <td>O(T·p·n log n) → O(T'·n·p), T' &lt; T</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.0032</td>
+      <td>23.2525</td>
+      <td>1.5170</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>SVM</th>
+      <td>núcleo RBF exacto</td>
+      <td>Nyström + LinearSVC</td>
+      <td>O(n²·p)–O(n³) → O(n·m·p)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.0466</td>
+      <td>3.1899</td>
+      <td>0.5716</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Regresión logística</th>
+      <td>lbfgs</td>
+      <td>saga</td>
+      <td>O(n·p) por iteración (ambos)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.0000</td>
+      <td>0.3783</td>
+      <td>2.4813</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Naive Bayes</th>
+      <td>fit completo</td>
+      <td>partial_fit por lotes</td>
+      <td>O(n·p) (igual); memoria O(n·p) → O(lote·p)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.0000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>64.8526</td>
+      <td>6.7107</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Interpretación.</strong> Las variantes optimizadas logran: KNN <strong>13× más rápido</strong> en las consultas (FAISS HNSW, −0,001 de AUC); XGBoost <strong>15× más rápido</strong> en el ajuste y con mejor AUC-PR (hist + parada temprana); SVM <strong>5,6× más rápida</strong> y con +0,047 de AUC-PR (Nyström frente al núcleo exacto con valores por defecto); Naive Bayes con <strong>10× menos memoria</strong> y el mismo modelo. La excepción documentada es la logística con SAGA, más lenta que lbfgs en este conjunto denso y pequeño en <span class="math notranslate nohighlight">\(p\)</span>.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./cuadernos"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="3_optimizacion.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">Optimización de hiperparámetros: comparación de métodos</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="5_clasificacion.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">Resultados de clasificación</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complejidad-teorica-frente-a-tiempo-empirico">1. Complejidad teórica frente a tiempo empírico</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#knn-busqueda-exhaustiva-kd-tree-ball-tree-y-faiss">2. KNN: búsqueda exhaustiva, KD-Tree, Ball Tree y FAISS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-lineales-solvers-saga">3. Modelos lineales: solvers (SAGA)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#naive-bayes-incremental-partial-fit">4. Naive Bayes incremental (<code class="docutils literal notranslate"><span class="pre">partial_fit</span></code>)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xgboost-hist-frente-a-exact-y-parada-temprana">5. XGBoost: <code class="docutils literal notranslate"><span class="pre">hist</span></code> frente a <code class="docutils literal notranslate"><span class="pre">exact</span></code> y parada temprana</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#svm-nucleo-exacto-frente-a-aproximaciones">6. SVM: núcleo exacto frente a aproximaciones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paralelizacion">7. Paralelización</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perfilamiento-y-memoria">8. Perfilamiento y memoria</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-comparativa-modelo-estandar-frente-a-optimizado">9. Tabla comparativa: modelo estándar frente a optimizado</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Daniel Serrano Romero
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

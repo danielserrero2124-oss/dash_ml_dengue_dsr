@@ -1,0 +1,564 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Conclusiones &#8212; Tercer Entregable – Modelos, optimización y comparación estadística</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/autor.css?v=483c0dd5" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'conclusiones';</script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="prev" title="Robustez y comparación estadística" href="cuadernos/8_estadistica.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logoUN.png" class="logo__image only-light" alt="Tercer Entregable – Modelos, optimización y comparación estadística - Home"/>
+    <script>document.write(`<img src="_static/logoUN.png" class="logo__image only-dark" alt="Tercer Entregable – Modelos, optimización y comparación estadística - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><!-- Tarjeta del autor en la barra lateral izquierda (visible en todas las páginas del libro) -->
+<div class="tarjeta-autor">
+  <img src="_static/foto_author_DSR_sidebar.png" alt="Daniel Serrano Romero" class="tarjeta-autor__foto">
+  <div class="tarjeta-autor__nombre">Daniel Serrano Romero</div>
+  <div class="tarjeta-autor__detalle">Maestría en Matemáticas</div>
+  <div class="tarjeta-autor__detalle">Machine Learning</div>
+</div></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Búsqueda</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Tercer Entregable: modelos de Machine Learning, optimización y comparación estadística
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Datos y diseño</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="cuadernos/1_datos.html">Datos: ETL y EDA mejorado</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cuadernos/2_diseno.html">Diseño experimental: 140 modelos con validación anidada</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Optimización</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="cuadernos/3_optimizacion.html">Optimización de hiperparámetros: comparación de métodos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cuadernos/4_computacional.html">Optimización computacional</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resultados</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="cuadernos/5_clasificacion.html">Resultados de clasificación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cuadernos/6_regresion.html">Resultados de regresión: log(1 + casos) en <span class="math notranslate nohighlight">\(t + 4\)</span></a></li>
+<li class="toctree-l1"><a class="reference internal" href="cuadernos/7_interpretabilidad.html">Interpretabilidad: valores de Shapley (SHAP) y LIME</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Comparación estadística</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="cuadernos/8_estadistica.html">Robustez y comparación estadística</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Cierre</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Conclusiones</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/conclusiones.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="claro/oscuro" aria-label="claro/oscuro" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Conclusiones</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hallazgos">Hallazgos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitaciones">Limitaciones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trabajo-futuro">Trabajo futuro</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reproducibilidad">Reproducibilidad</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="conclusiones">
+<h1>Conclusiones<a class="headerlink" href="#conclusiones" title="Link to this heading">#</a></h1>
+<section id="hallazgos">
+<h2>Hallazgos<a class="headerlink" href="#hallazgos" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Los modelos de árboles y la SVM con núcleo aproximado son los mejores, y son equivalentes entre sí.</strong> En la prueba 2023–2024,
+XGBoost sin balanceo logra AUC-PR 0,823 y AUC-ROC 0,898, la SVM 0,820 y Random Forest 0,818. Friedman–Nemenyi los agrupa como
+estadísticamente indistinguibles; DeLong con Holm no separa XGBoost de la SVM, y la diferencia de XGBoost con Random Forest
+(0,0014 de AUC) tiene un delta de Cliff despreciable. Los tres superan con claridad a la regresión logística, KNN, el árbol único y
+Naive Bayes.</p></li>
+<li><p><strong>La ganancia sobre el modelo base es real pero moderada:</strong> de AUC-PR 0,809 (logística del Primer Entregable) a 0,823. El techo lo
+fija la información disponible, no el algoritmo: la historia de casos domina y los brotes súbitos (sin casos previos) no se
+pueden anticipar con las variables del propio municipio.</p></li>
+<li><p><strong>El balanceo no ayuda en este problema.</strong> SMOTE, ADASYN y <code class="docutils literal notranslate"><span class="pre">class_weight</span></code> no mejoran el AUC-PR (lo reducen 0,005–0,024) y
+deterioran la calibración (ECE de 0,07 a 0,14–0,18). El desbalance se maneja mejor eligiendo el umbral en 2022 y, si se necesitan
+probabilidades, recalibrando con Platt o regresión isotónica (ECE ≤ 0,06).</p></li>
+<li><p><strong>El optimizador importa menos que el modelo.</strong> Con 20 evaluaciones los cuatro métodos llegan al mismo desempeño externo. La
+búsqueda bayesiana (TPE) tiene la mejor curva de desempeño en cualquier momento y, en el estudio con más presupuesto, es el único
+método que en las tres semillas llega al casi óptimo (≈ 14 evaluaciones; Grid y Random no lo logran en 40). Successive Halving
+ofrece la mejor calidad por minuto. Las mejoras internas por debajo de ≈ 0,005 no se trasladan al bucle externo.</p></li>
+<li><p><strong>Regresión:</strong> XGBoost y la SVR aproximada son los mejores (RMSE 0,573 y <span class="math notranslate nohighlight">\(R^2\)</span> 0,79 en la prueba, 13 % menos error que la
+persistencia; el MCS retiene 3 de 28 combinaciones). Los residuos son heterocedásticos y dependientes (White, BDS y Ljung-Box
+rechazan): queda estructura temporal y espacial sin capturar.</p></li>
+<li><p><strong>Eficiencia computacional verificada, no supuesta:</strong> <code class="docutils literal notranslate"><span class="pre">hist</span></code> acelera XGBoost 16× y la parada temprana mejora el modelo con 125
+árboles; FAISS HNSW acelera KNN 13× con 93 % de vecinos exactos; Nyström evita el costo cuadrático de la SVM (exponente empírico 2,0
+del núcleo exacto); <code class="docutils literal notranslate"><span class="pre">partial_fit</span></code> reduce la memoria de Naive Bayes 10×. SAGA no es más rápido en este conjunto denso de 34
+variables, y se reporta así.</p></li>
+</ol>
+</section>
+<section id="limitaciones">
+<h2>Limitaciones<a class="headerlink" href="#limitaciones" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>La búsqueda usa submuestras estratificadas (20 000 filas en el bucle externo, 40 000 en el reajuste final) para que 420 tareas
+anidadas quepan en el presupuesto de cómputo; el año evaluado siempre se usa completo.</p></li>
+<li><p>Tres pliegues externos (2019, 2020 y 2021) cubren regímenes distintos pero dan una estimación de la variabilidad con pocos puntos;
+la desviación entre pliegues (≈ 0,10) refleja la prevalencia de cada año más que la inestabilidad del modelo.</p></li>
+<li><p>El algoritmo genético trabaja con una población pequeña (6) por el presupuesto de 20 evaluaciones y converge prematuramente en la
+mayoría de las corridas.</p></li>
+<li><p>No hubo GPU disponible para medir <code class="docutils literal notranslate"><span class="pre">device='cuda'</span></code> en XGBoost.</p></li>
+<li><p>Las variables de vecindad espacial, que el EDA y los residuos señalan como la información faltante, no se incluyeron para mantener
+la comparación con los entregables anteriores.</p></li>
+</ul>
+</section>
+<section id="trabajo-futuro">
+<h2>Trabajo futuro<a class="headerlink" href="#trabajo-futuro" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Agregar rezagos espaciales (promedio de vecinos en <span class="math notranslate nohighlight">\(t\)</span>) y su interacción con El Niño.</p></li>
+<li><p>Optimización multiobjetivo (AUC-PR y calibración) y umbrales sensibles al costo de las alertas.</p></li>
+<li><p>Ensamblar los tres modelos equivalentes y recalibrar periódicamente con datos recientes.</p></li>
+</ul>
+</section>
+<section id="reproducibilidad">
+<h2>Reproducibilidad<a class="headerlink" href="#reproducibilidad" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Semilla global:</strong> <code class="docutils literal notranslate"><span class="pre">SEMILLA</span> <span class="pre">=</span> <span class="pre">42</span></code> en <code class="docutils literal notranslate"><span class="pre">e3/config.py</span></code>, propagada a NumPy, scikit-learn, XGBoost, imbalanced-learn, Optuna y DEAP.</p></li>
+<li><p><strong>Entorno:</strong> <code class="docutils literal notranslate"><span class="pre">entregable3/requirements.txt</span></code> (Python 3.9.25, versiones exactas).</p></li>
+<li><p><strong>Registro de experimentos:</strong> <code class="docutils literal notranslate"><span class="pre">resultados/tabla_maestra.csv</span></code> (420 filas: combinación, pliegue, semilla, hiperparámetros, métricas
+externas, evaluaciones y tiempos) y un archivo por tarea en <code class="docutils literal notranslate"><span class="pre">resultados/tareas/</span></code>.</p></li>
+<li><p><strong>Pasos</strong> (desde <code class="docutils literal notranslate"><span class="pre">entregable3</span></code>):</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>correr_experimento.py
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>correr_analisis.py
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>construir<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>python<span class="w"> </span>construir_todo.py
+</pre></div>
+</div>
+<p>Después se ejecutan los cuadernos de <code class="docutils literal notranslate"><span class="pre">cuadernos/</span></code> con <code class="docutils literal notranslate"><span class="pre">nbconvert</span></code> y se compila el libro con <code class="docutils literal notranslate"><span class="pre">jupyter-book</span> <span class="pre">build</span> <span class="pre">entregable3</span></code>.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="cuadernos/8_estadistica.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">Robustez y comparación estadística</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hallazgos">Hallazgos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitaciones">Limitaciones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trabajo-futuro">Trabajo futuro</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reproducibilidad">Reproducibilidad</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Daniel Serrano Romero
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
