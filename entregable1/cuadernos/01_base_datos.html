@@ -1,0 +1,1859 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Base de datos &#8212; Primer Entregable – Brotes de dengue en Colombia</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/autor.css?v=483c0dd5" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'cuadernos/01_base_datos';</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Partición y variable objetivo" href="02_objetivo.html" />
+    <link rel="prev" title="Primer Entregable: base de datos, EDA y modelo base" href="../intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logoUN.png" class="logo__image only-light" alt="Primer Entregable – Brotes de dengue en Colombia - Home"/>
+    <script>document.write(`<img src="../_static/logoUN.png" class="logo__image only-dark" alt="Primer Entregable – Brotes de dengue en Colombia - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><!-- Tarjeta del autor en la barra lateral izquierda (visible en todas las páginas del libro) -->
+<div class="tarjeta-autor">
+  <img src="../_static/foto_author_DSR_sidebar.png" alt="Daniel Serrano Romero" class="tarjeta-autor__foto">
+  <div class="tarjeta-autor__nombre">Daniel Serrano Romero</div>
+  <div class="tarjeta-autor__detalle">Maestría en Matemáticas</div>
+  <div class="tarjeta-autor__detalle">Machine Learning</div>
+</div></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Búsqueda</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Primer Entregable: base de datos, EDA y modelo base
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Base de datos</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Base de datos</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Análisis exploratorio de datos</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="02_objetivo.html">Partición y variable objetivo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_univariado.html">Análisis unidimensional</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_bivariado.html">Análisis bidimensional</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_multivariado.html">Análisis multivariado</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_fuga.html">Auditoría de fuga de datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_temporal.html">Componente temporal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_espacial.html">Componente espacial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_espacio_temporal.html">Componente espacio-temporal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_preprocesamiento.html">Preprocesamiento</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Modelo base</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="11_modelo_base.html">Modelo base: regresión logística</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Cierre</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../conclusiones.html">Conclusiones, limitaciones y reproducibilidad</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/cuadernos/01_base_datos.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="claro/oscuro" aria-label="claro/oscuro" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Base de datos</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problema-de-investigacion">Problema de investigación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#justificacion-de-la-seleccion-del-dataset">Justificación de la selección del dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fuente-de-los-datos-y-licencia">Fuente de los datos y licencia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diccionario-de-variables">Diccionario de variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estructura-de-los-datos">Estructura de los datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tamano-de-la-muestra">Tamaño de la muestra</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tamano-efectivo-las-filas-no-son-independientes">Tamaño efectivo: las filas no son independientes</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calidad-de-los-datos">Calidad de los datos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#valores-faltantes-patron">Valores faltantes: patrón</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#valores-faltantes-mecanismo-mcar-mar-o-mnar">Valores faltantes: mecanismo (MCAR, MAR o MNAR)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#duplicados-exactos-y-casi-duplicados">Duplicados exactos y casi duplicados</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#valores-atipicos">Valores atípicos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#valores-imposibles-o-inconsistentes">Valores imposibles o inconsistentes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sesgos-de-muestreo-y-representatividad">Sesgos de muestreo y representatividad</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consideraciones-eticas">Consideraciones éticas</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="base-de-datos">
+<h1>Base de datos<a class="headerlink" href="#base-de-datos" title="Link to this heading">#</a></h1>
+<p>Este capítulo cubre la sección 1 de la guía: problema de investigación, justificación, fuente y licencia, diccionario de variables, estructura, tamaño de la muestra, calidad de los datos y consideraciones éticas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>  <span class="c1"># Variables de entorno y rutas</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>  <span class="c1"># Configuración del intérprete</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">"LOKY_MAX_CPU_COUNT"</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">()))</span>  <span class="c1"># Evita un aviso de joblib en Windows</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s2">"../.."</span><span class="p">))</span>  <span class="c1"># Raíz del proyecto (paquete src)</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s2">".."</span><span class="p">))</span>  <span class="c1"># Carpeta entregable1 (paquete e1)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>  <span class="c1"># Control de avisos</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">"ignore"</span><span class="p">)</span>  <span class="c1"># Oculta avisos de versiones que no afectan los resultados</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">contextlib</span><span class="o">,</span><span class="w"> </span><span class="nn">io</span>  <span class="c1"># Silenciar una salida de diagnóstico</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">joblib.externals.loky</span><span class="w"> </span><span class="kn">import</span> <span class="n">cpu_count</span>  <span class="c1"># Conteo de núcleos de joblib</span>
+<span class="k">with</span> <span class="n">contextlib</span><span class="o">.</span><span class="n">redirect_stderr</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">()):</span>  <span class="c1"># En Windows 11 joblib imprime un diagnóstico al no encontrar «wmic»</span>
+    <span class="n">cpu_count</span><span class="p">(</span><span class="n">only_physical_cores</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Se calcula una vez (queda en caché) sin ensuciar las salidas</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>  <span class="c1"># Cálculo numérico</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>  <span class="c1"># Tablas</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">plotly.express</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">px</span>  <span class="c1"># Figuras rápidas</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">plotly.graph_objects</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span>  <span class="c1"># Figuras detalladas</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">plotly.subplots</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_subplots</span>  <span class="c1"># Figuras con varios paneles</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src</span><span class="w"> </span><span class="kn">import</span> <span class="n">config</span> <span class="k">as</span> <span class="n">cf</span>  <span class="c1"># Configuración del proyecto (horizonte, periodos, variables)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">e1</span><span class="w"> </span><span class="kn">import</span> <span class="n">datos</span> <span class="k">as</span> <span class="n">d</span><span class="p">,</span> <span class="n">estadistica</span> <span class="k">as</span> <span class="n">es</span><span class="p">,</span> <span class="n">espacial</span> <span class="k">as</span> <span class="n">sp</span><span class="p">,</span> <span class="n">modelo_base</span> <span class="k">as</span> <span class="n">mb</span>  <span class="c1"># Código del entregable</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">e1.figuras</span><span class="w"> </span><span class="kn">import</span> <span class="n">mostrar</span><span class="p">,</span> <span class="n">mapa_base</span><span class="p">,</span> <span class="n">AZUL</span><span class="p">,</span> <span class="n">ROJO</span><span class="p">,</span> <span class="n">VERDE</span><span class="p">,</span> <span class="n">AMBAR</span><span class="p">,</span> <span class="n">GRIS</span><span class="p">,</span> <span class="n">MORADO</span><span class="p">,</span> <span class="n">PERIODO_COLOR</span><span class="p">,</span> <span class="n">CUADRANTE_COLOR</span>  <span class="c1"># Estilo</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">cf</span><span class="o">.</span><span class="n">SEMILLA</span><span class="p">)</span>  <span class="c1"># Semilla global (42)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.width"</span><span class="p">,</span> <span class="mi">160</span><span class="p">)</span>  <span class="c1"># Ancho de las tablas</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.max_columns"</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>  <span class="c1"># Columnas visibles</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.float_format"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s2">,.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>  <span class="c1"># Cuatro decimales</span>
+<span class="n">raw</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">cf</span><span class="o">.</span><span class="n">RUTA_DATOS</span><span class="p">)</span>  <span class="c1"># Archivo original, sin transformar</span>
+<span class="n">raw</span><span class="p">[</span><span class="s2">"week_start"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">raw</span><span class="p">[</span><span class="s2">"week_start"</span><span class="p">])</span>  <span class="c1"># Fecha de inicio de la semana epidemiológica</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">municipios</span><span class="p">()</span>  <span class="c1"># 376 municipios con coordenadas DANE y región</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Archivo: </span><span class="si">{</span><span class="n">cf</span><span class="o">.</span><span class="n">RUTA_DATOS</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> · </span><span class="si">{</span><span class="n">raw</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> filas × </span><span class="si">{</span><span class="n">raw</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> columnas"</span><span class="p">)</span>  <span class="c1"># Dimensión</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Archivo: final_dataset.csv · 294,032 filas × 21 columnas
+</pre></div>
+</div>
+</div>
+</div>
+<section id="problema-de-investigacion">
+<h2>Problema de investigación<a class="headerlink" href="#problema-de-investigacion" title="Link to this heading">#</a></h2>
+<p><strong>Pregunta.</strong> ¿Es posible anticipar, con cuatro semanas de margen, si un municipio colombiano entrará en situación de brote de dengue, usando solo la información disponible en la semana actual (historia de casos, clima, vegetación, El Niño, población y movilidad)?</p>
+<p><strong>Definición operativa.</strong> Una semana es de brote si los casos superan el tercer cuartil de las mismas semanas (± 2) de los cinco años anteriores y hay al menos tres casos (canal endémico, método de cuartiles). El objetivo de la fila <span class="math notranslate nohighlight">\((m, t)\)</span> es el brote de la semana <span class="math notranslate nohighlight">\(t+4\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[y_{m,t} = \mathbb{1}\left[c_{m,t+4} &gt; Q_{0.75}\{c_{m,\,t+4-52k+j}\}_{k=1..5,\;j=-2..2} \;\wedge\; c_{m,t+4} \ge 3\right].\]</div>
+<p><strong>Tipo de tarea.</strong> Clasificación binaria probabilística sobre un panel espacio-temporal (ruta A de la guía, con las secciones 2.6 a 2.8 por tener tiempo y espacio).</p>
+</section>
+<section id="justificacion-de-la-seleccion-del-dataset">
+<h2>Justificación de la selección del dataset<a class="headerlink" href="#justificacion-de-la-seleccion-del-dataset" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Relevancia.</strong> El dengue es la arbovirosis de mayor carga en Colombia; 2024 fue el año con más casos de la serie. Las secretarías de salud deciden cada semana dónde fumigar, eliminar criaderos y reforzar servicios: una alerta con cuatro semanas de margen tiene uso directo.</p></li>
+<li><p><strong>Granularidad.</strong> Municipio × semana epidemiológica, la misma resolución de la vigilancia oficial.</p></li>
+<li><p><strong>Riqueza.</strong> Combina la notificación de casos con clima, vegetación (NDVI), el índice ONI de El Niño, población y flujo de personas, lo que permite estudiar componentes temporales, espaciales y espacio-temporales.</p></li>
+<li><p><strong>Tamaño.</strong> Muy por encima del mínimo de 20 000 observaciones exigido por la guía (ver abajo).</p></li>
+<li><p><strong>Dificultad adecuada.</strong> El objetivo no es trivial: la persistencia («si hay brote hoy, habrá brote en cuatro semanas») ya acierta mucho, y el reto es mejorar el <strong>ordenamiento del riesgo</strong>, no la exactitud.</p></li>
+</ul>
+</section>
+<section id="fuente-de-los-datos-y-licencia">
+<h2>Fuente de los datos y licencia<a class="headerlink" href="#fuente-de-los-datos-y-licencia" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Componente</p></th>
+<th class="head"><p>Origen</p></th>
+<th class="head"><p>Licencia / condiciones de uso</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Panel integrado <code class="docutils literal notranslate"><span class="pre">final_dataset.csv</span></code></p></td>
+<td><p>Archivo del proyecto (casos, clima, NDVI, ONI, población y flujo ya integrados por municipio y semana)</p></td>
+<td><p>Ver nota</p></td>
+</tr>
+<tr class="row-odd"><td><p>Casos de dengue</p></td>
+<td><p>Sistema Nacional de Vigilancia en Salud Pública (SIVIGILA), Instituto Nacional de Salud</p></td>
+<td><p>Datos abiertos del Estado colombiano (Ley 1712 de 2014)</p></td>
+</tr>
+<tr class="row-even"><td><p>Índice ONI (El Niño)</p></td>
+<td><p>NOAA Climate Prediction Center</p></td>
+<td><p>Dominio público (gobierno de EE. UU.)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Centroides municipales</p></td>
+<td><p>DANE, DIVIPOLA, corte 30-dic-2024: <a class="reference external" href="https://www.datos.gov.co/Mapas-Nacionales/DIVIPOLA-C-digos-municipios/gdxc-w37w">datos.gov.co/resource/gdxc-w37w</a></p></td>
+<td><p>CC BY-SA 4.0</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Las coordenadas no venían en el archivo original: se agregaron desde la DIVIPOLA del DANE (unión por el código municipal; los 376 municipios del panel se encontraron) para poder hacer el análisis espacial de las secciones 2.7 y 2.8. El panel integrado se distribuye con el repositorio del proyecto en <code class="docutils literal notranslate"><span class="pre">data/final_dataset.csv</span></code>.</p>
+</div>
+</section>
+<section id="diccionario-de-variables">
+<h2>Diccionario de variables<a class="headerlink" href="#diccionario-de-variables" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dic</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span>  <span class="c1"># Tipo, unidad y significado de las 21 columnas originales</span>
+    <span class="p">(</span><span class="s2">"COD_MUN_N"</span><span class="p">,</span> <span class="s2">"Identificador"</span><span class="p">,</span> <span class="s2">"código DANE"</span><span class="p">,</span> <span class="s2">"Municipio (5 dígitos; los dos primeros son el departamento)"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"ANO"</span><span class="p">,</span> <span class="s2">"Temporal"</span><span class="p">,</span> <span class="s2">"año"</span><span class="p">,</span> <span class="s2">"Año epidemiológico"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"SEMANA"</span><span class="p">,</span> <span class="s2">"Temporal"</span><span class="p">,</span> <span class="s2">"semana"</span><span class="p">,</span> <span class="s2">"Semana epidemiológica (1–52; 53 en 2015 y 2020)"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"casos_totales"</span><span class="p">,</span> <span class="s2">"Conteo"</span><span class="p">,</span> <span class="s2">"casos/semana"</span><span class="p">,</span> <span class="s2">"Casos de dengue notificados en la semana"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"casos_0_4"</span><span class="p">,</span> <span class="s2">"Conteo"</span><span class="p">,</span> <span class="s2">"casos/semana"</span><span class="p">,</span> <span class="s2">"Casos en menores de 5 años"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"casos_5_14"</span><span class="p">,</span> <span class="s2">"Conteo"</span><span class="p">,</span> <span class="s2">"casos/semana"</span><span class="p">,</span> <span class="s2">"Casos de 5 a 14 años"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"casos_15_64"</span><span class="p">,</span> <span class="s2">"Conteo"</span><span class="p">,</span> <span class="s2">"casos/semana"</span><span class="p">,</span> <span class="s2">"Casos de 15 a 64 años"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"casos_65_plus"</span><span class="p">,</span> <span class="s2">"Conteo"</span><span class="p">,</span> <span class="s2">"casos/semana"</span><span class="p">,</span> <span class="s2">"Casos de 65 años o más"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"casos_m"</span><span class="p">,</span> <span class="s2">"Conteo"</span><span class="p">,</span> <span class="s2">"casos/semana"</span><span class="p">,</span> <span class="s2">"Casos en hombres"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"casos_f"</span><span class="p">,</span> <span class="s2">"Conteo"</span><span class="p">,</span> <span class="s2">"casos/semana"</span><span class="p">,</span> <span class="s2">"Casos en mujeres"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"week_start"</span><span class="p">,</span> <span class="s2">"Temporal"</span><span class="p">,</span> <span class="s2">"fecha"</span><span class="p">,</span> <span class="s2">"Lunes de inicio de la semana epidemiológica"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"MES"</span><span class="p">,</span> <span class="s2">"Temporal"</span><span class="p">,</span> <span class="s2">"mes"</span><span class="p">,</span> <span class="s2">"Mes de la semana (1–12)"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"temp_mean"</span><span class="p">,</span> <span class="s2">"Continua"</span><span class="p">,</span> <span class="s2">"°C"</span><span class="p">,</span> <span class="s2">"Temperatura media semanal (imputada si temp_mean_missing = 1)"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"prec_total"</span><span class="p">,</span> <span class="s2">"Continua"</span><span class="p">,</span> <span class="s2">"mm/semana"</span><span class="p">,</span> <span class="s2">"Precipitación acumulada en la semana"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"ndvi_mean"</span><span class="p">,</span> <span class="s2">"Continua"</span><span class="p">,</span> <span class="s2">"índice [−1, 1]"</span><span class="p">,</span> <span class="s2">"Índice de vegetación de diferencia normalizada (valor mensual)"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"oni_anom"</span><span class="p">,</span> <span class="s2">"Continua"</span><span class="p">,</span> <span class="s2">"°C"</span><span class="p">,</span> <span class="s2">"Anomalía del Índice Oceánico de El Niño (&gt; 0,5 El Niño; &lt; −0,5 La Niña)"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"oni_total"</span><span class="p">,</span> <span class="s2">"Continua"</span><span class="p">,</span> <span class="s2">"°C"</span><span class="p">,</span> <span class="s2">"Temperatura superficial del mar en la región Niño 3.4"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"Flujo_in"</span><span class="p">,</span> <span class="s2">"Continua"</span><span class="p">,</span> <span class="s2">"personas (escala del dataset)"</span><span class="p">,</span> <span class="s2">"Flujo de personas que ingresan al municipio"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"temp_mean_missing"</span><span class="p">,</span> <span class="s2">"Binaria"</span><span class="p">,</span> <span class="s2">"0/1"</span><span class="p">,</span> <span class="s2">"1 si la temperatura de la semana fue imputada"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"time_idx"</span><span class="p">,</span> <span class="s2">"Temporal"</span><span class="p">,</span> <span class="s2">"índice"</span><span class="p">,</span> <span class="s2">"Número de la semana desde enero de 2010 (0–781)"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"poblacion"</span><span class="p">,</span> <span class="s2">"Conteo"</span><span class="p">,</span> <span class="s2">"habitantes"</span><span class="p">,</span> <span class="s2">"Población del municipio en el año"</span><span class="p">),</span>
+<span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"variable"</span><span class="p">,</span> <span class="s2">"tipo"</span><span class="p">,</span> <span class="s2">"unidad"</span><span class="p">,</span> <span class="s2">"significado"</span><span class="p">])</span>  <span class="c1"># Tabla</span>
+<span class="n">dic</span><span class="p">[</span><span class="s2">"dtype"</span><span class="p">]</span> <span class="o">=</span> <span class="n">dic</span><span class="p">[</span><span class="s2">"variable"</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">raw</span><span class="o">.</span><span class="n">dtypes</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">))</span>  <span class="c1"># Tipo de dato en pandas</span>
+<span class="n">dic</span><span class="p">[</span><span class="s2">"valores únicos"</span><span class="p">]</span> <span class="o">=</span> <span class="n">dic</span><span class="p">[</span><span class="s2">"variable"</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">raw</span><span class="o">.</span><span class="n">nunique</span><span class="p">())</span>  <span class="c1"># Cardinalidad</span>
+<span class="n">dic</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>variable</th>
+      <th>tipo</th>
+      <th>unidad</th>
+      <th>significado</th>
+      <th>dtype</th>
+      <th>valores únicos</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>COD_MUN_N</td>
+      <td>Identificador</td>
+      <td>código DANE</td>
+      <td>Municipio (5 dígitos; los dos primeros son el ...</td>
+      <td>int64</td>
+      <td>376</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>ANO</td>
+      <td>Temporal</td>
+      <td>año</td>
+      <td>Año epidemiológico</td>
+      <td>int64</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>SEMANA</td>
+      <td>Temporal</td>
+      <td>semana</td>
+      <td>Semana epidemiológica (1–52; 53 en 2015 y 2020)</td>
+      <td>int64</td>
+      <td>53</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>casos_totales</td>
+      <td>Conteo</td>
+      <td>casos/semana</td>
+      <td>Casos de dengue notificados en la semana</td>
+      <td>int64</td>
+      <td>543</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>casos_0_4</td>
+      <td>Conteo</td>
+      <td>casos/semana</td>
+      <td>Casos en menores de 5 años</td>
+      <td>int64</td>
+      <td>85</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>casos_5_14</td>
+      <td>Conteo</td>
+      <td>casos/semana</td>
+      <td>Casos de 5 a 14 años</td>
+      <td>int64</td>
+      <td>240</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>casos_15_64</td>
+      <td>Conteo</td>
+      <td>casos/semana</td>
+      <td>Casos de 15 a 64 años</td>
+      <td>int64</td>
+      <td>381</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>casos_65_plus</td>
+      <td>Conteo</td>
+      <td>casos/semana</td>
+      <td>Casos de 65 años o más</td>
+      <td>int64</td>
+      <td>71</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>casos_m</td>
+      <td>Conteo</td>
+      <td>casos/semana</td>
+      <td>Casos en hombres</td>
+      <td>int64</td>
+      <td>346</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>casos_f</td>
+      <td>Conteo</td>
+      <td>casos/semana</td>
+      <td>Casos en mujeres</td>
+      <td>int64</td>
+      <td>343</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>week_start</td>
+      <td>Temporal</td>
+      <td>fecha</td>
+      <td>Lunes de inicio de la semana epidemiológica</td>
+      <td>datetime64[ns]</td>
+      <td>782</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>MES</td>
+      <td>Temporal</td>
+      <td>mes</td>
+      <td>Mes de la semana (1–12)</td>
+      <td>int64</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>temp_mean</td>
+      <td>Continua</td>
+      <td>°C</td>
+      <td>Temperatura media semanal (imputada si temp_me...</td>
+      <td>float64</td>
+      <td>36504</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>prec_total</td>
+      <td>Continua</td>
+      <td>mm/semana</td>
+      <td>Precipitación acumulada en la semana</td>
+      <td>float64</td>
+      <td>4797</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>ndvi_mean</td>
+      <td>Continua</td>
+      <td>índice [−1, 1]</td>
+      <td>Índice de vegetación de diferencia normalizada...</td>
+      <td>float64</td>
+      <td>67680</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>oni_anom</td>
+      <td>Continua</td>
+      <td>°C</td>
+      <td>Anomalía del Índice Oceánico de El Niño (&gt; 0,5...</td>
+      <td>float64</td>
+      <td>131</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>oni_total</td>
+      <td>Continua</td>
+      <td>°C</td>
+      <td>Temperatura superficial del mar en la región N...</td>
+      <td>float64</td>
+      <td>140</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Flujo_in</td>
+      <td>Continua</td>
+      <td>personas (escala del dataset)</td>
+      <td>Flujo de personas que ingresan al municipio</td>
+      <td>float64</td>
+      <td>292516</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>temp_mean_missing</td>
+      <td>Binaria</td>
+      <td>0/1</td>
+      <td>1 si la temperatura de la semana fue imputada</td>
+      <td>int64</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>time_idx</td>
+      <td>Temporal</td>
+      <td>índice</td>
+      <td>Número de la semana desde enero de 2010 (0–781)</td>
+      <td>int64</td>
+      <td>782</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>poblacion</td>
+      <td>Conteo</td>
+      <td>habitantes</td>
+      <td>Población del municipio en el año</td>
+      <td>int64</td>
+      <td>376</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Además del archivo original, el análisis usa tres columnas <strong>derivadas</strong>: el umbral del canal endémico, el indicador de brote y el objetivo <code class="docutils literal notranslate"><span class="pre">y</span></code> (brote en <span class="math notranslate nohighlight">\(t+4\)</span>), y las 34 variables predictoras del capítulo de preprocesamiento. Las coordenadas, el nombre, el departamento y la región vienen de la DIVIPOLA.</p>
+</section>
+<section id="estructura-de-los-datos">
+<h2>Estructura de los datos<a class="headerlink" href="#estructura-de-los-datos" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_mun</span><span class="p">,</span> <span class="n">n_sem</span> <span class="o">=</span> <span class="n">raw</span><span class="p">[</span><span class="s2">"COD_MUN_N"</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">(),</span> <span class="n">raw</span><span class="p">[</span><span class="s2">"time_idx"</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span>  <span class="c1"># Entidades y periodos</span>
+<span class="n">balanceado</span> <span class="o">=</span> <span class="p">(</span><span class="n">raw</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"COD_MUN_N"</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="n">n_sem</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>  <span class="c1"># ¿Todas las entidades tienen todas las semanas?</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">({</span>  <span class="c1"># Resumen estructural</span>
+    <span class="s2">"Unidad de observación"</span><span class="p">:</span> <span class="s2">"municipio × semana epidemiológica"</span><span class="p">,</span>
+    <span class="s2">"Nivel de agregación"</span><span class="p">:</span> <span class="s2">"conteos semanales por municipio (no hay registros individuales)"</span><span class="p">,</span>
+    <span class="s2">"Tipo de datos"</span><span class="p">:</span> <span class="s2">"panel espacio-temporal (longitudinal con coordenadas)"</span><span class="p">,</span>
+    <span class="s2">"Municipios (entidades)"</span><span class="p">:</span> <span class="n">n_mun</span><span class="p">,</span>
+    <span class="s2">"Departamentos"</span><span class="p">:</span> <span class="n">raw</span><span class="p">[</span><span class="s2">"COD_MUN_N"</span><span class="p">]</span><span class="o">.</span><span class="n">floordiv</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">nunique</span><span class="p">(),</span>
+    <span class="s2">"Semanas"</span><span class="p">:</span> <span class="n">n_sem</span><span class="p">,</span>
+    <span class="s2">"Periodo"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">raw</span><span class="p">[</span><span class="s1">'week_start'</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="si">}</span><span class="s2"> a </span><span class="si">{</span><span class="n">raw</span><span class="p">[</span><span class="s1">'week_start'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+    <span class="s2">"Panel balanceado"</span><span class="p">:</span> <span class="n">balanceado</span><span class="p">,</span>
+<span class="p">},</span> <span class="n">name</span><span class="o">=</span><span class="s2">"valor"</span><span class="p">)</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>valor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Unidad de observación</th>
+      <td>municipio × semana epidemiológica</td>
+    </tr>
+    <tr>
+      <th>Nivel de agregación</th>
+      <td>conteos semanales por municipio (no hay regist...</td>
+    </tr>
+    <tr>
+      <th>Tipo de datos</th>
+      <td>panel espacio-temporal (longitudinal con coord...</td>
+    </tr>
+    <tr>
+      <th>Municipios (entidades)</th>
+      <td>376</td>
+    </tr>
+    <tr>
+      <th>Departamentos</th>
+      <td>32</td>
+    </tr>
+    <tr>
+      <th>Semanas</th>
+      <td>782</td>
+    </tr>
+    <tr>
+      <th>Periodo</th>
+      <td>2010-01-04 a 2024-12-23</td>
+    </tr>
+    <tr>
+      <th>Panel balanceado</th>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="tamano-de-la-muestra">
+<h2>Tamaño de la muestra<a class="headerlink" href="#tamano-de-la-muestra" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">panel</span><span class="p">()</span>  <span class="c1"># Panel con canal endémico, objetivo, variables y periodo de cada fila</span>
+<span class="n">mod</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">modelado</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>  <span class="c1"># Filas con objetivo y variables completas (2015–2024, sin filas purgadas)</span>
+<span class="n">tr</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">te</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">particion</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span>  <span class="c1"># Entrenamiento, validación y prueba</span>
+<span class="n">p</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cf</span><span class="o">.</span><span class="n">FEATURES</span><span class="p">)</span>  <span class="c1"># Número de variables predictoras</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">({</span>  <span class="c1"># Tamaños relevantes</span>
+    <span class="s2">"Filas del archivo"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">raw</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+    <span class="s2">"Columnas originales"</span><span class="p">:</span> <span class="n">raw</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+    <span class="s2">"Filas aptas para modelar (2015–2024)"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+    <span class="s2">"Filas de entrenamiento (2015–2021)"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">tr</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+    <span class="s2">"Variables predictoras (p)"</span><span class="p">:</span> <span class="n">p</span><span class="p">,</span>
+    <span class="s2">"Relación n/p (entrenamiento)"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">tr</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">p</span><span class="si">:</span><span class="s2">,.0f</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+    <span class="s2">"Brotes en entrenamiento (clase minoritaria)"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">tr</span><span class="p">[</span><span class="n">cf</span><span class="o">.</span><span class="n">TARGET</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+    <span class="s2">"No brotes en entrenamiento"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">int</span><span class="p">((</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">tr</span><span class="p">[</span><span class="n">cf</span><span class="o">.</span><span class="n">TARGET</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+<span class="p">},</span> <span class="n">name</span><span class="o">=</span><span class="s2">"valor"</span><span class="p">)</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>valor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Filas del archivo</th>
+      <td>294,032</td>
+    </tr>
+    <tr>
+      <th>Columnas originales</th>
+      <td>21</td>
+    </tr>
+    <tr>
+      <th>Filas aptas para modelar (2015–2024)</th>
+      <td>188,376</td>
+    </tr>
+    <tr>
+      <th>Filas de entrenamiento (2015–2021)</th>
+      <td>132,728</td>
+    </tr>
+    <tr>
+      <th>Variables predictoras (p)</th>
+      <td>34</td>
+    </tr>
+    <tr>
+      <th>Relación n/p (entrenamiento)</th>
+      <td>3,904</td>
+    </tr>
+    <tr>
+      <th>Brotes en entrenamiento (clase minoritaria)</th>
+      <td>13,644</td>
+    </tr>
+    <tr>
+      <th>No brotes en entrenamiento</th>
+      <td>119,084</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<section id="tamano-efectivo-las-filas-no-son-independientes">
+<h3>Tamaño efectivo: las filas no son independientes<a class="headerlink" href="#tamano-efectivo-las-filas-no-son-independientes" title="Link to this heading">#</a></h3>
+<p>Las 782 semanas de un municipio están correlacionadas. Con el coeficiente de correlación intraclase (ICC) del brote dentro de cada municipio, el <strong>efecto de diseño</strong> <span class="math notranslate nohighlight">\(\text{DEFF} = 1 + (\bar m - 1)\,\text{ICC}\)</span> indica cuántas filas equivalen a una observación independiente.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">icc_anova</span><span class="p">(</span><span class="n">valores</span><span class="p">,</span> <span class="n">grupos</span><span class="p">):</span>  <span class="c1"># ICC(1) por análisis de varianza de un factor</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"v"</span><span class="p">:</span> <span class="n">valores</span><span class="p">,</span> <span class="s2">"g"</span><span class="p">:</span> <span class="n">grupos</span><span class="p">})</span>  <span class="c1"># Tabla</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"g"</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>  <span class="c1"># Tamaño medio de grupo</span>
+    <span class="n">medias</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"g"</span><span class="p">)[</span><span class="s2">"v"</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="s2">"mean"</span><span class="p">)</span>  <span class="c1"># Media de cada grupo</span>
+    <span class="n">msb</span> <span class="o">=</span> <span class="p">((</span><span class="n">medias</span> <span class="o">-</span> <span class="n">g</span><span class="p">[</span><span class="s2">"v"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="s2">"g"</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Cuadrado medio entre grupos</span>
+    <span class="n">msw</span> <span class="o">=</span> <span class="p">((</span><span class="n">g</span><span class="p">[</span><span class="s2">"v"</span><span class="p">]</span> <span class="o">-</span> <span class="n">medias</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="p">)</span> <span class="o">-</span> <span class="n">g</span><span class="p">[</span><span class="s2">"g"</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">())</span>  <span class="c1"># Cuadrado medio dentro de grupos</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">msb</span> <span class="o">-</span> <span class="n">msw</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">msb</span> <span class="o">+</span> <span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">msw</span><span class="p">),</span> <span class="n">k</span>  <span class="c1"># ICC y tamaño medio</span>
+
+<span class="n">icc</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="n">icc_anova</span><span class="p">(</span><span class="n">tr</span><span class="p">[</span><span class="n">cf</span><span class="o">.</span><span class="n">TARGET</span><span class="p">],</span> <span class="n">tr</span><span class="p">[</span><span class="s2">"COD_MUN_N"</span><span class="p">])</span>  <span class="c1"># ICC del objetivo en entrenamiento</span>
+<span class="n">deff</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">icc</span>  <span class="c1"># Efecto de diseño</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"ICC del brote dentro de cada municipio: </span><span class="si">{</span><span class="n">icc</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>  <span class="c1"># Correlación intraclase</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Semanas por municipio en entrenamiento: </span><span class="si">{</span><span class="n">k</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> · efecto de diseño: </span><span class="si">{</span><span class="n">deff</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>  <span class="c1"># DEFF</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Tamaño efectivo aproximado: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">tr</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">deff</span><span class="si">:</span><span class="s2">,.0f</span><span class="si">}</span><span class="s2"> observaciones independientes (de </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">tr</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> filas)"</span><span class="p">)</span>  <span class="c1"># n efectivo</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ICC del brote dentro de cada municipio: 0.075
+Semanas por municipio en entrenamiento: 353 · efecto de diseño: 27.5
+Tamaño efectivo aproximado: 4,823 observaciones independientes (de 132,728 filas)
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Interpretación.</strong> El panel supera con holgura el mínimo de 20 000 observaciones y la relación <span class="math notranslate nohighlight">\(n/p\)</span> es muy alta, así que el sobreajuste por falta de datos no es una preocupación para un modelo lineal. Pero el tamaño efectivo es mucho menor que el número de filas: las semanas de un mismo municipio se parecen entre sí. Por eso la incertidumbre de las métricas se estima remuestreando <strong>municipios completos</strong> (bootstrap por conglomerados) y no filas, y la validación nunca mezcla semanas al azar.</p>
+</section>
+</section>
+<section id="calidad-de-los-datos">
+<h2>Calidad de los datos<a class="headerlink" href="#calidad-de-los-datos" title="Link to this heading">#</a></h2>
+<section id="valores-faltantes-patron">
+<h3>Valores faltantes: patrón<a class="headerlink" href="#valores-faltantes-patron" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Celdas nulas en el archivo: </span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">raw</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>  <span class="c1"># No hay nulos explícitos</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Semanas con temperatura imputada: </span><span class="si">{</span><span class="n">raw</span><span class="p">[</span><span class="s1">'temp_mean_missing'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>  <span class="c1"># Faltantes ocultos</span>
+<span class="n">frac</span> <span class="o">=</span> <span class="n">raw</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"COD_MUN_N"</span><span class="p">)[</span><span class="s2">"temp_mean_missing"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>  <span class="c1"># Fracción imputada por municipio</span>
+<span class="n">grupo</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">frac</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.01</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s2">"nunca imputada"</span><span class="p">,</span> <span class="s2">"parcialmente"</span><span class="p">,</span> <span class="s2">"siempre imputada"</span><span class="p">])</span>  <span class="c1"># Tres patrones</span>
+<span class="n">grupo</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s2">"municipios"</span><span class="p">)</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Celdas nulas en el archivo: 0
+Semanas con temperatura imputada: 64.3%
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>municipios</th>
+    </tr>
+    <tr>
+      <th>temp_mean_missing</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>siempre imputada</th>
+      <td>226</td>
+    </tr>
+    <tr>
+      <th>parcialmente</th>
+      <td>129</td>
+    </tr>
+    <tr>
+      <th>nunca imputada</th>
+      <td>21</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">matriz</span> <span class="o">=</span> <span class="n">raw</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">"COD_MUN_N"</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">"ANO"</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">"temp_mean_missing"</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s2">"mean"</span><span class="p">)</span>  <span class="c1"># Municipio × año</span>
+<span class="n">matriz</span> <span class="o">=</span> <span class="n">matriz</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">frac</span><span class="o">.</span><span class="n">sort_values</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>  <span class="c1"># Ordena por fracción imputada</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">matriz</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s2">"auto"</span><span class="p">,</span> <span class="n">color_continuous_scale</span><span class="o">=</span><span class="p">[</span><span class="s2">"#f8fafc"</span><span class="p">,</span> <span class="n">ROJO</span><span class="p">],</span> <span class="n">zmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">zmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>  <span class="c1"># Mapa de calor</span>
+                <span class="n">labels</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">"Año"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"Municipio (ordenado)"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"Fracción imputada"</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">update_yaxes</span><span class="p">(</span><span class="n">showticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  <span class="c1"># Sin etiquetas de municipio</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">"Matriz de faltantes: temperatura imputada por municipio y año"</span><span class="p">)</span>  <span class="c1"># Título</span>
+<span class="n">mostrar</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="mi">520</span><span class="p">)</span>  <span class="c1"># Muestra</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>                        <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>                <div id="4c34855d-1463-47d2-be14-f1eec6533201" class="plotly-graph-div" style="height:520px; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("4c34855d-1463-47d2-be14-f1eec6533201")) {                    Plotly.newPlot(                        "4c34855d-1463-47d2-be14-f1eec6533201",                        [{"coloraxis":"coloraxis","name":"0","x":[2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024],"y":[99773,19698,20001,41001,41206,11001,44847,50001,50226,52001,52678,15580,68895,73443,5282,54001,73563,76834,76520,99001,5045,73168,41551,73001,76109,5101,85230,54498,68081,70215,73055,18610,47551,73675,52786,73067,68167,54518,50350,18753,19455,15238,25035,13442,44035,41298,17001,95025,27001,73854,86001,70670,25269,23189,5088,13001,5604,73319,23068,23555,17042,23466,81794,54660,85250,17653,44430,5129,76736,97001,20750,13549,23001,85430,47692,73671,73483,94001,23417,18247,68190,8436,85001,54003,68147,18001,73268,50330,54820,23807,15759,68655,41801,5138,13430,76113,19001,23660,25743,5051,20013,5480,15001,13670,13894,41396,41770,23574,68307,13052,13688,5042,50110,66001,25040,8372,13244,68573,86573,5147,25885,41668,19318,47245,54800,25754,19573,47001,47980,73275,5209,85010,15455,73616,15507,76275,20517,5001,73624,20178,44001,63001,85410,76001,76248,50573,41013,66682,41020,15572,68615,86571,68679,86569,68689,68575,68745,76147,86568,86757,86320,5659,5656,70235,70265,70418,5642,70702,68770,68547,91540,86865,54874,99524,66088,66400,66456,5002,68001,68079,5790,68500,5736,68211,68255,68276,95001,68406,68418,70708,68432,91001,5034,85325,85263,70717,5234,73585,76863,76823,76622,73770,76497,73861,76403,76318,76020,76036,76306,76250,76041,76054,76100,5154,76111,76122,76130,73555,73547,76869,73504,70820,76233,5579,5495,5120,73148,5411,73217,73226,73236,70713,85225,73283,5390,85125,81065,73349,73408,73411,5308,73449,76890,85139,5172,15299,54720,13647,23090,23162,23182,13468,23570,23670,23672,23686,23855,25151,25245,13074,20787,25290,25438,25488,25491,25572,25662,25718,25815,25851,25878,27006,27361,13042,41006,25394,20710,20570,20550,15469,15480,15531,15667,15681,15686,13836,13810,17380,17495,17524,13744,18150,19110,19142,13667,19517,19532,13657,13654,20011,20032,20060,20175,20228,20295,20383,20400,20443,41016,41078,13006,8849,50006,50124,50150,50223,8421,50251,50270,50287,50318,50325,50370,50577,50590,50606,50680,50683,50689,50711,8078,52250,8001,5895,5890,54099,54172,5887,5837,54553,5809,47720,54810,47707,47555,41306,41349,41378,41483,41503,41524,41548,8832,41615,41660,41791,41797,41799,41885,8770,44078,44090,44378,99624,44650,8573,44874,47053,47058,47189,47268,47288,47460,8560,47660,50568],"z":[[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.019230769230769232],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.019230769230769232,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.019230769230769232],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.019230769230769232,0.0,0.0],[0.0,0.0,0.0,0.019230769230769232,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.019230769230769232],[0.0,0.0,0.0,0.0,0.038461538461538464,0.0,0.0,0.0,0.0,0.019230769230769232,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.057692307692307696,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.038461538461538464,0.018867924528301886,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.019230769230769232,0.03773584905660377,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.057692307692307696,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.057692307692307696,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.057692307692307696],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.07692307692307693,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.07692307692307693,0.0,0.018867924528301886,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.07692307692307693,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.019230769230769232,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.057692307692307696,0.0,0.057692307692307696,0.0,0.0,0.0,0.0,0.0,0.0],[0.038461538461538464,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.07547169811320754,0.0,0.0,0.0,0.0],[0.0,0.0,0.057692307692307696,0.07692307692307693,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.057692307692307696,0.0,0.0,0.0,0.0,0.0,0.09615384615384616,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.15384615384615385,0.0,0.0,0.0,0.0,0.0,0.0,0.019230769230769232],[0.0,0.0,0.0,0.0,0.0,0.16981132075471697,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.15384615384615385,0.057692307692307696,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.15384615384615385,0.0,0.0,0.05660377358490566,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.09615384615384616,0.019230769230769232,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.019230769230769232,0.07692307692307693],[0.0,0.07692307692307693,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.057692307692307696,0.0,0.0,0.09615384615384616,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.1346153846153846,0.0,0.0,0.0,0.0,0.0,0.0,0.09615384615384616,0.0],[0.0,0.07692307692307693,0.0,0.0,0.0,0.1320754716981132,0.019230769230769232,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.07692307692307693,0.15384615384615385,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.25,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.18867924528301888,0.0,0.019230769230769232,0.057692307692307696,0.0],[0.0,0.0,0.3269230769230769,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.07692307692307693,0.28846153846153844,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.25,0.0,0.0,0.1509433962264151,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.038461538461538464,0.019230769230769232,0.0,0.057692307692307696,0.0,0.018867924528301886,0.0,0.07692307692307693,0.019230769230769232,0.019230769230769232,0.018867924528301886,0.0,0.057692307692307696,0.038461538461538464,0.038461538461538464],[0.0,0.0,0.0,0.0,0.0,0.0,0.40384615384615385,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.018867924528301886,0.0,0.0,0.09615384615384616,0.3269230769230769],[0.0,0.0,0.07692307692307693,0.17307692307692307,0.19230769230769232,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.3269230769230769,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.1320754716981132,0.0,0.0,0.0,0.0],[0.0,0.0,0.3269230769230769,0.0,0.019230769230769232,0.05660377358490566,0.057692307692307696,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.07547169811320754,0.09615384615384616,0.23076923076923078,0.07692307692307693,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.019230769230769232,0.07692307692307693,0.0,0.1509433962264151,0.0,0.0,0.0,0.23076923076923078,0.0,0.0,0.0,0.0,0.0],[0.0,0.057692307692307696,0.0,0.0,0.23076923076923078,0.22641509433962265,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.5,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.019230769230769232,0.0,0.019230769230769232,0.0],[0.0,0.0,0.0,0.0,0.0,0.1509433962264151,0.0,0.0,0.0,0.0,0.18867924528301888,0.0,0.0,0.0,0.19230769230769232],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.15384615384615385,0.0,0.019230769230769232,0.0,0.0,0.038461538461538464,0.0,0.3269230769230769],[0.0,0.0,0.0,0.0,0.0,0.4716981132075472,0.057692307692307696,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.07692307692307693,0.018867924528301886,0.4230769230769231,0.0,0.019230769230769232,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.17307692307692307,0.0,0.0,0.07692307692307693,0.0,0.0,0.0,0.28846153846153844,0.019230769230769232],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.17307692307692307,0.38461538461538464],[0.0,0.0,0.0,0.0,0.0,0.07547169811320754,0.0,0.0,0.0,0.0,0.09433962264150944,0.0,0.40384615384615385,0.0,0.0],[0.0,0.0,0.09615384615384616,0.0,0.0,0.4716981132075472,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.05660377358490566,0.4807692307692308,0.057692307692307696,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.07692307692307693,0.0,0.057692307692307696,0.038461538461538464,0.16981132075471697,0.057692307692307696,0.0,0.019230769230769232,0.0,0.11320754716981132,0.0,0.0,0.0,0.057692307692307696],[0.0,0.0,0.0,0.15384615384615385,0.038461538461538464,0.05660377358490566,0.0,0.15384615384615385,0.0,0.0,0.0,0.0,0.21153846153846154,0.0,0.0],[0.0,0.057692307692307696,0.07692307692307693,0.25,0.07692307692307693,0.05660377358490566,0.038461538461538464,0.0,0.0,0.07692307692307693,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.25,0.19230769230769232,0.0,0.23076923076923078,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.07692307692307693,0.057692307692307696,0.0,0.057692307692307696,0.0,0.11320754716981132,0.0,0.0,0.0,0.0,0.0,0.21153846153846154,0.07692307692307693,0.09615384615384616,0.0],[0.038461538461538464,0.019230769230769232,0.25,0.0,0.019230769230769232,0.0,0.40384615384615385,0.0,0.0,0.0,0.0,0.019230769230769232,0.0,0.019230769230769232,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.07692307692307693,0.019230769230769232,0.0,0.15384615384615385,0.0,0.0,0.0,0.0,0.5384615384615384],[0.0,0.6538461538461539,0.0,0.0,0.0,0.05660377358490566,0.0,0.0,0.0,0.0,0.0,0.0,0.019230769230769232,0.09615384615384616,0.0],[0.0,0.0,0.40384615384615385,0.0,0.0,0.39622641509433965,0.0,0.038461538461538464,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.17307692307692307,0.0,0.3269230769230769,0.16981132075471697,0.038461538461538464,0.0,0.0,0.0,0.16981132075471697,0.0,0.0,0.019230769230769232,0.0],[0.0,0.0,0.0,0.0,0.25,0.6415094339622641,0.0,0.0,0.0,0.0,0.0,0.0,0.019230769230769232,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.39622641509433965,0.0,0.0,0.057692307692307696,0.0,0.4528301886792453,0.0,0.0,0.0,0.0],[0.0,0.07692307692307693,0.0,0.0,0.0,0.0,0.07692307692307693,0.0,0.38461538461538464,0.2692307692307692,0.0,0.07692307692307693,0.0,0.0,0.07692307692307693],[0.0,0.0,0.0,0.0,0.0,0.07547169811320754,0.3076923076923077,0.0,0.11538461538461539,0.07692307692307693,0.09433962264150944,0.057692307692307696,0.0,0.07692307692307693,0.17307692307692307],[0.0,0.15384615384615385,0.019230769230769232,0.0,0.0,0.0,0.0,0.0,0.0,0.15384615384615385,0.0,0.0,0.0,0.3076923076923077,0.36538461538461536],[0.057692307692307696,0.0,0.0,0.15384615384615385,0.21153846153846154,0.018867924528301886,0.019230769230769232,0.15384615384615385,0.019230769230769232,0.057692307692307696,0.09433962264150944,0.1346153846153846,0.057692307692307696,0.0,0.07692307692307693],[0.0,0.0,0.25,0.0,0.0,0.0,0.4807692307692308,0.3269230769230769,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.28846153846153844,0.07692307692307693,0.2692307692307692,0.3584905660377358,0.019230769230769232,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.057692307692307696],[0.0,0.0,0.0,0.0,0.057692307692307696,0.0,0.0,0.46153846153846156,0.40384615384615385,0.17307692307692307,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.5576923076923077,0.4807692307692308,0.0,0.0,0.0,0.0,0.0,0.0,0.07692307692307693],[0.0,0.0,0.0,0.038461538461538464,0.0,0.0,0.0,0.0,0.038461538461538464,0.0,0.0,0.15384615384615385,0.07692307692307693,0.6153846153846154,0.25],[0.0,0.0,0.6538461538461539,0.15384615384615385,0.07692307692307693,0.0,0.25,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.057692307692307696],[0.019230769230769232,0.0,0.0,0.0,0.0,0.0,0.5576923076923077,0.057692307692307696,0.1346153846153846,0.07692307692307693,0.05660377358490566,0.038461538461538464,0.038461538461538464,0.07692307692307693,0.15384615384615385],[0.0,0.0,0.0,0.0,0.0,0.03773584905660377,0.038461538461538464,0.057692307692307696,0.21153846153846154,0.038461538461538464,0.2830188679245283,0.0,0.0,0.0,0.5576923076923077],[0.0,0.0,0.3269230769230769,0.0,0.0,0.1509433962264151,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.8461538461538461],[0.15384615384615385,0.019230769230769232,0.019230769230769232,0.4807692307692308,0.057692307692307696,0.49056603773584906,0.0,0.0,0.19230769230769232,0.0,0.0,0.0,0.0,0.0,0.0],[0.4423076923076923,0.0,0.25,0.0,0.0,0.0,0.4807692307692308,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.3269230769230769],[0.0,0.0,0.0,0.07692307692307693,0.0,0.0,0.0,0.0,0.0,0.057692307692307696,0.49056603773584906,0.6730769230769231,0.0,0.23076923076923078,0.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.057692307692307696,0.0,0.0,0.018867924528301886,0.07692307692307693,0.5,0.5769230769230769,0.3269230769230769],[0.0,0.0,0.0,0.0,0.0,0.49056603773584906,0.0,0.0,0.0,0.0,0.7547169811320755,0.19230769230769232,0.07692307692307693,0.11538461538461539,0.07692307692307693],[0.9807692307692307,0.0,0.0,0.057692307692307696,0.0,0.0,0.0,0.0,0.0,0.25,0.11320754716981132,0.0,0.0,0.07692307692307693,0.2692307692307692],[0.0,0.0,0.07692307692307693,0.0,0.0,0.0,0.40384615384615385,0.0,0.0,0.0,0.0,0.0,0.0,0.3269230769230769,1.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.15384615384615385,0.09615384615384616,0.05660377358490566,0.07692307692307693,0.11538461538461539,0.3269230769230769,1.0],[0.0,0.0,0.0,0.019230769230769232,0.0,0.18867924528301888,0.3076923076923077,0.0,0.0,0.07692307692307693,0.0,0.25,0.7692307692307693,0.07692307692307693,0.15384615384615385],[0.9807692307692307,0.019230769230769232,0.25,0.0,0.0,0.1509433962264151,0.4807692307692308,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[0.0,0.25,1.0,0.5384615384615384,0.0,0.09433962264150944,0.0,0.0,0.0,0.0,0.0,0.11538461538461539,0.0,0.0,0.057692307692307696],[0.0,0.019230769230769232,1.0,0.40384615384615385,0.0,0.05660377358490566,0.40384615384615385,0.0,0.0,0.0,0.0,0.0,0.0,0.21153846153846154,0.0],[0.0,0.0,0.0,0.0,0.038461538461538464,0.1509433962264151,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.9423076923076923,1.0],[0.057692307692307696,0.0,0.0,0.09615384615384616,0.038461538461538464,0.05660377358490566,0.057692307692307696,0.09615384615384616,0.0,0.057692307692307696,0.0,0.09615384615384616,0.9230769230769231,0.6538461538461539,0.0],[0.0,0.0,0.0,0.0,0.6923076923076923,0.0,0.0,0.0,0.0,0.038461538461538464,0.05660377358490566,0.9038461538461539,0.038461538461538464,0.4807692307692308,0.07692307692307693],[0.0,0.0,0.0,0.0,0.0,0.018867924528301886,0.07692307692307693,0.0,0.0,0.36538461538461536,0.5094339622641509,0.9423076923076923,0.4230769230769231,0.0,0.038461538461538464],[0.019230769230769232,0.0,0.0,0.2692307692307692,0.11538461538461539,0.0,0.2692307692307692,0.0,0.21153846153846154,0.038461538461538464,0.7735849056603774,0.15384615384615385,0.019230769230769232,0.0,0.5],[0.0,0.0,0.6923076923076923,0.0,0.0,0.0,0.4807692307692308,0.0,0.0,0.0,0.0,0.0,0.0,0.25,1.0],[0.9807692307692307,0.019230769230769232,0.3269230769230769,0.3269230769230769,0.0,0.16981132075471697,0.40384615384615385,0.038461538461538464,0.0,0.0,0.0,0.0,0.0,0.0,0.25],[0.07692307692307693,0.0,0.0,0.0,0.0,0.32075471698113206,1.0,0.9230769230769231,0.1346153846153846,0.21153846153846154,0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.8269230769230769,0.7115384615384616,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.057692307692307696,0.6153846153846154,0.5769230769230769],[0.0,0.0,0.0,0.1346153846153846,0.0,0.0,0.0,0.0,0.0,0.0,0.9811320754716981,0.23076923076923078,0.6730769230769231,0.7307692307692307,0.09615384615384616],[0.15384615384615385,0.38461538461538464,0.5769230769230769,0.6346153846153846,0.0,0.0,0.0,0.0,0.019230769230769232,0.0,0.018867924528301886,0.0,0.0,0.8076923076923077,0.2692307692307692],[0.0,0.0,0.0,0.057692307692307696,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.07692307692307693,0.7692307692307693,1.0,1.0],[0.0,0.0,0.6923076923076923,0.07692307692307693,0.2692307692307692,0.1509433962264151,0.019230769230769232,0.40384615384615385,0.28846153846153844,0.0,0.018867924528301886,0.28846153846153844,0.4807692307692308,0.25,0.0],[0.0,0.0,0.0,0.0,0.0,0.1509433962264151,0.0,0.8269230769230769,0.0,0.0,0.18867924528301888,0.15384615384615385,0.038461538461538464,0.5961538461538461,1.0],[0.0,0.0,0.038461538461538464,0.09615384615384616,0.6153846153846154,1.0,0.46153846153846156,0.75,0.0,0.0,0.018867924528301886,0.0,0.0,0.0,0.0],[0.6923076923076923,0.3076923076923077,0.5,0.9038461538461539,0.19230769230769232,0.5471698113207547,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],[1.0,0.3076923076923077,0.0,0.0,0.0,0.05660377358490566,0.0,0.0,0.0,0.15384615384615385,0.07547169811320754,0.057692307692307696,0.40384615384615385,0.7115384615384616,0.5384615384615384],[0.0,0.0,0.0,0.0,0.038461538461538464,0.05660377358490566,0.0,0.0,0.0,0.21153846153846154,1.0,0.19230769230769232,0.15384615384615385,0.7115384615384616,1.0],[0.0,0.0,0.0,0.0,0.07692307692307693,0.20754716981132076,0.0,0.8076923076923077,0.40384615384615385,0.038461538461538464,0.0,0.5192307692307693,0.25,0.6153846153846154,0.4807692307692308],[0.0,0.0,0.0,0.0,0.0,0.05660377358490566,0.038461538461538464,0.0,0.0,0.019230769230769232,0.6792452830188679,0.09615384615384616,0.5,1.0,1.0],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.46153846153846156,0.07692307692307693,0.22641509433962265,0.019230769230769232,1.0,1.0,1.0],[0.057692307692307696,0.0,0.15384615384615385,0.0,0.057692307692307696,0.37735849056603776,0.0,0.0,0.0,0.0,0.4528301886792453,0.5384615384615384,1.0,0.7115384615384616,0.4423076923076923],[0.0,0.0,0.0,0.6923076923076923,1.0,1.0,0.8461538461538461,0.0,0.0,0.0,0.018867924528301886,0.0,0.0,0.0,0.38461538461538464],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.3269230769230769,0.038461538461538464,0.0,0.0,0.6923076923076923,1.0,1.0,1.0],[0.0,0.0,0.0,0.0,0.0,0.22641509433962265,0.0,0.5769230769230769,0.0,0.0,0.0,0.6730769230769231,1.0,1.0,1.0],[0.0,0.0,0.0,0.0,0.019230769230769232,0.39622641509433965,0.46153846153846156,0.0,0.0,0.0,0.6981132075471698,0.1346153846153846,0.75,1.0,1.0],[0.5576923076923077,0.7692307692307693,0.07692307692307693,0.4230769230769231,0.4423076923076923,0.9811320754716981,0.6153846153846154,0.17307692307692307,0.0,0.0,0.0,0.0,0.2692307692307692,0.0,0.36538461538461536],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.9811320754716981,1.0,1.0,1.0,1.0],[0.0,0.0,0.1346153846153846,0.057692307692307696,0.11538461538461539,0.0,0.0,0.0,0.019230769230769232,0.019230769230769232,0.660377358490566,1.0,1.0,1.0,1.0],[0.038461538461538464,0.15384615384615385,1.0,0.6153846153846154,0.0,0.24528301886792453,0.9807692307692307,0.36538461538461536,0.0,0.0,0.07547169811320754,0.019230769230769232,0.0,0.5769230769230769,1.0],[1.0,1.0,1.0,1.0,1.0,0.39622641509433965,0.0,0.0,0.019230769230769232,0.0,0.0,0.0,0.0,0.0,0.4230769230769231],[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.21153846153846154,0.5384615384615384,0.23076923076923078,0.8867924528301887,1.0,1.0,1.0,1.0],[0.0,0.0,0.15384615384615385,0.0,0.07692307692307693,0.11320754716981132,0.4230769230769231,0.0,0.19230769230769232,0.09615384615384616,0.9245283018867925,1.0,1.0,1.0,1.0],[0.0,0.0,0.019230769230769232,0.019230769230769232,0.09615384615384616,0.0,0.8269230769230769,0.0,0.25,0.07692307692307693,1.0,1.0,1.0,1.0,0.9038461538461539],[0.23076923076923078,0.07692307692307693,0.3269230769230769,0.5576923076923077,0.0,0.0,0.8269230769230769,0.25,0.5961538461538461,0.4807692307692308,0.16981132075471697,0.11538461538461539,0.7692307692307693,0.9038461538461539,0.9230769230769231],[0.0,0.057692307692307696,0.4423076923076923,0.6538461538461539,0.0,0.07547169811320754,0.0,0.40384615384615385,0.9038461538461539,0.19230769230769232,0.1509433962264151,1.0,1.0,1.0,1.0],[0.0,0.34615384615384615,0.0,0.0,0.19230769230769232,0.0,0.25,1.0,0.17307692307692307,0.9038461538461539,1.0,0.4230769230769231,0.6538461538461539,1.0,1.0],[0.0,0.038461538461538464,0.019230769230769232,0.019230769230769232,0.038461538461538464,0.5849056603773585,1.0,1.0,1.0,1.0,1.0,0.75,0.9807692307692307,1.0,1.0],[0.0,0.0,0.6538461538461539,1.0,0.5192307692307693,0.5283018867924528,1.0,1.0,0.5961538461538461,0.5769230769230769,0.8301886792452831,1.0,1.0,1.0,1.0],[0.0,0.7307692307692307,0.4230769230769231,1.0,1.0,1.0,1.0,1.0,0.3269230769230769,0.4807692307692308,0.22641509433962265,0.9230769230769231,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0]],"type":"heatmap","xaxis":"x","yaxis":"y","hovertemplate":"A\u00f1o: %{x}\u003cbr\u003eMunicipio (ordenado): %{y}\u003cbr\u003eFracci\u00f3n imputada: %{z}\u003cextra\u003e\u003c\u002fextra\u003e"}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmapgl":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmapgl"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#2563eb","#dc2626","#16a34a","#d97706","#7c3aed","#64748b","#0891b2","#db2777"],"font":{"family":"Inter, Segoe UI, sans-serif","size":13},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"white","showlakes":true,"showland":true,"subunitcolor":"#C8D4E3"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"margin":{"b":50,"l":60,"r":30,"t":60},"paper_bgcolor":"white","plot_bgcolor":"white","polar":{"angularaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""},"bgcolor":"white","radialaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"yaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"zaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"baxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"bgcolor":"white","caxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"A\u00f1o"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"autorange":"reversed","title":{"text":"Municipio (ordenado)"},"showticklabels":false},"coloraxis":{"colorbar":{"title":{"text":"Fracci\u00f3n imputada"}},"colorscale":[[0.0,"#f8fafc"],[1.0,"#dc2626"]],"cmin":0,"cmax":1},"title":{"text":"Matriz de faltantes: temperatura imputada por municipio y a\u00f1o"},"height":520},                        {"displaylogo": false, "responsive": true}                    )                };                            </script>        </div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">imp</span> <span class="o">=</span> <span class="n">raw</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">raw</span><span class="p">[</span><span class="s2">"temp_mean_missing"</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"temp_mean"</span><span class="p">]</span>  <span class="c1"># Temperaturas imputadas</span>
+<span class="n">obs</span> <span class="o">=</span> <span class="n">raw</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">raw</span><span class="p">[</span><span class="s2">"temp_mean_missing"</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"temp_mean"</span><span class="p">]</span>  <span class="c1"># Temperaturas observadas</span>
+<span class="n">bordes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">105</span><span class="p">)</span>  <span class="c1"># Intervalos de 0,25 °C (histograma precalculado: la figura no embebe 294 000 valores)</span>
+<span class="n">centros</span> <span class="o">=</span> <span class="p">(</span><span class="n">bordes</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">bordes</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span> <span class="o">/</span> <span class="mi">2</span>  <span class="c1"># Centro de cada intervalo</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">([</span><span class="n">go</span><span class="o">.</span><span class="n">Bar</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">centros</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">obs</span><span class="p">,</span> <span class="n">bordes</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">"Observada"</span><span class="p">,</span> <span class="n">marker_color</span><span class="o">=</span><span class="n">AZUL</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.6</span><span class="p">),</span>  <span class="c1"># Observada</span>
+                 <span class="n">go</span><span class="o">.</span><span class="n">Bar</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">centros</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">imp</span><span class="p">,</span> <span class="n">bordes</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">"Imputada"</span><span class="p">,</span> <span class="n">marker_color</span><span class="o">=</span><span class="n">ROJO</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)])</span>  <span class="c1"># Imputada</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">barmode</span><span class="o">=</span><span class="s2">"overlay"</span><span class="p">,</span> <span class="n">bargap</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Distribución de la temperatura observada frente a la imputada"</span><span class="p">,</span>  <span class="c1"># Formato</span>
+                  <span class="n">xaxis_title</span><span class="o">=</span><span class="s2">"°C"</span><span class="p">,</span> <span class="n">yaxis_title</span><span class="o">=</span><span class="s2">"densidad"</span><span class="p">)</span>
+<span class="n">mostrar</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="mi">380</span><span class="p">)</span>  <span class="c1"># Muestra</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Imputada: media </span><span class="si">{</span><span class="n">imp</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> °C, desviación </span><span class="si">{</span><span class="n">imp</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> · Observada: media </span><span class="si">{</span><span class="n">obs</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> °C, desviación </span><span class="si">{</span><span class="n">obs</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>  <span class="c1"># Resumen</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>                        <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>                <div id="7c63170e-63a3-4927-a543-d3e76f4c8ecb" class="plotly-graph-div" style="height:380px; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("7c63170e-63a3-4927-a543-d3e76f4c8ecb")) {                    Plotly.newPlot(                        "7c63170e-63a3-4927-a543-d3e76f4c8ecb",                        [{"marker":{"color":"#2563eb"},"name":"Observada","opacity":0.6,"x":[9.125,9.375,9.625,9.875,10.125,10.375,10.625,10.875,11.125,11.375,11.625,11.875,12.125,12.375,12.625,12.875,13.125,13.375,13.625,13.875,14.125,14.375,14.625,14.875,15.125,15.375,15.625,15.875,16.125,16.375,16.625,16.875,17.125,17.375,17.625,17.875,18.125,18.375,18.625,18.875,19.125,19.375,19.625,19.875,20.125,20.375,20.625,20.875,21.125,21.375,21.625,21.875,22.125,22.375,22.625,22.875,23.125,23.375,23.625,23.875,24.125,24.375,24.625,24.875,25.125,25.375,25.625,25.875,26.125,26.375,26.625,26.875,27.125,27.375,27.625,27.875,28.125,28.375,28.625,28.875,29.125,29.375,29.625,29.875,30.125,30.375,30.625,30.875,31.125,31.375,31.625,31.875,32.125,32.375,32.625,32.875,33.125,33.375,33.625,33.875,34.125,34.375,34.625,34.875],"y":[0.0,0.0,0.0,3.8062612998382336e-05,0.0,0.00011418783899514702,0.0003045009039870587,0.0007993148729660291,0.0010657531639547055,0.0020934437149110288,0.0036159482348463224,0.0060519554667427915,0.009363402797602055,0.011761347416500144,0.017470739366257492,0.02032543534113617,0.022685317347035876,0.023636882671995433,0.02279950518603102,0.02295175563802455,0.02002093443714911,0.017699115044247787,0.015301170425349701,0.014083166809401465,0.014806356456370729,0.01301741364544676,0.014007041583404701,0.014806356456370729,0.016214673137310877,0.01625273575030926,0.017204301075268817,0.021505376344086023,0.023332381768008375,0.024283947092967932,0.02797602055381102,0.028052145779807785,0.029726900751736608,0.025768388999904843,0.025616138547911314,0.024283947092967932,0.026301265581882196,0.02907983633076411,0.0312494052716719,0.034370539537539255,0.03596916928347131,0.035626605766485867,0.035131791797506896,0.0364259206394519,0.03798648777238557,0.033647349890569986,0.03665429631744219,0.03981349319630793,0.03928061661433058,0.044571319821105716,0.04464744504710248,0.04613188695403939,0.04738795318298601,0.05146065277381292,0.06371681415929203,0.07144352459796365,0.06105243124940527,0.06497288038823865,0.0734989056998763,0.08035017603958512,0.09169283471310305,0.09473784375297364,0.10779332001141878,0.10642306594347702,0.11430202683414216,0.11159958131125702,0.1172328480350176,0.12830906841754686,0.13847178608811495,0.1437244266818917,0.14692168617375584,0.1542677704824436,0.14874869159767817,0.13736797031116185,0.11795603768198687,0.09618422304691217,0.07856123322866115,0.0627271862213341,0.05161290322580645,0.04453325720810734,0.03612141973546484,0.027709582262822344,0.02135312589209249,0.01591017223332382,0.012446474450471024,0.007193833856694262,0.005671329336758969,0.003692073460843087,0.0021695689409077933,0.0019792558759158816,0.0008754400989627938,0.0009135027119611762,0.0005328765819773528,0.00015225045199352934,0.00011418783899514702,0.00015225045199352934,3.8062612998382336e-05,0.0,0.0,0.0],"type":"bar"},{"marker":{"color":"#dc2626"},"name":"Imputada","opacity":0.6,"x":[9.125,9.375,9.625,9.875,10.125,10.375,10.625,10.875,11.125,11.375,11.625,11.875,12.125,12.375,12.625,12.875,13.125,13.375,13.625,13.875,14.125,14.375,14.625,14.875,15.125,15.375,15.625,15.875,16.125,16.375,16.625,16.875,17.125,17.375,17.625,17.875,18.125,18.375,18.625,18.875,19.125,19.375,19.625,19.875,20.125,20.375,20.625,20.875,21.125,21.375,21.625,21.875,22.125,22.375,22.625,22.875,23.125,23.375,23.625,23.875,24.125,24.375,24.625,24.875,25.125,25.375,25.625,25.875,26.125,26.375,26.625,26.875,27.125,27.375,27.625,27.875,28.125,28.375,28.625,28.875,29.125,29.375,29.625,29.875,30.125,30.375,30.625,30.875,31.125,31.375,31.625,31.875,32.125,32.375,32.625,32.875,33.125,33.375,33.625,33.875,34.125,34.375,34.625,34.875],"y":[0.0,0.0,0.0,0.0,4.2341035873442644e-05,2.1170517936721322e-05,2.1170517936721322e-05,2.1170517936721322e-05,2.1170517936721322e-05,2.1170517936721322e-05,6.351155381016397e-05,0.00023287569730393455,0.0010585258968360662,0.00042341035873442643,0.0010373553788993448,0.0014607657376337713,0.001376083665886886,0.0016301298811275417,0.0013549131479501646,0.001185549004456394,0.002371098008912788,0.001185549004456394,0.0010161848609626235,0.0006986270919118036,0.0017571529887478697,0.0009315027892157382,0.00010585258968360661,0.00014819362555704924,0.00021170517936721321,0.0002540462152406559,0.0001905346614304919,0.0005080924304813118,0.0004869219125445904,0.0036624996030527887,0.005652528289104593,0.0006774565739750823,0.007303828688168856,0.0007621386457219676,0.001185549004456394,0.0002540462152406559,0.0002540462152406559,0.003429623905748854,0.0008468207174688529,0.0017359824708111484,0.0012702310762032793,0.0013549131479501646,0.0016936414349377057,0.0022017338654190177,0.0020111992039885257,0.003874204782420002,0.0009315027892157382,0.006668713150067216,0.9343819796551323,1.8740989298303183,0.9498364577489389,0.003620158567179346,0.005779551396724921,0.004212933069407543,0.011770807972817056,0.0022652454192291813,0.0024769505985963946,0.001503106773507214,0.0057372103608514784,0.0022652454192291813,0.0032602597622550834,0.004636343428141969,0.007473192831662627,0.005017412751002953,0.004615172910205248,0.009272686856283938,0.0045940023922685265,0.01215187729567804,0.0035143059774957394,0.007092123508801643,0.005250288448306888,0.006520519524510167,0.007409681277852463,0.006901588847371151,0.007938944226270495,0.010310042235183284,0.006986270919118036,0.010098337055816071,0.0020535402398619684,0.0019476876501783617,0.001312572112076722,0.003090895618761313,0.0012278900403298366,0.0009526733071524595,0.00044458087667114776,0.001841835060494755,0.00014819362555704924,0.00012702310762032794,8.468207174688529e-05,8.468207174688529e-05,6.351155381016397e-05,2.1170517936721322e-05,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"type":"bar"}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmapgl":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmapgl"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#2563eb","#dc2626","#16a34a","#d97706","#7c3aed","#64748b","#0891b2","#db2777"],"font":{"family":"Inter, Segoe UI, sans-serif","size":13},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"white","showlakes":true,"showland":true,"subunitcolor":"#C8D4E3"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"margin":{"b":50,"l":60,"r":30,"t":60},"paper_bgcolor":"white","plot_bgcolor":"white","polar":{"angularaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""},"bgcolor":"white","radialaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"yaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"zaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"baxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"bgcolor":"white","caxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2}}},"barmode":"overlay","bargap":0,"title":{"text":"Distribuci\u00f3n de la temperatura observada frente a la imputada"},"xaxis":{"title":{"text":"\u00b0C"}},"yaxis":{"title":{"text":"densidad"}},"height":380},                        {"displaylogo": false, "responsive": true}                    )                };                            </script>        </div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Imputada: media 22.49 °C, desviación 1.25 · Observada: media 24.48 °C, desviación 4.50
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Patrón.</strong> No hay celdas nulas, pero la temperatura está imputada en el 64 % de las semanas y el patrón es <strong>por municipio</strong>, no por semana: 226 municipios nunca tienen temperatura medida, solo 21 la tienen siempre y 129 la tienen parcialmente. La fracción imputada es casi idéntica todos los años. Los valores imputados se concentran alrededor de 22,4 °C con muy poca variación: la imputación original es prácticamente una constante y no conserva la diferencia climática entre municipios.</p>
+</section>
+<section id="valores-faltantes-mecanismo-mcar-mar-o-mnar">
+<h3>Valores faltantes: mecanismo (MCAR, MAR o MNAR)<a class="headerlink" href="#valores-faltantes-mecanismo-mcar-mar-o-mnar" title="Link to this heading">#</a></h3>
+<p>Se marcan como faltantes las temperaturas imputadas y se aplican tres evidencias: la prueba de Little (H0: MCAR), la comparación de distribuciones entre registros completos e incompletos (diferencia estandarizada) y un modelo que intenta predecir qué municipios carecen de temperatura a partir de variables observadas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eda</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">entrenamiento_eda</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>  <span class="c1"># Decisiones del EDA: solo semanas 2010–2021 (la prueba queda sellada)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"temp_mean"</span><span class="p">:</span> <span class="n">eda</span><span class="p">[</span><span class="s2">"temp_mean"</span><span class="p">]</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">eda</span><span class="p">[</span><span class="s2">"temp_mean_missing"</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">),</span>  <span class="c1"># Temperatura con faltantes</span>
+                  <span class="s2">"prec_total"</span><span class="p">:</span> <span class="n">eda</span><span class="p">[</span><span class="s2">"prec_total"</span><span class="p">],</span> <span class="s2">"ndvi_mean"</span><span class="p">:</span> <span class="n">eda</span><span class="p">[</span><span class="s2">"ndvi_mean"</span><span class="p">],</span> <span class="s2">"oni_anom"</span><span class="p">:</span> <span class="n">eda</span><span class="p">[</span><span class="s2">"oni_anom"</span><span class="p">],</span>  <span class="c1"># Observadas</span>
+                  <span class="s2">"log_poblacion"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">eda</span><span class="p">[</span><span class="s2">"poblacion"</span><span class="p">]),</span> <span class="s2">"log_casos"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="n">eda</span><span class="p">[</span><span class="s2">"casos_totales"</span><span class="p">])})</span>  <span class="c1"># Observadas</span>
+<span class="n">muestra</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">20000</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">cf</span><span class="o">.</span><span class="n">SEMILLA</span><span class="p">)</span>  <span class="c1"># Muestra para la prueba (con n enorme siempre rechaza)</span>
+<span class="n">d2</span><span class="p">,</span> <span class="n">gl</span><span class="p">,</span> <span class="n">p_little</span><span class="p">,</span> <span class="n">patrones</span> <span class="o">=</span> <span class="n">es</span><span class="o">.</span><span class="n">prueba_little</span><span class="p">(</span><span class="n">muestra</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span>  <span class="c1"># Prueba de Little</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Prueba de Little (n = 20 000): d² = </span><span class="si">{</span><span class="n">d2</span><span class="si">:</span><span class="s2">,.1f</span><span class="si">}</span><span class="s2">, gl = </span><span class="si">{</span><span class="n">gl</span><span class="si">}</span><span class="s2">, p = </span><span class="si">{</span><span class="n">p_little</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">, patrones = </span><span class="si">{</span><span class="n">patrones</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>  <span class="c1"># Resultado</span>
+<span class="n">falta</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="s2">"temp_mean"</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span>  <span class="c1"># Indicador de faltante</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"diferencia estandarizada (faltante − observado)"</span><span class="p">:</span> <span class="p">{</span><span class="n">c</span><span class="p">:</span> <span class="n">es</span><span class="o">.</span><span class="n">diferencia_estandarizada</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">falta</span><span class="p">,</span> <span class="n">c</span><span class="p">],</span> <span class="n">X</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">falta</span><span class="p">,</span> <span class="n">c</span><span class="p">])</span>  <span class="c1"># d de Cohen</span>
+                                                                 <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">1</span><span class="p">:]}})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Prueba de Little (n = 20 000): d² = 2,304.8, gl = 5, p = 0.00e+00, patrones = 2
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>diferencia estandarizada (faltante − observado)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>log_casos</th>
+      <td>-0.3347</td>
+    </tr>
+    <tr>
+      <th>log_poblacion</th>
+      <td>-0.6801</td>
+    </tr>
+    <tr>
+      <th>ndvi_mean</th>
+      <td>0.2808</td>
+    </tr>
+    <tr>
+      <th>oni_anom</th>
+      <td>0.0080</td>
+    </tr>
+    <tr>
+      <th>prec_total</th>
+      <td>-0.0149</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LogisticRegression</span>  <span class="c1"># Modelo del mecanismo</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">cross_val_score</span>  <span class="c1"># Validación cruzada</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_pipeline</span>  <span class="c1"># Encadena</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>  <span class="c1"># Estandariza</span>
+<span class="n">perfil</span> <span class="o">=</span> <span class="n">eda</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"COD_MUN_N"</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">log_poblacion</span><span class="o">=</span><span class="p">(</span><span class="s2">"poblacion"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">mean</span><span class="p">())),</span> <span class="n">prec</span><span class="o">=</span><span class="p">(</span><span class="s2">"prec_total"</span><span class="p">,</span> <span class="s2">"mean"</span><span class="p">),</span>  <span class="c1"># Perfil del municipio</span>
+                                      <span class="n">ndvi</span><span class="o">=</span><span class="p">(</span><span class="s2">"ndvi_mean"</span><span class="p">,</span> <span class="s2">"mean"</span><span class="p">),</span> <span class="n">log_casos</span><span class="o">=</span><span class="p">(</span><span class="s2">"casos_totales"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">mean</span><span class="p">())),</span>
+                                      <span class="n">falta</span><span class="o">=</span><span class="p">(</span><span class="s2">"temp_mean_missing"</span><span class="p">,</span> <span class="s2">"mean"</span><span class="p">))</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"COD_MUN_N"</span><span class="p">)[[</span><span class="s2">"region"</span><span class="p">,</span> <span class="s2">"latitud"</span><span class="p">,</span> <span class="s2">"longitud"</span><span class="p">]])</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">perfil</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s2">"falta"</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"region"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>  <span class="c1"># Variables observadas</span>
+<span class="n">auc_mec</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">make_pipeline</span><span class="p">(</span><span class="n">StandardScaler</span><span class="p">(),</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">2000</span><span class="p">)),</span> <span class="n">Z</span><span class="p">,</span> <span class="p">(</span><span class="n">perfil</span><span class="p">[</span><span class="s2">"falta"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span>  <span class="c1"># ¿Se predice el faltante?</span>
+                          <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s2">"roc_auc"</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"AUC al predecir qué municipio carece de temperatura con variables observadas: </span><span class="si">{</span><span class="n">auc_mec</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>  <span class="c1"># 0,5 = imposible de predecir</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"COD_MUN_N"</span><span class="p">)[</span><span class="s2">"region"</span><span class="p">],</span> <span class="n">grupo</span><span class="p">,</span> <span class="n">margins</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Patrón de faltantes por región (todos los años)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AUC al predecir qué municipio carece de temperatura con variables observadas: 0.666
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>temp_mean_missing</th>
+      <th>nunca imputada</th>
+      <th>parcialmente</th>
+      <th>siempre imputada</th>
+      <th>All</th>
+    </tr>
+    <tr>
+      <th>region</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Amazonía</th>
+      <td>0</td>
+      <td>9</td>
+      <td>10</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <th>Andina</th>
+      <td>10</td>
+      <td>63</td>
+      <td>100</td>
+      <td>173</td>
+    </tr>
+    <tr>
+      <th>Caribe</th>
+      <td>2</td>
+      <td>34</td>
+      <td>63</td>
+      <td>99</td>
+    </tr>
+    <tr>
+      <th>Orinoquía</th>
+      <td>4</td>
+      <td>11</td>
+      <td>26</td>
+      <td>41</td>
+    </tr>
+    <tr>
+      <th>Pacífica</th>
+      <td>5</td>
+      <td>12</td>
+      <td>27</td>
+      <td>44</td>
+    </tr>
+    <tr>
+      <th>All</th>
+      <td>21</td>
+      <td>129</td>
+      <td>226</td>
+      <td>376</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Mecanismo.</strong> Los faltantes <strong>no son MCAR</strong>: la prueba de Little los rechaza con claridad, y la diferencia más grande está en el tamaño del municipio (los municipios sin temperatura son mucho más pequeños, <span class="math notranslate nohighlight">\(d \approx -0{,}7\)</span>) y en la carga de casos (<span class="math notranslate nohighlight">\(d \approx -0{,}3\)</span>). La falta de dato se explica en parte con variables observadas (AUC ≈ 0,67 con población, región, coordenadas y clima) y no cambia con el tiempo, lo que es coherente con <strong>MAR estructural</strong>: los municipios pequeños no tienen estación meteorológica. No se puede descartar un componente <strong>MNAR</strong> (si las estaciones faltan justo donde el clima es más extremo), y eso no es verificable con estos datos.</p>
+<p><strong>Consecuencia.</strong> No se reimputa la temperatura con medias de otros municipios (226 municipios no tienen ninguna medición propia y la altitud cambia mucho entre vecinos). Se conserva la bandera <code class="docutils literal notranslate"><span class="pre">temp_missing</span></code> como variable (método del indicador de faltante), de modo que el modelo pueda descontar la señal térmica cuando es imputada; el <code class="docutils literal notranslate"><span class="pre">SimpleImputer</span></code> del Pipeline queda como protección ante nulos futuros.</p>
+</section>
+<section id="duplicados-exactos-y-casi-duplicados">
+<h3>Duplicados exactos y casi duplicados<a class="headerlink" href="#duplicados-exactos-y-casi-duplicados" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clima</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"temp_mean"</span><span class="p">,</span> <span class="s2">"prec_total"</span><span class="p">,</span> <span class="s2">"ndvi_mean"</span><span class="p">]</span>  <span class="c1"># Variables climáticas</span>
+<span class="n">dup_clima</span> <span class="o">=</span> <span class="n">raw</span><span class="o">.</span><span class="n">duplicated</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">"time_idx"</span><span class="p">]</span> <span class="o">+</span> <span class="n">clima</span><span class="p">,</span> <span class="n">keep</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  <span class="c1"># Misma semana y mismo clima en distintos municipios</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">({</span>
+    <span class="s2">"Filas duplicadas exactas"</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">raw</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+    <span class="s2">"Claves (municipio, semana) repetidas"</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">raw</span><span class="o">.</span><span class="n">duplicated</span><span class="p">([</span><span class="s2">"COD_MUN_N"</span><span class="p">,</span> <span class="s2">"time_idx"</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+    <span class="s2">"Filas idénticas salvo identificadores"</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">raw</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"COD_MUN_N"</span><span class="p">,</span> <span class="s2">"time_idx"</span><span class="p">,</span> <span class="s2">"week_start"</span><span class="p">,</span> <span class="s2">"SEMANA"</span><span class="p">])</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+    <span class="s2">"Filas con clima idéntico a otro municipio en la misma semana"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">dup_clima</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">dup_clima</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">)"</span><span class="p">,</span>
+<span class="p">},</span> <span class="n">name</span><span class="o">=</span><span class="s2">"conteo"</span><span class="p">)</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>conteo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Filas duplicadas exactas</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Claves (municipio, semana) repetidas</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Filas idénticas salvo identificadores</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Filas con clima idéntico a otro municipio en la misma semana</th>
+      <td>0 (0.0%)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Interpretación.</strong> No hay duplicados exactos, claves (municipio, semana) repetidas ni filas que coincidan en todo salvo los identificadores. Tampoco hay casi duplicados climáticos: ningún par de municipios comparte exactamente temperatura, lluvia y NDVI en la misma semana. No se elimina ninguna fila por duplicación.</p>
+</section>
+<section id="valores-atipicos">
+<h3>Valores atípicos<a class="headerlink" href="#valores-atipicos" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cont</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"casos_totales"</span><span class="p">,</span> <span class="s2">"temp_mean"</span><span class="p">,</span> <span class="s2">"prec_total"</span><span class="p">,</span> <span class="s2">"ndvi_mean"</span><span class="p">,</span> <span class="s2">"oni_anom"</span><span class="p">,</span> <span class="s2">"Flujo_in"</span><span class="p">,</span> <span class="s2">"poblacion"</span><span class="p">]</span>  <span class="c1"># Variables continuas</span>
+<span class="n">q1</span><span class="p">,</span> <span class="n">q3</span> <span class="o">=</span> <span class="n">raw</span><span class="p">[</span><span class="n">cont</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">),</span> <span class="n">raw</span><span class="p">[</span><span class="n">cont</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span>  <span class="c1"># Cuartiles</span>
+<span class="n">iqr</span> <span class="o">=</span> <span class="n">q3</span> <span class="o">-</span> <span class="n">q1</span>  <span class="c1"># Rango intercuartílico</span>
+<span class="n">fuera</span> <span class="o">=</span> <span class="p">(</span><span class="n">raw</span><span class="p">[</span><span class="n">cont</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">q1</span> <span class="o">-</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">iqr</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">raw</span><span class="p">[</span><span class="n">cont</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">q3</span> <span class="o">+</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">iqr</span><span class="p">)</span>  <span class="c1"># Regla de Tukey</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"límite inferior"</span><span class="p">:</span> <span class="n">q1</span> <span class="o">-</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">iqr</span><span class="p">,</span> <span class="s2">"límite superior"</span><span class="p">:</span> <span class="n">q3</span> <span class="o">+</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">iqr</span><span class="p">,</span>  <span class="c1"># Límites</span>
+              <span class="s2">"atípicos (%)"</span><span class="p">:</span> <span class="n">fuera</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="s2">"máximo"</span><span class="p">:</span> <span class="n">raw</span><span class="p">[</span><span class="n">cont</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>límite inferior</th>
+      <th>límite superior</th>
+      <th>atípicos (%)</th>
+      <th>máximo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>casos_totales</th>
+      <td>-3.0000</td>
+      <td>5.0000</td>
+      <td>11.7997</td>
+      <td>1,426.0000</td>
+    </tr>
+    <tr>
+      <th>temp_mean</th>
+      <td>19.1335</td>
+      <td>27.3999</td>
+      <td>18.1375</td>
+      <td>34.0667</td>
+    </tr>
+    <tr>
+      <th>prec_total</th>
+      <td>-82.2500</td>
+      <td>148.5500</td>
+      <td>4.6682</td>
+      <td>1,053.0000</td>
+    </tr>
+    <tr>
+      <th>ndvi_mean</th>
+      <td>0.3435</td>
+      <td>0.9443</td>
+      <td>1.6621</td>
+      <td>0.8772</td>
+    </tr>
+    <tr>
+      <th>oni_anom</th>
+      <td>-2.3550</td>
+      <td>2.3250</td>
+      <td>2.3018</td>
+      <td>2.7500</td>
+    </tr>
+    <tr>
+      <th>Flujo_in</th>
+      <td>-1.9642</td>
+      <td>4.0137</td>
+      <td>12.5646</td>
+      <td>1,337.5596</td>
+    </tr>
+    <tr>
+      <th>poblacion</th>
+      <td>-34,761.5000</td>
+      <td>90,352.5000</td>
+      <td>14.0957</td>
+      <td>7,149,540.0000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">top</span> <span class="o">=</span> <span class="n">raw</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="s2">"casos_totales"</span><span class="p">)</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">"COD_MUN_N"</span><span class="p">)</span>  <span class="c1"># Semanas con más casos</span>
+<span class="n">top</span><span class="p">[[</span><span class="s2">"municipio"</span><span class="p">,</span> <span class="s2">"departamento"</span><span class="p">,</span> <span class="s2">"week_start"</span><span class="p">,</span> <span class="s2">"casos_totales"</span><span class="p">,</span> <span class="s2">"poblacion"</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>municipio</th>
+      <th>departamento</th>
+      <th>week_start</th>
+      <th>casos_totales</th>
+      <th>poblacion</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Santiago De Cali</td>
+      <td>Valle Del Cauca</td>
+      <td>2024-05-20</td>
+      <td>1426</td>
+      <td>1811385</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Santiago De Cali</td>
+      <td>Valle Del Cauca</td>
+      <td>2024-06-03</td>
+      <td>1399</td>
+      <td>1811385</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Santiago De Cali</td>
+      <td>Valle Del Cauca</td>
+      <td>2024-05-27</td>
+      <td>1378</td>
+      <td>1811385</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Santiago De Cali</td>
+      <td>Valle Del Cauca</td>
+      <td>2024-06-17</td>
+      <td>1366</td>
+      <td>1811385</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Santiago De Cali</td>
+      <td>Valle Del Cauca</td>
+      <td>2024-06-10</td>
+      <td>1364</td>
+      <td>1811385</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Santiago De Cali</td>
+      <td>Valle Del Cauca</td>
+      <td>2024-04-01</td>
+      <td>1284</td>
+      <td>1811385</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Santiago De Cali</td>
+      <td>Valle Del Cauca</td>
+      <td>2024-04-29</td>
+      <td>1281</td>
+      <td>1811385</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Santiago De Cali</td>
+      <td>Valle Del Cauca</td>
+      <td>2024-04-15</td>
+      <td>1277</td>
+      <td>1811385</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Interpretación y tratamiento.</strong> Los casos tienen una cola muy larga: casi el 12 % de las semanas supera el límite de Tukey (más de 5 casos), y las ocho semanas con más casos son todas de Cali en la epidemia de 2024, no errores de digitación. <strong>No se eliminan</strong>: son precisamente los eventos que se quieren anticipar. Se tratan con la transformación <span class="math notranslate nohighlight">\(\log(1 + x)\)</span>, que comprime la cola sin borrar información; lo mismo aplica a la población y al flujo de personas (12–14 % de atípicos por sus colas largas). El 18 % de «atípicos» de temperatura es un artefacto: la imputación concentra el 64 % de los valores cerca de 22,4 °C, estrecha el rango intercuartílico y convierte en atípicas temperaturas normales de tierra caliente.</p>
+</section>
+<section id="valores-imposibles-o-inconsistentes">
+<h3>Valores imposibles o inconsistentes<a class="headerlink" href="#valores-imposibles-o-inconsistentes" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">edades</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"casos_0_4"</span><span class="p">,</span> <span class="s2">"casos_5_14"</span><span class="p">,</span> <span class="s2">"casos_15_64"</span><span class="p">,</span> <span class="s2">"casos_65_plus"</span><span class="p">]</span>  <span class="c1"># Grupos de edad</span>
+<span class="n">chequeos</span> <span class="o">=</span> <span class="p">{</span>  <span class="c1"># Reglas de consistencia</span>
+    <span class="s2">"Conteos negativos"</span><span class="p">:</span> <span class="nb">int</span><span class="p">((</span><span class="n">raw</span><span class="p">[[</span><span class="s2">"casos_totales"</span><span class="p">]</span> <span class="o">+</span> <span class="n">edades</span> <span class="o">+</span> <span class="p">[</span><span class="s2">"casos_m"</span><span class="p">,</span> <span class="s2">"casos_f"</span><span class="p">]]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+    <span class="s2">"Suma de edades ≠ total"</span><span class="p">:</span> <span class="nb">int</span><span class="p">((</span><span class="n">raw</span><span class="p">[</span><span class="n">edades</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">!=</span> <span class="n">raw</span><span class="p">[</span><span class="s2">"casos_totales"</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+    <span class="s2">"Hombres + mujeres ≠ total"</span><span class="p">:</span> <span class="nb">int</span><span class="p">((</span><span class="n">raw</span><span class="p">[</span><span class="s2">"casos_m"</span><span class="p">]</span> <span class="o">+</span> <span class="n">raw</span><span class="p">[</span><span class="s2">"casos_f"</span><span class="p">]</span> <span class="o">!=</span> <span class="n">raw</span><span class="p">[</span><span class="s2">"casos_totales"</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+    <span class="s2">"Temperatura fuera de [0, 40] °C"</span><span class="p">:</span> <span class="nb">int</span><span class="p">((</span><span class="o">~</span><span class="n">raw</span><span class="p">[</span><span class="s2">"temp_mean"</span><span class="p">]</span><span class="o">.</span><span class="n">between</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">40</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+    <span class="s2">"Precipitación negativa"</span><span class="p">:</span> <span class="nb">int</span><span class="p">((</span><span class="n">raw</span><span class="p">[</span><span class="s2">"prec_total"</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+    <span class="s2">"NDVI fuera de [−1, 1]"</span><span class="p">:</span> <span class="nb">int</span><span class="p">((</span><span class="o">~</span><span class="n">raw</span><span class="p">[</span><span class="s2">"ndvi_mean"</span><span class="p">]</span><span class="o">.</span><span class="n">between</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+    <span class="s2">"Población ≤ 0"</span><span class="p">:</span> <span class="nb">int</span><span class="p">((</span><span class="n">raw</span><span class="p">[</span><span class="s2">"poblacion"</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+    <span class="s2">"Semanas que no avanzan 7 días"</span><span class="p">:</span> <span class="nb">int</span><span class="p">((</span><span class="n">raw</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s2">"COD_MUN_N"</span><span class="p">,</span> <span class="s2">"time_idx"</span><span class="p">])</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"COD_MUN_N"</span><span class="p">)[</span><span class="s2">"week_start"</span><span class="p">]</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">days</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">7</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+    <span class="s2">"Población distinta dentro de un mismo año"</span><span class="p">:</span> <span class="nb">int</span><span class="p">((</span><span class="n">raw</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">"COD_MUN_N"</span><span class="p">,</span> <span class="s2">"ANO"</span><span class="p">])[</span><span class="s2">"poblacion"</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+    <span class="s2">"Casos mayores que la población"</span><span class="p">:</span> <span class="nb">int</span><span class="p">((</span><span class="n">raw</span><span class="p">[</span><span class="s2">"casos_totales"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">raw</span><span class="p">[</span><span class="s2">"poblacion"</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+<span class="p">}</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">chequeos</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"filas con problema"</span><span class="p">)</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>filas con problema</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Conteos negativos</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Suma de edades ≠ total</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Hombres + mujeres ≠ total</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Temperatura fuera de [0, 40] °C</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Precipitación negativa</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>NDVI fuera de [−1, 1]</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Población ≤ 0</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Semanas que no avanzan 7 días</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Población distinta dentro de un mismo año</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Casos mayores que la población</th>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mayor_lluvia</span> <span class="o">=</span> <span class="n">raw</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s2">"prec_total"</span><span class="p">)</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">"COD_MUN_N"</span><span class="p">)[[</span><span class="s2">"municipio"</span><span class="p">,</span> <span class="s2">"departamento"</span><span class="p">,</span> <span class="s2">"week_start"</span><span class="p">,</span> <span class="s2">"prec_total"</span><span class="p">]]</span>  <span class="c1"># Lluvias extremas</span>
+<span class="n">mayor_lluvia</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>municipio</th>
+      <th>departamento</th>
+      <th>week_start</th>
+      <th>prec_total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Istmina</td>
+      <td>Chocó</td>
+      <td>2024-04-15</td>
+      <td>1,053.0000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Istmina</td>
+      <td>Chocó</td>
+      <td>2022-07-04</td>
+      <td>874.0000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Guamal</td>
+      <td>Meta</td>
+      <td>2011-11-28</td>
+      <td>796.0000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Interpretación.</strong> No hay valores imposibles: los conteos son coherentes entre sí (edades y sexo suman el total), los rangos físicos son válidos, la frecuencia es estrictamente semanal y la población es anual. Las lluvias semanales extremas (más de 1 000 mm) corresponden a municipios del Pacífico, una de las regiones más lluviosas del planeta, así que son plausibles. Las categorías son códigos numéricos, sin errores de escritura.</p>
+</section>
+<section id="sesgos-de-muestreo-y-representatividad">
+<h3>Sesgos de muestreo y representatividad<a class="headerlink" href="#sesgos-de-muestreo-y-representatividad" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">todos</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">RUTA_DIVIPOLA</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>  <span class="c1"># Los 1 122 municipios del país</span>
+<span class="n">todos</span><span class="p">[</span><span class="s2">"region"</span><span class="p">]</span> <span class="o">=</span> <span class="n">todos</span><span class="p">[</span><span class="s2">"cod_dpto"</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">REGIONES</span><span class="p">)</span>  <span class="c1"># Región</span>
+<span class="n">rep</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"municipios del país"</span><span class="p">:</span> <span class="n">todos</span><span class="p">[</span><span class="s2">"region"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(),</span>  <span class="c1"># Universo</span>
+                    <span class="s2">"municipios del panel"</span><span class="p">:</span> <span class="n">m</span><span class="p">[</span><span class="s2">"region"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()})</span>  <span class="c1"># Muestra</span>
+<span class="n">rep</span><span class="p">[</span><span class="s2">"cobertura (%)"</span><span class="p">]</span> <span class="o">=</span> <span class="n">rep</span><span class="p">[</span><span class="s2">"municipios del panel"</span><span class="p">]</span> <span class="o">/</span> <span class="n">rep</span><span class="p">[</span><span class="s2">"municipios del país"</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span>  <span class="c1"># Cobertura</span>
+<span class="n">rep</span><span class="p">[</span><span class="s2">"participación en el panel (%)"</span><span class="p">]</span> <span class="o">=</span> <span class="n">rep</span><span class="p">[</span><span class="s2">"municipios del panel"</span><span class="p">]</span> <span class="o">/</span> <span class="n">rep</span><span class="p">[</span><span class="s2">"municipios del panel"</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span>  <span class="c1"># Composición</span>
+<span class="n">rep</span><span class="p">[</span><span class="s2">"participación en el país (%)"</span><span class="p">]</span> <span class="o">=</span> <span class="n">rep</span><span class="p">[</span><span class="s2">"municipios del país"</span><span class="p">]</span> <span class="o">/</span> <span class="n">rep</span><span class="p">[</span><span class="s2">"municipios del país"</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span>  <span class="c1"># Composición nacional</span>
+<span class="n">pob_panel</span> <span class="o">=</span> <span class="n">raw</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">raw</span><span class="p">[</span><span class="s2">"ANO"</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2024</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"COD_MUN_N"</span><span class="p">)[</span><span class="s2">"poblacion"</span><span class="p">]</span><span class="o">.</span><span class="n">first</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>  <span class="c1"># Población cubierta en 2024</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Municipios en el panel: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="si">}</span><span class="s2"> de </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">todos</span><span class="p">)</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">todos</span><span class="p">)</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">) · población cubierta en 2024: </span><span class="si">{</span><span class="n">pob_panel</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1e6</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> millones"</span><span class="p">)</span>  <span class="c1"># Cobertura</span>
+<span class="n">rep</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Municipios en el panel: 376 de 1122 (33.5%) · población cubierta en 2024: 32.2 millones
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>municipios del país</th>
+      <th>municipios del panel</th>
+      <th>cobertura (%)</th>
+      <th>participación en el panel (%)</th>
+      <th>participación en el país (%)</th>
+    </tr>
+    <tr>
+      <th>region</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Andina</th>
+      <td>629</td>
+      <td>173</td>
+      <td>27.5000</td>
+      <td>46.0000</td>
+      <td>56.1000</td>
+    </tr>
+    <tr>
+      <th>Caribe</th>
+      <td>197</td>
+      <td>99</td>
+      <td>50.3000</td>
+      <td>26.3000</td>
+      <td>17.6000</td>
+    </tr>
+    <tr>
+      <th>Pacífica</th>
+      <td>179</td>
+      <td>44</td>
+      <td>24.6000</td>
+      <td>11.7000</td>
+      <td>16.0000</td>
+    </tr>
+    <tr>
+      <th>Orinoquía</th>
+      <td>59</td>
+      <td>41</td>
+      <td>69.5000</td>
+      <td>10.9000</td>
+      <td>5.3000</td>
+    </tr>
+    <tr>
+      <th>Amazonía</th>
+      <td>58</td>
+      <td>19</td>
+      <td>32.8000</td>
+      <td>5.1000</td>
+      <td>5.2000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Interpretación.</strong> El panel incluye un tercio de los municipios del país pero cerca del 60 % de su población (32 de unos 53 millones de habitantes), porque contiene las capitales y los municipios con transmisión habitual de dengue. La composición regional no es la nacional: el Caribe y la Orinoquía están sobrerrepresentados (son regiones de tierra caliente, endémicas) y la región Andina y la Pacífica, subrepresentadas. Hay tres sesgos a declarar: (1) <strong>selección</strong>, los municipios de alta montaña sin transmisión no están, así que las conclusiones aplican a municipios endémicos; (2) <strong>subregistro</strong>, los casos son los notificados al SIVIGILA y su calidad varía entre municipios y años (por ejemplo, durante la pandemia de 2020); y (3) <strong>cobertura climática</strong>, la medición de temperatura falta justamente en los municipios pequeños.</p>
+</section>
+</section>
+<section id="consideraciones-eticas">
+<h2>Consideraciones éticas<a class="headerlink" href="#consideraciones-eticas" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Datos personales.</strong> El panel solo contiene conteos agregados por municipio y semana; no hay nombres, documentos ni direcciones. No requiere consentimiento informado ni aprobación de un comité de ética.</p></li>
+<li><p><strong>Riesgo de reidentificación.</strong> Es bajo pero no nulo: en municipios pequeños, una semana con un caso de 65 años o más y sexo conocido podría asociarse a una persona por conocimiento local. Por eso el informe solo publica agregados y nunca cruces finos de edad × sexo × semana en municipios pequeños.</p></li>
+<li><p><strong>Coordenadas y tiempo.</strong> Las coordenadas son centroides oficiales del municipio, no ubicaciones de viviendas, y el tiempo está agregado por semana: no permiten ubicar casos individuales.</p></li>
+<li><p><strong>Uso del modelo.</strong> Una alerta falsa puede generar gasto o alarma injustificada; un brote no anticipado cuesta salud. El modelo es una herramienta de apoyo a la vigilancia y no reemplaza el criterio epidemiológico. Además, si la calidad de la notificación es peor en municipios pobres, el modelo podría subestimar su riesgo (sesgo de equidad).</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./cuadernos"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../intro.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">Primer Entregable: base de datos, EDA y modelo base</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="02_objetivo.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">Partición y variable objetivo</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problema-de-investigacion">Problema de investigación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#justificacion-de-la-seleccion-del-dataset">Justificación de la selección del dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fuente-de-los-datos-y-licencia">Fuente de los datos y licencia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diccionario-de-variables">Diccionario de variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estructura-de-los-datos">Estructura de los datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tamano-de-la-muestra">Tamaño de la muestra</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tamano-efectivo-las-filas-no-son-independientes">Tamaño efectivo: las filas no son independientes</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calidad-de-los-datos">Calidad de los datos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#valores-faltantes-patron">Valores faltantes: patrón</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#valores-faltantes-mecanismo-mcar-mar-o-mnar">Valores faltantes: mecanismo (MCAR, MAR o MNAR)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#duplicados-exactos-y-casi-duplicados">Duplicados exactos y casi duplicados</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#valores-atipicos">Valores atípicos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#valores-imposibles-o-inconsistentes">Valores imposibles o inconsistentes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sesgos-de-muestreo-y-representatividad">Sesgos de muestreo y representatividad</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consideraciones-eticas">Consideraciones éticas</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Daniel Serrano Romero
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

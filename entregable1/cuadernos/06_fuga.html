@@ -1,0 +1,1010 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Auditoría de fuga de datos &#8212; Primer Entregable – Brotes de dengue en Colombia</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/autor.css?v=483c0dd5" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'cuadernos/06_fuga';</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Componente temporal" href="07_temporal.html" />
+    <link rel="prev" title="Análisis multivariado" href="05_multivariado.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logoUN.png" class="logo__image only-light" alt="Primer Entregable – Brotes de dengue en Colombia - Home"/>
+    <script>document.write(`<img src="../_static/logoUN.png" class="logo__image only-dark" alt="Primer Entregable – Brotes de dengue en Colombia - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><!-- Tarjeta del autor en la barra lateral izquierda (visible en todas las páginas del libro) -->
+<div class="tarjeta-autor">
+  <img src="../_static/foto_author_DSR_sidebar.png" alt="Daniel Serrano Romero" class="tarjeta-autor__foto">
+  <div class="tarjeta-autor__nombre">Daniel Serrano Romero</div>
+  <div class="tarjeta-autor__detalle">Maestría en Matemáticas</div>
+  <div class="tarjeta-autor__detalle">Machine Learning</div>
+</div></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Búsqueda</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Primer Entregable: base de datos, EDA y modelo base
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Base de datos</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_base_datos.html">Base de datos</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Análisis exploratorio de datos</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="02_objetivo.html">Partición y variable objetivo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_univariado.html">Análisis unidimensional</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_bivariado.html">Análisis bidimensional</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_multivariado.html">Análisis multivariado</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Auditoría de fuga de datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_temporal.html">Componente temporal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_espacial.html">Componente espacial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_espacio_temporal.html">Componente espacio-temporal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_preprocesamiento.html">Preprocesamiento</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Modelo base</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="11_modelo_base.html">Modelo base: regresión logística</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Cierre</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../conclusiones.html">Conclusiones, limitaciones y reproducibilidad</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/cuadernos/06_fuga.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="claro/oscuro" aria-label="claro/oscuro" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Auditoría de fuga de datos</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#disponibilidad-de-cada-variable-en-la-semana-de-la-prediccion">Disponibilidad de cada variable en la semana de la predicción</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#desempeno-univariado-senal-de-alerta-si-se-acerca-a-1">Desempeño univariado: señal de alerta si se acerca a 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#duplicados-y-entidades-repetidas-entre-particiones">Duplicados y entidades repetidas entre particiones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demostracion-cuanto-infla-la-fuga-el-desempeno">Demostración: cuánto infla la fuga el desempeño</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resultado-de-la-auditoria">Resultado de la auditoría</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="auditoria-de-fuga-de-datos">
+<h1>Auditoría de fuga de datos<a class="headerlink" href="#auditoria-de-fuga-de-datos" title="Link to this heading">#</a></h1>
+<p>Una variable tiene fuga si contiene información que no estaría disponible en la semana <span class="math notranslate nohighlight">\(t\)</span>, cuando se emite la alerta. Se revisa la disponibilidad de cada familia de variables, el desempeño univariado de cada una, los identificadores y el solapamiento entre particiones, y se demuestra cuánto se inflaría el desempeño con fuga.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>  <span class="c1"># Variables de entorno y rutas</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>  <span class="c1"># Configuración del intérprete</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">"LOKY_MAX_CPU_COUNT"</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">()))</span>  <span class="c1"># Evita un aviso de joblib en Windows</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s2">"../.."</span><span class="p">))</span>  <span class="c1"># Raíz del proyecto (paquete src)</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s2">".."</span><span class="p">))</span>  <span class="c1"># Carpeta entregable1 (paquete e1)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>  <span class="c1"># Control de avisos</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">"ignore"</span><span class="p">)</span>  <span class="c1"># Oculta avisos de versiones que no afectan los resultados</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">contextlib</span><span class="o">,</span><span class="w"> </span><span class="nn">io</span>  <span class="c1"># Silenciar una salida de diagnóstico</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">joblib.externals.loky</span><span class="w"> </span><span class="kn">import</span> <span class="n">cpu_count</span>  <span class="c1"># Conteo de núcleos de joblib</span>
+<span class="k">with</span> <span class="n">contextlib</span><span class="o">.</span><span class="n">redirect_stderr</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">()):</span>  <span class="c1"># En Windows 11 joblib imprime un diagnóstico al no encontrar «wmic»</span>
+    <span class="n">cpu_count</span><span class="p">(</span><span class="n">only_physical_cores</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Se calcula una vez (queda en caché) sin ensuciar las salidas</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>  <span class="c1"># Cálculo numérico</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>  <span class="c1"># Tablas</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">plotly.express</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">px</span>  <span class="c1"># Figuras rápidas</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">plotly.graph_objects</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span>  <span class="c1"># Figuras detalladas</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">plotly.subplots</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_subplots</span>  <span class="c1"># Figuras con varios paneles</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src</span><span class="w"> </span><span class="kn">import</span> <span class="n">config</span> <span class="k">as</span> <span class="n">cf</span>  <span class="c1"># Configuración del proyecto (horizonte, periodos, variables)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">e1</span><span class="w"> </span><span class="kn">import</span> <span class="n">datos</span> <span class="k">as</span> <span class="n">d</span><span class="p">,</span> <span class="n">estadistica</span> <span class="k">as</span> <span class="n">es</span><span class="p">,</span> <span class="n">espacial</span> <span class="k">as</span> <span class="n">sp</span><span class="p">,</span> <span class="n">modelo_base</span> <span class="k">as</span> <span class="n">mb</span>  <span class="c1"># Código del entregable</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">e1.figuras</span><span class="w"> </span><span class="kn">import</span> <span class="n">mostrar</span><span class="p">,</span> <span class="n">mapa_base</span><span class="p">,</span> <span class="n">AZUL</span><span class="p">,</span> <span class="n">ROJO</span><span class="p">,</span> <span class="n">VERDE</span><span class="p">,</span> <span class="n">AMBAR</span><span class="p">,</span> <span class="n">GRIS</span><span class="p">,</span> <span class="n">MORADO</span><span class="p">,</span> <span class="n">PERIODO_COLOR</span><span class="p">,</span> <span class="n">CUADRANTE_COLOR</span>  <span class="c1"># Estilo</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">cf</span><span class="o">.</span><span class="n">SEMILLA</span><span class="p">)</span>  <span class="c1"># Semilla global (42)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.width"</span><span class="p">,</span> <span class="mi">160</span><span class="p">)</span>  <span class="c1"># Ancho de las tablas</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.max_columns"</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>  <span class="c1"># Columnas visibles</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.float_format"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s2">,.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>  <span class="c1"># Cuatro decimales</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">roc_auc_score</span>  <span class="c1"># AUC univariado</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">KFold</span><span class="p">,</span> <span class="n">cross_val_score</span>  <span class="c1"># Validación aleatoria (para la demostración)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">panel</span><span class="p">()</span>  <span class="c1"># Panel completo</span>
+<span class="n">mod</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">modelado</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>  <span class="c1"># Filas aptas para modelar</span>
+<span class="n">tr</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">te</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">particion</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span>  <span class="c1"># Particiones purgadas</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Entrenamiento: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">tr</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> filas"</span><span class="p">)</span>  <span class="c1"># Tamaño</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Entrenamiento: 132,728 filas
+</pre></div>
+</div>
+</div>
+</div>
+<section id="disponibilidad-de-cada-variable-en-la-semana-de-la-prediccion">
+<h2>Disponibilidad de cada variable en la semana de la predicción<a class="headerlink" href="#disponibilidad-de-cada-variable-en-la-semana-de-la-prediccion" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">familias</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span>  <span class="c1"># Familia, variables y justificación de disponibilidad</span>
+    <span class="p">(</span><span class="s2">"Historia de casos"</span><span class="p">,</span> <span class="s2">"lc_l0–lc_l3, lc_m4–lc_m12, incid"</span><span class="p">,</span> <span class="s2">"Sí"</span><span class="p">,</span> <span class="s2">"Casos notificados en las semanas t, t−1, …; se conocen al cierre de la semana t."</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"Brote actual"</span><span class="p">,</span> <span class="s2">"brote_l0, brote_m8"</span><span class="p">,</span> <span class="s2">"Sí"</span><span class="p">,</span> <span class="s2">"Se calcula con los casos hasta t y el umbral de t, que usa años anteriores."</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"Umbral objetivo"</span><span class="p">,</span> <span class="s2">"l_umbral_obj, ratio_umbral"</span><span class="p">,</span> <span class="s2">"Sí"</span><span class="p">,</span> <span class="s2">"u(t+4) es el Q3 de semanas t+4−52k±2 (k ≥ 1): la más reciente es t−46."</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"Clima"</span><span class="p">,</span> <span class="s2">"temp/prec/ndvi_mean_m1–m12"</span><span class="p">,</span> <span class="s2">"Sí"</span><span class="p">,</span> <span class="s2">"Medias móviles de semanas ≤ t (rolling hacia atrás)."</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"Anomalías"</span><span class="p">,</span> <span class="s2">"temp/prec/ndvi_anom_m8"</span><span class="p">,</span> <span class="s2">"Sí"</span><span class="p">,</span> <span class="s2">"La normal climática se estima solo con 2010–2021 (entrenamiento)."</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"El Niño"</span><span class="p">,</span> <span class="s2">"oni_anom, oni_l8"</span><span class="p">,</span> <span class="s2">"Sí*"</span><span class="p">,</span> <span class="s2">"El ONI mensual se publica con unos días de rezago; oni_l8 (8 semanas antes) no tiene ningún riesgo."</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"Calendario"</span><span class="p">,</span> <span class="s2">"sem_sin, sem_cos"</span><span class="p">,</span> <span class="s2">"Sí"</span><span class="p">,</span> <span class="s2">"La semana del año se conoce de antemano."</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"Contexto"</span><span class="p">,</span> <span class="s2">"lpob, flujo_m4, temp_missing"</span><span class="p">,</span> <span class="s2">"Sí"</span><span class="p">,</span> <span class="s2">"Población anual proyectada; flujo de semanas ≤ t; bandera de imputación."</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"Objetivo y futuro"</span><span class="p">,</span> <span class="s2">"y, casos_obj (casos de t+4)"</span><span class="p">,</span> <span class="s2">"No"</span><span class="p">,</span> <span class="s2">"Son el objetivo o información de t+4: nunca se usan como predictoras."</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"Identificadores"</span><span class="p">,</span> <span class="s2">"COD_MUN_N, ANO, time_idx, departamento"</span><span class="p">,</span> <span class="s2">"Sí, pero se excluyen"</span><span class="p">,</span> <span class="s2">"Permitirían memorizar lugares o épocas y no generalizan."</span><span class="p">),</span>
+<span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"familia"</span><span class="p">,</span> <span class="s2">"variables"</span><span class="p">,</span> <span class="s2">"¿disponible en t?"</span><span class="p">,</span> <span class="s2">"justificación"</span><span class="p">])</span>
+<span class="n">familias</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>familia</th>
+      <th>variables</th>
+      <th>¿disponible en t?</th>
+      <th>justificación</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Historia de casos</td>
+      <td>lc_l0–lc_l3, lc_m4–lc_m12, incid</td>
+      <td>Sí</td>
+      <td>Casos notificados en las semanas t, t−1, …; se...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Brote actual</td>
+      <td>brote_l0, brote_m8</td>
+      <td>Sí</td>
+      <td>Se calcula con los casos hasta t y el umbral d...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Umbral objetivo</td>
+      <td>l_umbral_obj, ratio_umbral</td>
+      <td>Sí</td>
+      <td>u(t+4) es el Q3 de semanas t+4−52k±2 (k ≥ 1): ...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Clima</td>
+      <td>temp/prec/ndvi_mean_m1–m12</td>
+      <td>Sí</td>
+      <td>Medias móviles de semanas ≤ t (rolling hacia a...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Anomalías</td>
+      <td>temp/prec/ndvi_anom_m8</td>
+      <td>Sí</td>
+      <td>La normal climática se estima solo con 2010–20...</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>El Niño</td>
+      <td>oni_anom, oni_l8</td>
+      <td>Sí*</td>
+      <td>El ONI mensual se publica con unos días de rez...</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Calendario</td>
+      <td>sem_sin, sem_cos</td>
+      <td>Sí</td>
+      <td>La semana del año se conoce de antemano.</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Contexto</td>
+      <td>lpob, flujo_m4, temp_missing</td>
+      <td>Sí</td>
+      <td>Población anual proyectada; flujo de semanas ≤...</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Objetivo y futuro</td>
+      <td>y, casos_obj (casos de t+4)</td>
+      <td>No</td>
+      <td>Son el objetivo o información de t+4: nunca se...</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Identificadores</td>
+      <td>COD_MUN_N, ANO, time_idx, departamento</td>
+      <td>Sí, pero se excluyen</td>
+      <td>Permitirían memorizar lugares o épocas y no ge...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Verificación numérica del umbral objetivo: semanas históricas que usa u(t+4)</span>
+<span class="n">desfases</span> <span class="o">=</span> <span class="p">[</span><span class="n">cf</span><span class="o">.</span><span class="n">HORIZONTE</span> <span class="o">-</span> <span class="mi">52</span> <span class="o">*</span> <span class="n">k</span> <span class="o">+</span> <span class="n">j</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">cf</span><span class="o">.</span><span class="n">ANIOS_HISTORIA</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="n">cf</span><span class="o">.</span><span class="n">VENTANA_SEMANAS</span><span class="p">,</span> <span class="n">cf</span><span class="o">.</span><span class="n">VENTANA_SEMANAS</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>  <span class="c1"># Desfases respecto a t</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"El umbral objetivo usa las semanas t</span><span class="si">{</span><span class="nb">min</span><span class="p">(</span><span class="n">desfases</span><span class="p">)</span><span class="si">:</span><span class="s2">+d</span><span class="si">}</span><span class="s2"> a t</span><span class="si">{</span><span class="nb">max</span><span class="p">(</span><span class="n">desfases</span><span class="p">)</span><span class="si">:</span><span class="s2">+d</span><span class="si">}</span><span class="s2">: todas anteriores a t → sin fuga"</span><span class="p">)</span>  <span class="c1"># Rango</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>El umbral objetivo usa las semanas t-258 a t-46: todas anteriores a t → sin fuga
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>El ONI de un mes se publica a inicios del mes siguiente, así que en las primeras semanas de cada mes el valor contemporáneo <code class="docutils literal notranslate"><span class="pre">oni_anom</span></code> podría no estar publicado todavía. Por eso se conserva también <code class="docutils literal notranslate"><span class="pre">oni_l8</span></code>, que no tiene ningún riesgo, y la variable contemporánea queda <strong>en observación</strong>: en la auditoría de desempeño no se comporta como un proxy del objetivo (AUC univariado ≈ 0,65).</p>
+</div>
+</section>
+<section id="desempeno-univariado-senal-de-alerta-si-se-acerca-a-1">
+<h2>Desempeño univariado: señal de alerta si se acerca a 1<a class="headerlink" href="#desempeno-univariado-senal-de-alerta-si-se-acerca-a-1" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filas</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># AUC univariado de cada candidata</span>
+<span class="n">candidatas</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="n">tr</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">cf</span><span class="o">.</span><span class="n">FEATURES</span><span class="p">},</span>  <span class="c1"># Las 34 predictoras</span>
+              <span class="s2">"casos_obj (casos de t+4)"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="n">tr</span><span class="p">[</span><span class="s2">"casos_obj"</span><span class="p">]),</span>  <span class="c1"># Información del futuro (para contraste)</span>
+              <span class="s2">"COD_MUN_N (identificador)"</span><span class="p">:</span> <span class="n">tr</span><span class="p">[</span><span class="s2">"COD_MUN_N"</span><span class="p">],</span> <span class="s2">"time_idx (identificador)"</span><span class="p">:</span> <span class="n">tr</span><span class="p">[</span><span class="s2">"time_idx"</span><span class="p">],</span> <span class="s2">"ANO (identificador)"</span><span class="p">:</span> <span class="n">tr</span><span class="p">[</span><span class="s2">"ANO"</span><span class="p">]}</span>  <span class="c1"># Identificadores</span>
+<span class="k">for</span> <span class="n">nombre</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">candidatas</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>  <span class="c1"># Cada candidata</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">tr</span><span class="p">[</span><span class="n">cf</span><span class="o">.</span><span class="n">TARGET</span><span class="p">],</span> <span class="n">x</span><span class="p">)</span>  <span class="c1"># AUC univariado</span>
+    <span class="n">filas</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"variable"</span><span class="p">:</span> <span class="n">nombre</span><span class="p">,</span> <span class="s2">"AUC univariado"</span><span class="p">:</span> <span class="nb">max</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">a</span><span class="p">)})</span>  <span class="c1"># Simétrico (la dirección no importa)</span>
+<span class="n">auc_uni</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">filas</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"variable"</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"AUC univariado"</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  <span class="c1"># Tabla</span>
+<span class="n">auc_uni</span><span class="p">[</span><span class="s2">"alerta (&gt; 0,9)"</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">auc_uni</span><span class="p">[</span><span class="s2">"AUC univariado"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.9</span><span class="p">,</span> <span class="s2">"⚠ fuga probable"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>  <span class="c1"># Bandera</span>
+<span class="n">auc_uni</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>AUC univariado</th>
+      <th>alerta (&gt; 0,9)</th>
+    </tr>
+    <tr>
+      <th>variable</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>casos_obj (casos de t+4)</th>
+      <td>0.9630</td>
+      <td>⚠ fuga probable</td>
+    </tr>
+    <tr>
+      <th>lc_m4</th>
+      <td>0.8810</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>lc_m8</th>
+      <td>0.8770</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>lc_m12</th>
+      <td>0.8690</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>brote_m8</th>
+      <td>0.8660</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>lc_l0</th>
+      <td>0.8520</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>incid</th>
+      <td>0.8470</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>lc_l1</th>
+      <td>0.8410</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>lc_l2</th>
+      <td>0.8300</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>lc_l3</th>
+      <td>0.8250</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>ratio_umbral</th>
+      <td>0.8060</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>brote_l0</th>
+      <td>0.7700</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>flujo_m4</th>
+      <td>0.7460</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>oni_l8</th>
+      <td>0.6600</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>oni_anom</th>
+      <td>0.6520</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orden</span> <span class="o">=</span> <span class="n">auc_uni</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"AUC univariado"</span><span class="p">)</span><span class="o">.</span><span class="n">index</span>  <span class="c1"># Orden</span>
+<span class="n">colores</span> <span class="o">=</span> <span class="p">[</span><span class="n">ROJO</span> <span class="k">if</span> <span class="s2">"obj"</span> <span class="ow">in</span> <span class="n">v</span> <span class="k">else</span> <span class="n">GRIS</span> <span class="k">if</span> <span class="s2">"identificador"</span> <span class="ow">in</span> <span class="n">v</span> <span class="k">else</span> <span class="n">AZUL</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">orden</span><span class="p">]</span>  <span class="c1"># Rojo: futuro; gris: identificadores</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Bar</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">auc_uni</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">orden</span><span class="p">,</span> <span class="s2">"AUC univariado"</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">orden</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s2">"h"</span><span class="p">,</span> <span class="n">marker_color</span><span class="o">=</span><span class="n">colores</span><span class="p">))</span>  <span class="c1"># Barras</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">add_vline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">line_dash</span><span class="o">=</span><span class="s2">"dash"</span><span class="p">,</span> <span class="n">line_color</span><span class="o">=</span><span class="n">ROJO</span><span class="p">,</span> <span class="n">annotation_text</span><span class="o">=</span><span class="s2">"alerta 0,9"</span><span class="p">)</span>  <span class="c1"># Umbral de alerta</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">"AUC univariado de cada variable (rojo: información del futuro; gris: identificadores)"</span><span class="p">,</span> <span class="n">xaxis_range</span><span class="o">=</span><span class="p">[</span><span class="mf">0.45</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>  <span class="c1"># Formato</span>
+<span class="n">mostrar</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="mi">820</span><span class="p">)</span>  <span class="c1"># Muestra</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>                        <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>                <div id="c11229f9-5080-467f-b182-840396eb981d" class="plotly-graph-div" style="height:820px; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("c11229f9-5080-467f-b182-840396eb981d")) {                    Plotly.newPlot(                        "c11229f9-5080-467f-b182-840396eb981d",                        [{"marker":{"color":["#2563eb","#2563eb","#2563eb","#2563eb","#2563eb","#2563eb","#2563eb","#2563eb","#2563eb","#64748b","#64748b","#2563eb","#64748b","#2563eb","#2563eb","#2563eb","#2563eb","#2563eb","#2563eb","#2563eb","#2563eb","#2563eb","#dc2626","#2563eb","#2563eb","#2563eb","#2563eb","#2563eb","#2563eb","#2563eb","#2563eb","#2563eb","#2563eb","#2563eb","#2563eb","#2563eb","#2563eb","#dc2626"]},"orientation":"h","x":[0.5007759366644325,0.5054886372283118,0.5063982145824926,0.5064197817822336,0.5071111489524931,0.508943911331726,0.5103467622159223,0.5131019525956175,0.5159557617380344,0.5163960300064754,0.5172347960190719,0.5179355699891957,0.5346064608530743,0.5411537621965524,0.5448264786886229,0.5470435882991168,0.54891624495104,0.5505352208164657,0.5505907602640151,0.5602039462650503,0.5721670895369098,0.638416718496386,0.6498223676265817,0.6521291751112454,0.6597846361300623,0.746127524105854,0.7700995555529557,0.8061364291399726,0.8245430256759797,0.8304375302520566,0.8413870265222321,0.8466198312909032,0.852209877809978,0.8661619259374211,0.8687963370443246,0.8769408076367676,0.8812431784083372,0.9629898429776887],"y":["sem_sin","prec_total_m1","prec_total_m4","ndvi_mean_m1","prec_total_m8","ndvi_mean_m4","prec_total_m12","ndvi_mean_m8","sem_cos","time_idx (identificador)","ANO (identificador)","ndvi_mean_m12","COD_MUN_N (identificador)","temp_missing","ndvi_anom_m8","temp_mean_m1","temp_mean_m4","temp_mean_m8","temp_mean_m12","temp_anom_m8","prec_anom_m8","lpob","l_umbral_obj","oni_anom","oni_l8","flujo_m4","brote_l0","ratio_umbral","lc_l3","lc_l2","lc_l1","incid","lc_l0","brote_m8","lc_m12","lc_m8","lc_m4","casos_obj (casos de t+4)"],"type":"bar"}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmapgl":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmapgl"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#2563eb","#dc2626","#16a34a","#d97706","#7c3aed","#64748b","#0891b2","#db2777"],"font":{"family":"Inter, Segoe UI, sans-serif","size":13},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"white","showlakes":true,"showland":true,"subunitcolor":"#C8D4E3"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"margin":{"b":50,"l":60,"r":30,"t":60},"paper_bgcolor":"white","plot_bgcolor":"white","polar":{"angularaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""},"bgcolor":"white","radialaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"yaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"zaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"baxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"bgcolor":"white","caxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2}}},"shapes":[{"line":{"color":"#dc2626","dash":"dash"},"type":"line","x0":0.9,"x1":0.9,"xref":"x","y0":0,"y1":1,"yref":"y domain"}],"annotations":[{"showarrow":false,"text":"alerta 0,9","x":0.9,"xanchor":"left","xref":"x","y":1,"yanchor":"top","yref":"y domain"}],"xaxis":{"range":[0.45,1]},"title":{"text":"AUC univariado de cada variable (rojo: informaci\u00f3n del futuro; gris: identificadores)"},"height":820},                        {"displaylogo": false, "responsive": true}                    )                };                            </script>        </div></div></div>
+</div>
+<p><strong>Interpretación.</strong> Ninguna de las 34 predictoras supera 0,9: la más fuerte es la media de 4 semanas del log de casos (≈ 0,88), coherente con la persistencia de las epidemias y no con una fuga. Los casos de la semana objetivo, en cambio, alcanzan ≈ 0,96: es exactamente el patrón que delata una fuga, y por eso esa columna se descarta. Los identificadores tienen AUC moderados (los brotes se concentran en ciertos años y municipios); no se usan porque el modelo aprendería <em>cuándo</em> y <em>dónde</em> hubo brotes en el entrenamiento en lugar de <em>por qué</em>.</p>
+</section>
+<section id="duplicados-y-entidades-repetidas-entre-particiones">
+<h2>Duplicados y entidades repetidas entre particiones<a class="headerlink" href="#duplicados-y-entidades-repetidas-entre-particiones" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clave</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">set</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s2">"COD_MUN_N"</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="s2">"time_idx"</span><span class="p">]))</span>  <span class="c1"># Clave única (municipio, semana)</span>
+<span class="n">ultima_obj_tr</span> <span class="o">=</span> <span class="p">(</span><span class="n">tr</span><span class="p">[</span><span class="s2">"time_idx"</span><span class="p">]</span> <span class="o">+</span> <span class="n">cf</span><span class="o">.</span><span class="n">HORIZONTE</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>  <span class="c1"># Última semana objetivo del entrenamiento</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">({</span>
+    <span class="s2">"Filas compartidas entrenamiento ∩ validación"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">clave</span><span class="p">(</span><span class="n">tr</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">clave</span><span class="p">(</span><span class="n">va</span><span class="p">)),</span>
+    <span class="s2">"Filas compartidas entrenamiento ∩ prueba"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">clave</span><span class="p">(</span><span class="n">tr</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">clave</span><span class="p">(</span><span class="n">te</span><span class="p">)),</span>
+    <span class="s2">"Filas compartidas validación ∩ prueba"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">clave</span><span class="p">(</span><span class="n">va</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">clave</span><span class="p">(</span><span class="n">te</span><span class="p">)),</span>
+    <span class="s2">"Última semana objetivo del entrenamiento (time_idx)"</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">ultima_obj_tr</span><span class="p">),</span>
+    <span class="s2">"Primera semana t de la validación (time_idx)"</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">va</span><span class="p">[</span><span class="s2">"time_idx"</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()),</span>
+    <span class="s2">"Última semana objetivo de la validación (time_idx)"</span><span class="p">:</span> <span class="nb">int</span><span class="p">((</span><span class="n">va</span><span class="p">[</span><span class="s2">"time_idx"</span><span class="p">]</span> <span class="o">+</span> <span class="n">cf</span><span class="o">.</span><span class="n">HORIZONTE</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()),</span>
+    <span class="s2">"Primera semana t de la prueba (time_idx)"</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">te</span><span class="p">[</span><span class="s2">"time_idx"</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()),</span>
+    <span class="s2">"Filas purgadas en las fronteras"</span><span class="p">:</span> <span class="nb">int</span><span class="p">((</span><span class="n">df</span><span class="p">[</span><span class="s2">"periodo"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"purgada"</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+    <span class="s2">"Municipios presentes en las tres particiones"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">tr</span><span class="p">[</span><span class="s2">"COD_MUN_N"</span><span class="p">])</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">va</span><span class="p">[</span><span class="s2">"COD_MUN_N"</span><span class="p">])</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">te</span><span class="p">[</span><span class="s2">"COD_MUN_N"</span><span class="p">])),</span>
+<span class="p">},</span> <span class="n">name</span><span class="o">=</span><span class="s2">"valor"</span><span class="p">)</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>valor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Filas compartidas entrenamiento ∩ validación</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Filas compartidas entrenamiento ∩ prueba</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Filas compartidas validación ∩ prueba</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Última semana objetivo del entrenamiento (time_idx)</th>
+      <td>625</td>
+    </tr>
+    <tr>
+      <th>Primera semana t de la validación (time_idx)</th>
+      <td>626</td>
+    </tr>
+    <tr>
+      <th>Última semana objetivo de la validación (time_idx)</th>
+      <td>677</td>
+    </tr>
+    <tr>
+      <th>Primera semana t de la prueba (time_idx)</th>
+      <td>678</td>
+    </tr>
+    <tr>
+      <th>Filas purgadas en las fronteras</th>
+      <td>6016</td>
+    </tr>
+    <tr>
+      <th>Municipios presentes en las tres particiones</th>
+      <td>376</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Interpretación.</strong> No hay filas compartidas y ninguna etiqueta de un periodo se usa en el anterior: la última semana objetivo del entrenamiento es anterior a la primera semana de la validación, y lo mismo entre validación y prueba (la purga quita 4 semanas en cada frontera). Los 376 municipios aparecen en las tres particiones <strong>por diseño</strong>: el objetivo principal es predecir el futuro de municipios conocidos. Como las semanas de un municipio están correlacionadas, esto exige (1) que la partición sea temporal y (2) evaluar aparte la generalización a <strong>zonas nuevas</strong> con bloques espaciales (capítulo del modelo base).</p>
+</section>
+<section id="demostracion-cuanto-infla-la-fuga-el-desempeno">
+<h2>Demostración: cuánto infla la fuga el desempeño<a class="headerlink" href="#demostracion-cuanto-infla-la-fuga-el-desempeno" title="Link to this heading">#</a></h2>
+<p>Se entrena la misma regresión logística del modelo base en dos escenarios incorrectos y en el correcto.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipe</span> <span class="o">=</span> <span class="n">mb</span><span class="o">.</span><span class="n">pipeline_base</span><span class="p">()</span><span class="o">.</span><span class="n">set_params</span><span class="p">(</span><span class="n">clf__C</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>  <span class="c1"># Mismo Pipeline del modelo base</span>
+<span class="n">temporal</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">pipe</span><span class="p">,</span> <span class="n">tr</span><span class="p">[</span><span class="n">cf</span><span class="o">.</span><span class="n">FEATURES</span><span class="p">],</span> <span class="n">tr</span><span class="p">[</span><span class="n">cf</span><span class="o">.</span><span class="n">TARGET</span><span class="p">],</span> <span class="n">groups</span><span class="o">=</span><span class="n">mb</span><span class="o">.</span><span class="n">grupos</span><span class="p">(</span><span class="n">tr</span><span class="p">),</span> <span class="n">cv</span><span class="o">=</span><span class="n">mb</span><span class="o">.</span><span class="n">ValidacionAnualPurgada</span><span class="p">(),</span> <span class="n">scoring</span><span class="o">=</span><span class="s2">"roc_auc"</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>  <span class="c1"># Correcto</span>
+<span class="n">aleatorio</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">pipe</span><span class="p">,</span> <span class="n">tr</span><span class="p">[</span><span class="n">cf</span><span class="o">.</span><span class="n">FEATURES</span><span class="p">],</span> <span class="n">tr</span><span class="p">[</span><span class="n">cf</span><span class="o">.</span><span class="n">TARGET</span><span class="p">],</span> <span class="n">cv</span><span class="o">=</span><span class="n">KFold</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">cf</span><span class="o">.</span><span class="n">SEMILLA</span><span class="p">),</span> <span class="n">scoring</span><span class="o">=</span><span class="s2">"roc_auc"</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>  <span class="c1"># Semanas mezcladas</span>
+<span class="n">con_futuro</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">lc_obj</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="n">tr</span><span class="p">[</span><span class="s2">"casos_obj"</span><span class="p">]))</span>  <span class="c1"># Agrega los casos de t+4</span>
+<span class="n">futuro</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">pipe</span><span class="p">,</span> <span class="n">con_futuro</span><span class="p">[</span><span class="n">cf</span><span class="o">.</span><span class="n">FEATURES</span> <span class="o">+</span> <span class="p">[</span><span class="s2">"lc_obj"</span><span class="p">]],</span> <span class="n">con_futuro</span><span class="p">[</span><span class="n">cf</span><span class="o">.</span><span class="n">TARGET</span><span class="p">],</span> <span class="n">groups</span><span class="o">=</span><span class="n">mb</span><span class="o">.</span><span class="n">grupos</span><span class="p">(</span><span class="n">tr</span><span class="p">),</span>  <span class="c1"># Con información del futuro</span>
+                         <span class="n">cv</span><span class="o">=</span><span class="n">mb</span><span class="o">.</span><span class="n">ValidacionAnualPurgada</span><span class="p">(),</span> <span class="n">scoring</span><span class="o">=</span><span class="s2">"roc_auc"</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"AUC-ROC de validación cruzada"</span><span class="p">:</span> <span class="p">[</span><span class="n">temporal</span><span class="p">,</span> <span class="n">aleatorio</span><span class="p">,</span> <span class="n">futuro</span><span class="p">]},</span>  <span class="c1"># Comparación</span>
+             <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">"Correcto: años hacia adelante con purga"</span><span class="p">,</span> <span class="s2">"Fuga temporal: semanas mezcladas al azar"</span><span class="p">,</span>
+                    <span class="s2">"Fuga directa: casos de la semana objetivo"</span><span class="p">])</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>AUC-ROC de validación cruzada</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Correcto: años hacia adelante con purga</th>
+      <td>0.8985</td>
+    </tr>
+    <tr>
+      <th>Fuga temporal: semanas mezcladas al azar</th>
+      <td>0.9064</td>
+    </tr>
+    <tr>
+      <th>Fuga directa: casos de la semana objetivo</th>
+      <td>0.9941</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Interpretación.</strong> Con la validación correcta el AUC ronda 0,90. Mezclar semanas al azar cambia poco en este modelo lineal (la regresión logística no puede memorizar interacciones finas entre semanas vecinas), pero la fuga directa lo lleva casi a 1: un modelo «perfecto» e inútil. La auditoría no solo revisa columnas; también comprueba que el esquema de validación respete el tiempo, porque con modelos más flexibles (los de los siguientes entregables) la mezcla aleatoria sí infla el desempeño.</p>
+</section>
+<section id="resultado-de-la-auditoria">
+<h2>Resultado de la auditoría<a class="headerlink" href="#resultado-de-la-auditoria" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Decisión</p></th>
+<th class="head"><p>Variables</p></th>
+<th class="head"><p>Motivo</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Descartadas</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">casos_obj</span></code> y cualquier dato de <span class="math notranslate nohighlight">\(t+1\)</span> a <span class="math notranslate nohighlight">\(t+4\)</span></p></td>
+<td><p>Información del futuro (AUC ≈ 0,96)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Descartadas</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">COD_MUN_N</span></code>, <code class="docutils literal notranslate"><span class="pre">ANO</span></code>, <code class="docutils literal notranslate"><span class="pre">time_idx</span></code>, departamento</p></td>
+<td><p>Identificadores: memorizan lugar y época</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Descartadas</strong></p></td>
+<td><p>Casos por edad y sexo</p></td>
+<td><p>Redundantes (suman el total), no son fuga</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>En observación</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">oni_anom</span></code></p></td>
+<td><p>Posible rezago de publicación; se conserva <code class="docutils literal notranslate"><span class="pre">oni_l8</span></code> como respaldo</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>En observación</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">brote_m8</span></code>, <code class="docutils literal notranslate"><span class="pre">lc_m4</span></code>, <code class="docutils literal notranslate"><span class="pre">ratio_umbral</span></code></p></td>
+<td><p>Señal fuerte (AUC 0,81–0,88) pero legítima: semanas ≤ t</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>En observación</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">temp_missing</span></code></p></td>
+<td><p>Proxy del tamaño del municipio, no del objetivo</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./cuadernos"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="05_multivariado.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">Análisis multivariado</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="07_temporal.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">Componente temporal</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#disponibilidad-de-cada-variable-en-la-semana-de-la-prediccion">Disponibilidad de cada variable en la semana de la predicción</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#desempeno-univariado-senal-de-alerta-si-se-acerca-a-1">Desempeño univariado: señal de alerta si se acerca a 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#duplicados-y-entidades-repetidas-entre-particiones">Duplicados y entidades repetidas entre particiones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demostracion-cuanto-infla-la-fuga-el-desempeno">Demostración: cuánto infla la fuga el desempeño</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resultado-de-la-auditoria">Resultado de la auditoría</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Daniel Serrano Romero
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
